@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Design Internship | Shahrzad Jafari</title>
+    <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
+    <link rel="stylesheet" href="../normalize.css">
+    <link rel="stylesheet" href="../case-studies/case-study.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo-link">
+        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+    </a>
+    <div class="header-right">
+        <nav>
+            <ul>
+                <li><a href="../index.html#work">Work</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+</header>
+
+<main>
+    <section class="case-study-hero">
+        <div class="hero-content">
+            <h1>UX Design Internship</h1>
+            <p class="subtitle">UX Research and User Testing for Mobile Applications</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <strong>Role</strong>
+                    <span>UX Design Intern</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Focus</strong>
+                    <span>Mobile Applications</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Timeline</strong>
+                    <span>2021 - 2022</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Tools</strong>
+                    <span>Figma, Maze, User Testing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Project Overview</h2>
+        <p>Focused on UX research and user testing for mobile applications to improve user engagement and satisfaction. Worked on various projects to enhance the mobile user experience through data-driven design decisions.</p>
+    </section>
+
+    <section class="content-section">
+        <h2>My Role & Responsibilities</h2>
+        <ul>
+            <li>Conducted user research interviews and surveys</li>
+            <li>Performed usability testing sessions with mobile app users</li>
+            <li>Analyzed user behavior data and created insights reports</li>
+            <li>Created wireframes and prototypes for mobile interfaces</li>
+            <li>Collaborated with developers to implement design improvements</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Key Challenges</h2>
+        <ul>
+            <li>Identifying and addressing user pain points in existing mobile apps</li>
+            <li>Designing for various mobile device sizes and operating systems</li>
+            <li>Balancing user needs with technical constraints</li>
+            <li>Measuring and improving engagement metrics</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Solutions & Impact</h2>
+        <ul>
+            <li>Improved user satisfaction scores through iterative testing</li>
+            <li>Enhanced mobile app engagement through research-driven redesigns</li>
+            <li>Created standardized testing protocols for consistent evaluation</li>
+            <li>Delivered actionable insights that informed product roadmap</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Skills Applied</h2>
+        <p><strong>Research Methods:</strong> User interviews, Usability testing, A/B testing, Analytics</p>
+        <p><strong>Design:</strong> Mobile UI, Wireframing, Prototyping, Responsive design</p>
+        <p><strong>Analysis:</strong> Data interpretation, User journey mapping, Heuristic evaluation</p>
+    </section>
+
+    <nav class="page-navigation">
+        <a href="digital-lab.html" class="nav-btn nav-prev">← Prev: Digital Lab</a>
+        <a href="freelance.html" class="nav-btn nav-next">Next: Freelance →</a>
+    </nav>
+</main>
+
+<footer>
+    <p>
+        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="#">Dribbble</a>
+    </p>
+    <p>&copy; made and designed by Shahrzad Jafari — Version 3.0</p>
+</footer>
+
+<script>
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+const currentTheme = localStorage.getItem('theme') || 'light';
+const themeIcon = themeToggle.querySelector('.theme-icon');
+htmlElement.setAttribute('data-theme', currentTheme);
+themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+</script>
+
+</body>
+</html>
+
