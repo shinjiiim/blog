@@ -222,31 +222,57 @@ main {
     width: 100%;
 }
 
-/* Hero Section */
+/* Hero Section (responsive image under heading) */
 .case-study-hero {
     background: var(--background-secondary);
-    padding: 6rem 2rem 4rem;
+    padding: 4rem 1.5rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-.hero-cover-image {
+/* Keep hero text above the image */
+.case-study-hero .hero-content {
+    position: relative;
+    z-index: 2;
     max-width: 1200px;
-    margin: 3rem auto 0;
-    padding: 0 2rem;
+    width: 100%;
+    padding: 0 1rem;
 }
 
-.hero-cover-image img {
+/* Wrapper maintains consistent aspect ratio across screens */
+.hero-image-wrapper {
     width: 100%;
     max-width: 100%;
     height: auto;
     border-radius: 1rem;
-    box-shadow: var(--shadow-lg);
-    object-fit: cover;
 }
 
-.hero-content {
-    max-width: 900px;
-    margin: 0 auto;
+.hero-image-wrapper img.hero-cover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+    display: block;
+}
+
+/* Small screens: taller ratio */
+@media (max-width: 768px) {
+    .case-study-hero { padding: 3rem 1rem; }
+    .hero-image-wrapper::before { padding-top: 66.66%; /* ~3:2 */ }
+}
+
+/* Larger screens: wider / shorter ratio */
+@media (min-width: 1440px) {
+    .case-study-hero { padding: 5rem 2rem; }
+    .hero-image-wrapper::before { padding-top: 45%; }
+    .case-study-hero .hero-content { max-width: 1400px; }
 }
 
 .case-study-hero h1 {
