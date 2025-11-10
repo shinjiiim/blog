@@ -132,7 +132,15 @@ header {
     border-bottom: 1px solid rgba(55, 65, 81, 0.5);
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
 }
-
+blockquote {
+    font-style: italic;
+    color: var(--text-secondary);
+    border-left: 4px solid var(--primary-color);
+    margin: 1rem 0;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    
+}
 .header-right {
     display: flex;
     align-items: center;
@@ -239,7 +247,7 @@ main {
 }
 
 .hero-inner {
-    padding: 0 2rem;
+    padding: 0 1rem;
     position: relative;
     z-index: 1;
     display: grid;
@@ -257,8 +265,8 @@ main {
 .hero-name {
     font-family: var(--font-display);
     font-size: 4.5rem;
-    font-weight: 800;
-    line-height: 0.9;
+    font-weight: 1100;
+    line-height: 1.1;
     margin: 0;
     color: var(--text-primary);
     letter-spacing: -0.02em;
@@ -273,38 +281,25 @@ main {
 
 .hero-description strong {
     color: var(--text-primary);
-    font-weight: 600;
-}
-
-.hero-subtitle {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.4;
-    margin: 1rem 0;
-
-}
-
-.hero-subtitle strong {
-    color: var(--primary-color);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .hero-stats {
     display: flex;
-    gap: 4rem;
+    gap: 2rem;
     margin-top: 1rem;
 }
 
 .stat {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .stat-icon {
-    font-size: 1.5rem;
-    width: 40px;
-    height: 40px;
+    font-size: 1rem;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -324,20 +319,6 @@ main {
     font-weight: 400;
 }
 
-.stat-value {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.plantix-logo {
-    width: 16px;
-    height: 16px;
-}
-
 .hero-right {
     position: relative;
     display: flex;
@@ -347,13 +328,13 @@ main {
 
 .illustration-container {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
 }
 
 .circular-illustration {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     border-radius: 50%;
     background: linear-gradient(135deg, #126831 0%, #16a34a 100%);
     display: flex;
@@ -366,8 +347,8 @@ main {
 }
 
 .personal-photo {
-    width: 280px;
-    height: 280px;
+    width: 380px;
+    height: 380px;
     object-fit: cover;
     border-radius: 50%;
     border: 4px solid white;
@@ -397,35 +378,35 @@ main {
 }
 
 .design-systems {
-    background: #ef4444;
+    background: #e24848;
     top: 20px;
-    right: 20px;
+    right: 30px;
 }
 
 .motion-design {
-    background: #06b6d4;
-    top: 50%;
-    right: -40px;
+    background: #1ea6be;
+    top: 40%;
+    right: -70px;
     transform: translateY(-50%);
 }
 
 .product-thinking {
-    background: #50358d;
-    top: 65%;
-    left: -5px;
+    background: #5d34be;
+    top: 60%;
+    left: -50px;
     transform: translateY(-50%);
 }
 
 .ux-research {
     background: #479d14;
-    bottom: 20px;
-    left: 45%;
+    bottom: 40px;
+    left: 55%;
     transform: translateX(-50%);
 }
 
 /* Section Styles */
 section {
-    padding: 2rem 0;
+    padding: 0rem 0;
     max-width: 100%;
     margin: 0 auto;
     padding-left: 2rem;
@@ -449,14 +430,21 @@ section hr {
 
 /* Work Experience */
 #work {
-    background: var(--background-secondary);
+    background: transparent;
 }
-
+#colored-card {
+    background: var(--background-secondary);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
 .work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 100%;
 }
 
@@ -562,7 +550,7 @@ section hr {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 100%;
 }
 
@@ -576,7 +564,7 @@ section hr {
 }
 
 .case-study-card:hover {
-    transform: translateY(-6px);
+    transform: scale(1.03);
     box-shadow: var(--shadow-lg);
 }
 
@@ -593,14 +581,11 @@ section hr {
 }
 
 .promo-engine {
-    background: linear-gradient(135deg, #f5f5f5 0%, #457978 100%);
+    background: linear-gradient(135deg, #585858 0%, #ffffff 100%);
     padding: 2rem;
 }
 
-.checkout {
-    background: linear-gradient(135deg, #f5f5f5 0%, #794548 100%);
-    padding: 2rem;
-}
+
 
 .phone-mockup {
     width: 200px;
@@ -662,6 +647,7 @@ section hr {
 
 .case-study-btn:hover {
     background: var(--border-color);
+    font-weight: 1000;
 }
 
 /* Selected Project */
@@ -779,7 +765,7 @@ section hr {
     font-family: var(--font-display);
     color: var(--text-primary);
     margin-bottom: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 1.5rem;
 }
 
@@ -824,18 +810,19 @@ section hr {
 
 .timeline-line-dual {
     position: absolute;
+    width:: calc(100% );
     top: 50%;
     left: 140px;
-    right: 2rem;
-    height: 3px;
+    right: 1rem;
+    height: 2px;
     background: linear-gradient(to right, var(--border-color), var(--text-secondary), var(--border-color));
-    transform: translateY(-50%);
+    transform: translateY(-70%);
     z-index: 0;
 }
 
 .timeline-track {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     padding-left: 160px;
     padding-right: 2rem;
     position: relative;
@@ -888,15 +875,7 @@ section hr {
     z-index: 1;
 }
 
-.education-track .timeline-item-dual::before {
-    top: 0;
-    height: 0.75rem;
-}
 
-.experience-track .timeline-item-dual::before {
-    bottom: 0;
-    height: 0.75rem;
-}
 
 .timeline-dot-dual {
     width: 16px;
@@ -926,17 +905,17 @@ section hr {
 
 .timeline-content-dual {
     text-align: center;
-    padding: 1rem;
+    padding: 0.5rem;
     background: var(--background-primary);
     border: 2px solid;
     border-radius: 0.75rem;
     box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
-    height: 120px;
+    height: 110px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
     width: 100%;
 }
 
@@ -958,8 +937,8 @@ section hr {
     margin: 0;
     font-size: 0.95rem;
     color: var(--text-primary);
-    font-weight: 600;
-    line-height: 1.3;
+    font-weight: 700;
+    line-height: 1;
 }
 
 .timeline-year {
@@ -1131,6 +1110,147 @@ footer a:hover {
     
     .hero-inner {
         max-width: 1400px;
+    }
+}
+
+/* Extra Large Desktops (1920px and above) */
+@media (min-width: 1920px) {
+    section {
+        max-width: 1800px;
+    }
+    
+    .hero-inner {
+        max-width: 1800px;
+        gap: 6rem;
+    }
+
+    .container {
+        max-width: 1800px;
+        padding: 0 4rem;
+    }
+
+    .hero-name {
+        font-size: 5rem;
+    }
+
+    .hero-description {
+        font-size: 1.5rem;
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .case-studies-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Ultra Wide Screens (2560px and above) */
+@media (min-width: 2560px) {
+    :root {
+        --content-max: 2200px;
+    }
+
+    section {
+        max-width: var(--content-max);
+        padding: 4rem 6rem;
+    }
+    
+    .hero-inner {
+        max-width: var(--content-max);
+        gap: 8rem;
+    }
+
+    .container {
+        max-width: var(--content-max);
+        padding: 0 6rem;
+    }
+
+    /* Larger typography for ultra-wide screens */
+    .hero-name {
+        font-size: 6rem;
+    }
+
+    .hero-description {
+        font-size: 1.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    /* Larger illustrations and images */
+    .illustration-container {
+        width: 500px;
+        height: 500px;
+    }
+
+    .circular-illustration {
+        width: 400px;
+        height: 400px;
+    }
+
+    .personal-photo {
+        width: 380px;
+        height: 380px;
+    }
+
+    /* Adjust grid layouts */
+    .work-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+    }
+
+    .case-studies-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+
+    .design-system-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+
+    /* Larger section headings */
+    section h1, section h2 {
+        font-size: 4rem;
+    }
+
+    /* Adjust card content */
+    .work-card p,
+    .case-study-content p,
+    .design-system-card p {
+        font-size: 1.125rem;
+    }
+
+    /* Larger skill tags */
+    .skill-tag {
+        padding: 1rem 2rem;
+        font-size: 1.25rem;
+    }
+
+    /* Adjust timeline for larger screens */
+    .timeline-content-dual {
+        height: 160px;
+        padding: 1.5rem;
+    }
+
+    .timeline-content-dual h4 {
+        font-size: 1.25rem;
+    }
+
+    .timeline-year {
+        font-size: 1.1rem;
+    }
+
+    /* Improved readability for ultra-wide screens */
+    .about-me p {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        max-width: 75ch;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
