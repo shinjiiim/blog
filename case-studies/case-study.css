@@ -18,7 +18,7 @@
 /* Dark Mode Variables */
 [data-theme="dark"] {
     --primary-color: #e5e7eb;
-    --text-primary: #f3f4f6;
+    --text-primary: #d1d5db;
     --text-secondary: #d1d5db;
     --text-light: #9ca3af;
     --background-primary: #111827;
@@ -222,57 +222,32 @@ main {
     width: 100%;
 }
 
-/* Hero Section (responsive image under heading) */
+/* Hero Section */
 .case-study-hero {
     background: var(--background-secondary);
-    padding: 4rem 1.5rem;
+    padding: 6rem 2rem 4rem;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
 }
 
-/* Keep hero text above the image */
-.case-study-hero .hero-content {
-    position: relative;
-    z-index: 2;
+
+.hero-cover-image {
     max-width: 1200px;
-    width: 100%;
-    padding: 0 1rem;
+    margin: 3rem auto 0;
+    padding: 0 2rem;
 }
 
-/* Wrapper maintains consistent aspect ratio across screens */
-.hero-image-wrapper {
+.hero-cover-image img {
     width: 100%;
     max-width: 100%;
     height: auto;
     border-radius: 1rem;
-}
-
-.hero-image-wrapper img.hero-cover-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1rem;
     box-shadow: var(--shadow-lg);
-    display: block;
+    object-fit: cover;
 }
 
-/* Small screens: taller ratio */
-@media (max-width: 768px) {
-    .case-study-hero { padding: 3rem 1rem; }
-    .hero-image-wrapper::before { padding-top: 66.66%; /* ~3:2 */ }
-}
-
-/* Larger screens: wider / shorter ratio */
-@media (min-width: 1440px) {
-    .case-study-hero { padding: 5rem 2rem; }
-    .hero-image-wrapper::before { padding-top: 45%; }
-    .case-study-hero .hero-content { max-width: 1400px; }
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .case-study-hero h1 {
