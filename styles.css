@@ -134,13 +134,14 @@ header {
 }
 blockquote {
     font-style: italic;
-    color: var(--text-secondary);
-    border-left: 4px solid var(--primary-color);
+    color: var(--text-primary);
+    border-left: 2px solid var(--text-light);
     margin: 1rem 0;
     padding-left: 1rem;
-    font-size: 1.5rem;
-    
+    font-size: 2rem;
+
 }
+
 .header-right {
     display: flex;
     align-items: center;
@@ -357,7 +358,7 @@ main {
 
 .personal-photo:hover {
     transform:scale(1.2);
-    cursor:grab
+    cursor:move
 }
 
 .skill-tag {
@@ -374,7 +375,7 @@ main {
 .skill-tag:hover {
     transform:rotate(20deg);
     transition: transform 1s ease;
-    cursor: pointer;
+    cursor: cell;
 }
 
 .design-systems {
@@ -581,7 +582,7 @@ section hr {
 }
 
 .promo-engine {
-    background: linear-gradient(135deg, #585858 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #1f2937 0%, #ffffff 100%);
     padding: 2rem;
 }
 
@@ -646,7 +647,7 @@ section hr {
 }
 
 .case-study-btn:hover {
-    background: var(--border-color);
+    background: var(--text-light);
     font-weight: 1000;
 }
 
@@ -735,7 +736,7 @@ section hr {
     box-shadow: var(--shadow-md);
     transform: translateX(4px);
     border-left-color: var(--secondary-color);
-    cursor: grab
+    cursor: text
 }
 
 .category-name {
@@ -759,6 +760,7 @@ section hr {
 
 .about-me {
     max-width: 100%;
+        text-align: center;
 }
 
 .about-me h3, .about-me h4 {
@@ -822,7 +824,7 @@ section hr {
 
 .timeline-track {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     padding-left: 160px;
     padding-right: 2rem;
     position: relative;
@@ -847,16 +849,16 @@ section hr {
 }
 
 .education-track {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .timeline-item-dual {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.0rem;
     flex-shrink: 0;
-    min-width: 160px;
+    min-width: 25%;
     position: relative;
 }
 
@@ -930,7 +932,7 @@ section hr {
 .timeline-item-dual:hover .timeline-content-dual {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    cursor: help;
+    cursor: grab;
 }
 
 .timeline-content-dual h4 {
@@ -992,6 +994,8 @@ section hr {
 }
 
 .about-card {
+    background-image: none;
+    width: 100%;
     background: var(--background-primary);
     border: 1px solid var(--border-color);
     border-radius: 1rem;
@@ -1014,8 +1018,9 @@ section hr {
 }
 
 .about-card-icon {
-    font-size: 3rem;
+    font-size: 1.4rem;
     line-height: 1;
+
 }
 
 .about-card h3 {
@@ -1142,7 +1147,7 @@ footer a:hover {
     }
 
     .case-studies-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1169,31 +1174,37 @@ footer a:hover {
 
     /* Larger typography for ultra-wide screens */
     .hero-name {
-        font-size: 6rem;
+        font-size: 10rem;
+    }
+    .hero-stats {
+        font-size: 2rem;
+    }
+    .hero-description {
+        font-size: 3.75rem;
     }
 
-    .hero-description {
-        font-size: 1.75rem;
+    blockquote {
+        font-size: 4.5rem;
     }
 
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 3.25rem;
     }
 
     /* Larger illustrations and images */
     .illustration-container {
-        width: 500px;
-        height: 500px;
+        width: 800px;
+        height: 800px;
     }
 
     .circular-illustration {
-        width: 400px;
-        height: 400px;
+        width: 700px;
+        height: 700px;
     }
 
     .personal-photo {
-        width: 380px;
-        height: 380px;
+        width: 680px;
+        height: 680px;
     }
 
     /* Adjust grid layouts */
@@ -1203,7 +1214,7 @@ footer a:hover {
     }
 
     .case-studies-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 3rem;
     }
 
@@ -1214,34 +1225,34 @@ footer a:hover {
 
     /* Larger section headings */
     section h1, section h2 {
-        font-size: 4rem;
+        font-size: 6rem;
     }
 
     /* Adjust card content */
     .work-card p,
     .case-study-content p,
     .design-system-card p {
-        font-size: 1.125rem;
+        font-size: 2.125rem;
     }
 
     /* Larger skill tags */
     .skill-tag {
         padding: 1rem 2rem;
-        font-size: 1.25rem;
+        font-size: 2.25rem;
     }
 
     /* Adjust timeline for larger screens */
     .timeline-content-dual {
         height: 160px;
-        padding: 1.5rem;
+        padding: 2.5rem;
     }
 
     .timeline-content-dual h4 {
-        font-size: 1.25rem;
+        font-size: 2.25rem;
     }
 
     .timeline-year {
-        font-size: 1.1rem;
+        font-size: 2.1rem;
     }
 
     /* Improved readability for ultra-wide screens */
@@ -1249,8 +1260,9 @@ footer a:hover {
         font-size: 1.25rem;
         line-height: 1.8;
         max-width: 75ch;
-        margin-left: auto;
+        margin-left: 2rem;
         margin-right: auto;
+        
     }
 }
 
@@ -1846,11 +1858,11 @@ footer a:hover {
 /* Floating Chat Button */
 .chat-button {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 56px;
-    height: 56px;
-    background: var(--text-primary);
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background: var(--text-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1859,8 +1871,8 @@ footer a:hover {
     box-shadow: var(--shadow-md);
     z-index: 1000;
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
-    font-size: 1.3rem;
+    border: 1px solid var(--primary-color);
+    font-size: 1.9rem;
     color: var(--background-primary);
 }
 
@@ -1870,7 +1882,7 @@ footer a:hover {
 }
 
 .chat-button:active {
-    transform: scale(0.95);
+    transform: scale(1.1);
 }
 
 [data-theme="dark"] .chat-button {
