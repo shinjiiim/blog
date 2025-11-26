@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Children's Hospital Digital Lab | Shahrzad Jafari</title>
+    <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
+    <link rel="stylesheet" href="../normalize.css">
+    <link rel="stylesheet" href="../case-studies/case-study.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo-link">
+        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+    </a>
+    <div class="header-right">
+        <nav>
+            <ul>
+                <li><a href="../index.html#work">Work</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+</header>
+
+<main>
+    <section class="case-study-hero">
+        <div class="hero-content">
+            <h1>BC Children's Hospital Digital Lab</h1>
+            <p class="subtitle">Research and Development Lab Designing Digital Healthcare Applications</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <strong>Role</strong>
+                    <span>UX Researcher, UI Designer</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Organization</strong>
+                    <span>BC Children's Hospital / UBC</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Timeline</strong>
+                    <span>2022 - 2023</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Focus</strong>
+                    <span>Healthcare, Pediatrics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Project Overview</h2>
+        <p>Worked in a research and development lab designing digital applications in collaboration with BC Children's Hospital, funded by UBC University. The lab focused on creating innovative healthcare solutions for pediatric patients and their families.</p>
+    </section>
+
+    <section class="content-section">
+        <h2>My Role & Responsibilities</h2>
+        <ul>
+            <li>Conducted user research with patients, families, and healthcare providers</li>
+            <li>Designed healthcare-focused digital applications and interfaces</li>
+            <li>Collaborated with medical professionals to understand clinical workflows</li>
+            <li>Ensured accessibility and usability for diverse user groups</li>
+            <li>Participated in research documentation and academic publications</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Key Challenges</h2>
+        <ul>
+            <li>Designing for sensitive healthcare contexts and vulnerable populations</li>
+            <li>Balancing medical accuracy with user-friendly design</li>
+            <li>Meeting strict healthcare privacy and security requirements</li>
+            <li>Accommodating various literacy levels and age groups</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Solutions & Impact</h2>
+        <ul>
+            <li>Created empathy-driven designs based on extensive user research</li>
+            <li>Developed accessible interfaces compliant with healthcare standards</li>
+            <li>Implemented clear information hierarchy for medical content</li>
+            <li>Designed age-appropriate experiences for pediatric users</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Skills Applied</h2>
+        <p><strong>Research:</strong> Healthcare user research, Ethnographic studies, Accessibility research</p>
+        <p><strong>Design:</strong> Healthcare UI/UX, Inclusive design, Information architecture</p>
+        <p><strong>Collaboration:</strong> Cross-disciplinary teamwork, Academic research, Clinical stakeholders</p>
+    </section>
+
+    <nav class="page-navigation">
+        <a href="koach.html" class="nav-btn nav-prev">← Prev: Koach</a>
+        <a href="ux-internship.html" class="nav-btn nav-next">Next: UX Internship →</a>
+    </nav>
+</main>
+
+<footer>
+    <p>
+        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="#">Dribbble</a>
+    </p>
+    <p>&copy; made and designed by Shahrzad Jafari — Version 3.0</p>
+</footer>
+
+<script>
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+const currentTheme = localStorage.getItem('theme') || 'light';
+const themeIcon = themeToggle.querySelector('.theme-icon');
+htmlElement.setAttribute('data-theme', currentTheme);
+themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+</script>
+
+</body>
+</html>
+
