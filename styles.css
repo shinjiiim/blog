@@ -815,7 +815,7 @@ section hr {
 .timeline-line-dual {
     position: absolute;
     width:: calc(100% );
-    top: 50%;
+    top: 13%;
     left: 140px;
     right: 1rem;
     height: 2px;
@@ -823,6 +823,7 @@ section hr {
     transform: translateY(-70%);
     z-index: 0;
 }
+
 
 .timeline-track {
     display: flex;
