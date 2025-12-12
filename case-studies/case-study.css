@@ -98,6 +98,18 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
 }
 
+/* Prevent image downloads */
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+img:not([aria-label="Logo"]) {
+    pointer-events: auto;
+    user-select: none;
+}
+
 /* Header Styles */
 header {
     position: fixed;
@@ -224,9 +236,16 @@ main {
 
 /* Hero Section */
 .case-study-hero {
-    background: var(--background-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding: 6rem 2rem 4rem;
     text-align: center;
+}
+
+[data-theme="dark"] .case-study-hero {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 
@@ -330,13 +349,29 @@ main {
 /* Content Sections */
 .content-section {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+}
+
+[data-theme="dark"] .content-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .content-section.bg-light {
-    background: var(--background-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     max-width: 100%;
+}
+
+[data-theme="dark"] .content-section.bg-light {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .content-section.bg-light > * {

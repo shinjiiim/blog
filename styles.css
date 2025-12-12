@@ -100,6 +100,18 @@ img {
     max-width: none;
 }
 
+/* Prevent image downloads */
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+img:not([aria-label="Logo"]) {
+    pointer-events: auto;
+    user-select: none;
+}
+
 /* Prevent horizontal overflow */
 * {
     max-width: 100%;
@@ -707,7 +719,21 @@ section hr {
 
 /* Design Stack */
 #design-stack {
-    background: var(--background-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+}
+
+[data-theme="dark"] #design-stack {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .design-stack-list {
@@ -757,7 +783,21 @@ section hr {
 
 /* About Section */
 #about {
-    background: var(--background-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+}
+
+[data-theme="dark"] #about {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .about-me {
@@ -808,8 +848,19 @@ section hr {
     position: relative;
     overflow-x: auto;
     overflow-y: visible;
-    padding: 2rem 0;
+    padding: 2rem;
     margin: 3rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+[data-theme="dark"] .dual-timeline {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .timeline-line-dual {
@@ -1043,8 +1094,22 @@ section hr {
 /* Contact Section */
 
 #contact {
-    background: var(--background-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
     text-align: center;
+    width: 100%;
+}
+
+[data-theme="dark"] #contact {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #contact p {
@@ -1121,6 +1186,10 @@ footer a:hover {
     .hero-inner {
         max-width: 1400px;
     }
+    
+    #design-stack, #about, #contact {
+        max-width: 1400px;
+    }
 }
 
 /* Extra Large Desktops (1920px and above) */
@@ -1137,6 +1206,10 @@ footer a:hover {
     .container {
         max-width: 1800px;
         padding: 0 4rem;
+    }
+    
+    #design-stack, #about, #contact {
+        max-width: 1800px;
     }
 
     .hero-name {
@@ -1335,6 +1408,12 @@ footer a:hover {
         width: 180px;
         height: 360px;
     }
+    
+    /* Responsive sections for 1024px and below */
+    #design-stack, #about, #contact {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
 }
 
 /* Medium Tablets (900px and below) */
@@ -1346,6 +1425,12 @@ footer a:hover {
     
     .hero-stats {
         gap: 2rem;
+    }
+    
+    /* Responsive sections for 900px and below */
+    #design-stack, #about, #contact {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 }
 
@@ -1518,6 +1603,12 @@ footer a:hover {
     .tools {
         font-size: 0.85rem;
     }
+    
+    /* Responsive sections for 768px and below */
+    #design-stack, #about, #contact {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 /* Small Mobile Landscape and Portrait (600px and below) */
@@ -1530,6 +1621,12 @@ footer a:hover {
     .hero-description br,
     .hero-subtitle br {
         display: none;
+    }
+    
+    /* Responsive sections for 600px and below */
+    #design-stack, #about, #contact {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
     }
 }
 
@@ -2120,5 +2217,34 @@ footer a:hover {
         font-size: 0.8rem;
     }
 }
+
+/* Role Switcher Typing Effect */
+.role-switcher {
+    position: relative;
+    display: inline-block;
+    min-width: 150px;
+}
+
+.role-switcher::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 1.1em;
+    background-color: var(--text-primary);
+    animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
 
 

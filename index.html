@@ -54,9 +54,8 @@
         <div class="hero-left">
         <h1 class="hero-name">SHAHRZAD<br>JAFARI</h1>
         <blockquote>Design isn't just problem-solving, it's creating harmony between people, products, and possibilities.</blockquote>
-        <p class="hero-description"> Innovative <strong>UX/UI Designer</strong> and Storyteller Design Researcher<br>
-        with 8+ years of experience creating intuitive mobile and web solutions.
-        <br>Bridging <strong>Behavioral Science</strong> & <strong>Human-Centered Design</strong>to deliver user-friendly, scalable products that turn user problems into measurable business outcomes.</p>
+        <p class="hero-description"> Innovative <strong><span class="role-switcher" data-roles="UX/UI Designer,Design Researcher">UX/UI Designer</span></strong> and Storyteller with 8+ years of experience creating intuitive mobile and web solutions.
+        <br>Bridging <strong>Behavioral Science</strong> & <strong>Human-Centered Design</strong> to deliver user-friendly, scalable products that turn user problems into measurable business outcomes.</p>
         <div class="hero-stats">
             <p class="stat">
             <span class="stat-icon">🎯</span>
@@ -586,26 +585,132 @@ const chatButton = document.getElementById('chat-button');
 const chatModal = document.getElementById('chat-modal');
 const chatClose = document.getElementById('chat-close');
 
-// Toggle chat modal
+// Add pulse animation to chat button on page load
+chatButton.style.animation = 'none';
+setTimeout(() => {
+    chatButton.style.animation = '';
+}, 100);
+
+// Toggle chat modal with animation
 chatButton.addEventListener('click', () => {
-    chatModal.classList.toggle('active');
+    const isActive = chatModal.classList.contains('active');
+    
+    if (!isActive) {
+        // Opening modal
+        chatModal.classList.add('active');
+        chatButton.style.transform = 'scale(1.1) rotate(10deg)';
+        chatButton.style.transition = 'transform 0.3s ease';
+    } else {
+        // Closing modal
+        chatButton.style.transform = 'scale(1) rotate(0deg)';
+        setTimeout(() => {
+            chatModal.classList.remove('active');
+        }, 150);
+    }
+});
+
+// Scale button on hover
+chatButton.addEventListener('mouseenter', () => {
+    if (!chatModal.classList.contains('active')) {
+        chatButton.style.transform = 'scale(1.15)';
+        chatButton.style.transition = 'transform 0.2s ease';
+    }
+});
+
+chatButton.addEventListener('mouseleave', () => {
+    if (!chatModal.classList.contains('active')) {
+        chatButton.style.transform = 'scale(1)';
+    }
 });
 
 // Close chat modal
 chatClose.addEventListener('click', () => {
+    chatButton.style.transform = 'scale(1) rotate(0deg)';
     chatModal.classList.remove('active');
 });
 
 // Close modal when clicking outside
 document.addEventListener('click', (e) => {
     if (!chatModal.contains(e.target) && !chatButton.contains(e.target)) {
-        chatModal.classList.remove('active');
+        if (chatModal.classList.contains('active')) {
+            chatButton.style.transform = 'scale(1) rotate(0deg)';
+            chatModal.classList.remove('active');
+        }
     }
 });
 
 // Prevent modal from closing when clicking inside it
 chatModal.addEventListener('click', (e) => {
     e.stopPropagation();
+});
+
+// Role Switcher with Character-by-Character Typing
+const roleSwitcher = document.querySelector('.role-switcher');
+if (roleSwitcher) {
+    const roles = roleSwitcher.getAttribute('data-roles').split(',');
+    let currentRoleIndex = 0;
+
+    function typeText(element, text, speed = 80) {
+        element.textContent = '';
+        let charIndex = 0;
+
+        return new Promise((resolve) => {
+            const typeInterval = setInterval(() => {
+                if (charIndex < text.length) {
+                    element.textContent += text[charIndex];
+                    charIndex++;
+                } else {
+                    clearInterval(typeInterval);
+                    resolve();
+                }
+            }, speed);
+        });
+    }
+
+    async function switchRole() {
+        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+        const newRole = roles[currentRoleIndex].trim();
+        
+        // Delete text
+        let text = roleSwitcher.textContent;
+        for (let i = text.length - 1; i >= 0; i--) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+            roleSwitcher.textContent = text.substring(0, i);
+        }
+        
+        // Type new text
+        await typeText(roleSwitcher, newRole, 80);
+    }
+
+    // Switch role every 5 seconds (give typing time + pause)
+    setInterval(() => {
+        switchRole();
+    }, 5000);
+}
+
+// Prevent image downloads
+document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Prevent drag and drop of images
+document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Disable right-click on images
+const images = document.querySelectorAll('img');
+images.forEach(img => {
+    img.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
 });
 </script>
 
