@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Product Design | Shahrzad Jafari</title>
+    <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
+    <link rel="stylesheet" href="../normalize.css">
+    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo-link">
+        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+    </a>
+    <div class="header-right">
+        <nav>
+            <ul>
+                <li><a href="../index.html#work">Work</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+</header>
+
+<main>
+    <section class="case-study-hero">
+        <div class="hero-content">
+            <h1>Freelance Product Design</h1>
+            <p class="subtitle">Mixed-Methods Research Combining Quantitative and Qualitative Data Analysis</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <strong>Role</strong>
+                    <span>Product Designer, Researcher</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Type</strong>
+                    <span>Freelance / Contract</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Timeline</strong>
+                    <span>2020 - Present</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Specialization</strong>
+                    <span>Mixed-Methods Research</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Project Overview</h2>
+        <p>As a freelance product designer, I specialize in conducting comprehensive mixed-methods research that combines quantitative and qualitative data analysis to inform design decisions and product strategy for various clients.</p>
+    </section>
+
+    <section class="content-section">
+        <h2>My Role & Responsibilities</h2>
+        <ul>
+            <li>Designed and conducted mixed-methods research studies</li>
+            <li>Performed quantitative analysis using analytics and surveys</li>
+            <li>Conducted qualitative research through interviews and observations</li>
+            <li>Synthesized research findings into actionable design recommendations</li>
+            <li>Delivered end-to-end product design from concept to prototype</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Research Methodologies</h2>
+        <ul>
+            <li><strong>Quantitative:</strong> Analytics analysis, Survey design, A/B testing, Statistical analysis</li>
+            <li><strong>Qualitative:</strong> User interviews, Contextual inquiry, Usability testing, Ethnographic studies</li>
+            <li><strong>Synthesis:</strong> Triangulation, Pattern identification, Insight generation, Persona development</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Key Achievements</h2>
+        <ul>
+            <li>Served multiple clients across different industries</li>
+            <li>Increased user engagement through research-backed design decisions</li>
+            <li>Reduced development costs by identifying issues early through research</li>
+            <li>Built long-term client relationships through quality deliverables</li>
+        </ul>
+    </section>
+
+    <section class="content-section">
+        <h2>Skills Applied</h2>
+        <p><strong>Research:</strong> Mixed-methods research, Survey design, User interviews, Data analysis</p>
+        <p><strong>Design:</strong> Full-stack product design, Prototyping, Design systems, UI/UX</p>
+        <p><strong>Business:</strong> Client management, Project scoping, Deliverable creation, Presentation</p>
+    </section>
+
+    <nav class="page-navigation">
+        <a href="ux-internship.html" class="nav-btn nav-prev">← Prev: UX Internship</a>
+        <a href="downtown-radiology.html" class="nav-btn nav-next">Next: Downtown Radiology →</a>
+    </nav>
+</main>
+
+<footer>
+    <p>
+        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="#">Dribbble</a>
+    </p>
+    <p>&copy; made and designed by Shahrzad Jafari — Version 3.0</p>
+</footer>
+
+<script>
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+const currentTheme = localStorage.getItem('theme') || 'light';
+const themeIcon = themeToggle.querySelector('.theme-icon');
+htmlElement.setAttribute('data-theme', currentTheme);
+themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// Prevent image downloads
+document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Prevent drag and drop of images
+document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Disable right-click on images
+const images = document.querySelectorAll('img');
+images.forEach(img => {
+    img.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+});
+</script>
+
+</body>
+</html>
+
