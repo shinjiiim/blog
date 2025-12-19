@@ -48,7 +48,9 @@ body {
     color: var(--text-primary);
     background-color: var(--background-primary);
     margin: 0;
-    padding: 0;
+    padding: 0 0 64px 0;
+    direction: ltr;
+    text-align: left;
     overflow-x: hidden;
     width: 100%;
     min-height: 100vh;
@@ -575,6 +577,9 @@ Work Experience */
     box-shadow: var(--shadow-md);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
 }
 
 .case-study-card:hover {
@@ -585,49 +590,40 @@ Work Experience */
 .case-study-image {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-}
-
-.image-placeholder {
-    border-radius: 0.75rem;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-}
-
-.promo-engine {
-    background: linear-gradient(135deg, #1f2937 0%, #ffffff 100%);
-    padding: 2rem;
-}
-
-
-
-.phone-mockup {
-    width: 200px;
-    height: 400px;
-    background: #1f2937;
-    border-radius: 2rem;
-    padding: 0.5rem;
-    margin: 0 auto;
-    position: relative;
-}
-
-.phone-screen {
-    width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 1.5rem;
-    padding: 0.2rem;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    aspect-ratio: 1 / 1;
 }
 
-.phone-screen img {
+.case-study-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1rem;
+    display: block;
+}
+
+/* Remove all mockup/placeholder styling */
+.image-placeholder {
+    display: none;
+}
+
+.promo-engine {
+    display: none;
+}
+
+.phone-mockup {
+    display: none;
+}
+
+.phone-screen {
+    display: none;
+}
+
+.phone-screen img {
+    display: none;
 }
 
 .case-study-content {
@@ -802,7 +798,7 @@ Work Experience */
 
 .about-me {
     max-width: 100%;
-        text-align: center;
+    text-align: left;
 }
 
 .about-me h3, .about-me h4 {
@@ -1061,8 +1057,8 @@ Work Experience */
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     gap: 1rem;
 }
 
@@ -1170,6 +1166,54 @@ footer a:hover {
     opacity: 0.5;
     text-decoration: underline;
     transition: text-decoration 0.3s ease;
+}
+
+/* Certificates Section */
+.certificates-section {
+    padding: 1rem 0 2rem 0;
+}
+.cert-list {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0.5rem 0 0 0;
+    padding: 0;
+    align-items: center;
+    /* allow horizontal scroll on small screens */
+    overflow-x: auto;
+}
+.cert-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    min-width: 220px;
+    flex: 0 0 220px;
+}
+.cert-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+}
+.cert-title {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+.cert-meta {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.cert-issuer {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+@media (max-width: 520px) {
+    .cert-card { padding: 0.75rem; }
+    .cert-title { font-size: 0.95rem; }
 }
 
 /* ===================================

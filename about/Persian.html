@@ -11,6 +11,59 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Persian font: B Zar (local fallback) and Vazirmatn as web fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Try local B Zar first (place font files in ../fonts/ if available) */
+        @font-face {
+            font-family: 'B Zar';
+            src: url('../fonts/BZar.woff2') format('woff2'),
+                 url('../fonts/BZar.woff') format('woff');
+            font-weight: 300 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Scoped Persian styles - do NOT affect header, nav, footer, or page navigation */
+        .persian-root {
+            direction: rtl;
+            unicode-bidi: embed;
+            font-family: 'B Zar', 'Vazirmatn', Tahoma, 'Segoe UI', sans-serif;
+            color: inherit;
+        }
+
+        .persian-root p,
+        .persian-root .subtitle,
+        .persian-root .content-section p,
+        .persian-root li {
+            text-align: justify;
+            text-justify: inter-word;
+            direction: rtl;
+        }
+
+        .persian-root h1,
+        .persian-root h2,
+        .persian-root h3,
+        .persian-root h4,
+        .persian-root strong,
+        .persian-root blockquote {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Keep page navigation and header/footer untouched */
+        .persian-root .page-navigation,
+        .page-navigation {
+            direction: ltr; /* preserve existing styles */
+        }
+
+        /* Ensure hero image and illustration align to the right in RTL layout */
+        .persian-root .circular-illustration,
+        .persian-root .hero-content {
+            text-align: right;
+        }
+
+    </style>
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -32,7 +85,7 @@
     <div class="header-right">
         <nav>
             <ul>
-                <li><a href="../index.html#work">Work</a></li>
+                <li><a href="../index.html#work">Projects</a></li>
                 <li><a href="../index.html#about">About</a></li>
                 <li><a href="../index.html#contact">Contact</a></li>
                 <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
@@ -45,13 +98,14 @@
 </header>
 
 <main>
+    <div class="persian-root">
     <section class="case-study-hero">
         <div class="hero-content">
             <h1> درباره من</h1>
             <p class="subtitle">برای من، طراحی فقط یک مهارت نیست . زبانی‌ست برای درک انسان‌ها.
 مسیرم از دنیای هنر و تئاتر آغاز شد و به تجربه‌گرایی در طراحی دیجیتال و پژوهش‌های رفتاری رسید. طراحی برایم یعنی دیدن، شنیدن، و خلق تجربه‌هایی که زندگی را کمی ساده‌تر، زیباتر و معنا‌دارتر می‌کنند.</p>
 <div class="circular-illustration">
-    <img src="/image/personal2.jpg" alt="Shahrzad Jafari" class="personal-photo">
+    <img src="/image/personal/personal2.jpg" alt="Shahrzad Jafari" class="personal-photo">
         </div>
         </div>
     </section>
@@ -104,6 +158,8 @@
 قصه‌ی دیدن انسان، درک احساس، و ساختن جهانی که کمی مهربان‌تر باشد.»</strong>
 
     </section>
+
+    </div><!-- /.persian-root -->
 
     <nav class="page-navigation">
         <a href="/index.html" class="nav-btn nav-prev">← Prev: Home Page</a>
