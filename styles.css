@@ -583,7 +583,8 @@ Work Experience */
 }
 
 .case-study-card:hover {
-    transform: scale(1.03);
+    transform: scale(1.08);
+    transition: all 0.7s ease;
     box-shadow: var(--shadow-lg);
 }
 
@@ -656,8 +657,8 @@ Work Experience */
 }
 
 .case-study-btn:hover {
-    background: var(--text-light);
-    font-style: italic;
+    background: var(--border-color);
+    font-weight: bold;
 }
 
 /* Selected Project */
@@ -758,10 +759,8 @@ Work Experience */
 .stack-item:hover {
     box-shadow: var(--shadow-md);
     background-color: var(--secondary-color);
-    transform: translateY(-4px) scale(1.04);
-    border-left-color: var(--secondary-color);
-    cursor: text
-}
+    transform: translateY(-0px) ;
+    border-left-color: var(--secondary-color);}
 
 .category-name {
     font-weight: 650;
@@ -1176,44 +1175,69 @@ footer a:hover {
     display: flex;
     gap: 1rem;
     list-style: none;
-    margin: 0.5rem 0 0 0;
+    margin: 1rem 0 0 0;
     padding: 0;
     align-items: center;
-    /* allow horizontal scroll on small screens */
     overflow-x: auto;
 }
+
 .cert-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-    min-width: 220px;
-    flex: 0 0 220px;
+    background: var(--background-primary);
+    border: 2px solid transparent;
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    height: 140px;
+    min-width: 25%;
+    flex-shrink: 0;
 }
+
 .cert-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+    cursor: grab;
 }
+
 .cert-title {
-    margin: 0 0 0.25rem 0;
-    font-size: 1rem;
-    color: var(--primary-color);
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.2;
 }
+
 .cert-meta {
     margin: 0;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
+    line-height: 1.4;
 }
+
 .cert-issuer {
     font-weight: 600;
     color: var(--text-primary);
 }
 
+.cert-year {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
 @media (max-width: 520px) {
-    .cert-card { padding: 0.75rem; }
-    .cert-title { font-size: 0.95rem; }
+    .cert-card { 
+        padding: 1rem 0.75rem;
+        min-height: 120px;
+    }
+    .cert-title { font-size: 0.9rem; }
+    .cert-meta { font-size: 0.75rem; }
 }
 
 /* ===================================
