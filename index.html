@@ -55,8 +55,9 @@
         <blockquote>Design isn't just problem-solving, it's creating harmony between people, products, and possibilities.</blockquote>
         <h1 class="hero-name">SHAHRZAD<br>JAFARI</h1>
        
-        <p class="hero-description"> Innovative <strong><span class="role-switcher" data-roles="UX/UI Designer,Design Researcher,Industrial Designer, Product Designer, Graphic Designer, Web Developer" >UX/UI Designer</span></strong> and Storyteller with 6+ years of experience creating intuitive mobile and web solutions.
+        <p class="hero-description"> Innovative <strong><span class="role-switcher" data-roles="UX/UI Designer,Design Researcher,Industrial Designer,Product Designer,Graphic Designer,Web Developer">UX/UI Designer</span></strong> and Storyteller with 6+ years of experience creating intuitive mobile and web solutions.
         <br>Bridging <strong>Behavioral Science</strong> & <strong>Human-Centered Design</strong> to deliver user-friendly, scalable products that turn user problems into measurable business outcomes.</p>
+
         <div class="hero-stats">
             <p class="stat">
             <span class="stat-icon">🎯</span>
@@ -787,6 +788,8 @@ chatModal.addEventListener('click', (e) => {
 });
 
 // Role Switcher with Character-by-Character Typing
+
+
 const roleSwitcher = document.querySelector('.role-switcher');
 if (roleSwitcher) {
     const roles = roleSwitcher.getAttribute('data-roles').split(',');
@@ -810,24 +813,25 @@ if (roleSwitcher) {
     }
 
     async function switchRole() {
-        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-        const newRole = roles[currentRoleIndex].trim();
-        
-        // Delete text
-        let text = roleSwitcher.textContent;
-        for (let i = text.length - 1; i >= 0; i--) {
-            await new Promise(resolve => setTimeout(resolve, 50));
-            roleSwitcher.textContent = text.substring(0, i);
-        }
-        
-        // Type new text
-        await typeText(roleSwitcher, newRole, 80);
+    await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second pause before deleting
+    currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+    const newRole = roles[currentRoleIndex].trim();
+    
+    // Delete text
+    let text = roleSwitcher.textContent;
+    for (let i = text.length - 1; i >= 0; i--) {
+        await new Promise(resolve => setTimeout(resolve, 50));
+        roleSwitcher.textContent = text.substring(0, i);
     }
+    
+    // Type new text
+    await typeText(roleSwitcher, newRole, 80);
+}
 
     // Switch role every 5 seconds (give typing time + pause)
     setInterval(() => {
         switchRole();
-    }, 5000);
+    }, 4000);
 }
 
 // Prevent image downloads
@@ -855,6 +859,7 @@ images.forEach(img => {
     });
 });
 </script>
+
 
 </body>
 </html>
