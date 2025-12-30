@@ -789,7 +789,6 @@ chatModal.addEventListener('click', (e) => {
 
 // Role Switcher with Character-by-Character Typing
 
-
 const roleSwitcher = document.querySelector('.role-switcher');
 if (roleSwitcher) {
     const roles = roleSwitcher.getAttribute('data-roles').split(',');
@@ -800,7 +799,7 @@ if (roleSwitcher) {
         let charIndex = 0;
 
         return new Promise((resolve) => {
-            const typeInterval = setInterval(() => {
+            const typeInterval = switchRole(() => {
                 if (charIndex < text.length) {
                     element.textContent += text[charIndex];
                     charIndex++;
@@ -812,27 +811,32 @@ if (roleSwitcher) {
         });
     }
 
-    async function switchRole() {
-    await new Promise(resolve => setTimeout(resolve, 2000)); // 2 second pause before deleting
+   async function switchRole() {
+    // Pause for 2 seconds while showing current role
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
     currentRoleIndex = (currentRoleIndex + 1) % roles.length;
     const newRole = roles[currentRoleIndex].trim();
     
     // Delete text
     let text = roleSwitcher.textContent;
     for (let i = text.length - 1; i >= 0; i--) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        await new Promise(resolve => setTimeout(resolve, 30));
         roleSwitcher.textContent = text.substring(0, i);
     }
     
+    // Small pause before typing
+    await new Promise(resolve => setTimeout(resolve, 200));
+    
     // Type new text
     await typeText(roleSwitcher, newRole, 80);
+    
+    // Call itself again to create loop
+    switchRole();
 }
 
-    // Switch role every 5 seconds (give typing time + pause)
-    setInterval(() => {
-        switchRole();
-    }, 4000);
-}
+// Start the animation
+switchRole();
 
 // Prevent image downloads
 document.addEventListener('contextmenu', (e) => {
