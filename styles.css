@@ -580,8 +580,25 @@ Work Experience */
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+    cursor: pointer; /* Show pointer cursor */
 }
 
+/* Make anchor tags behave like cards */
+a.case-study-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.case-study-card:hover {
+    transform: scale(1.08);
+    transition: all 0.7s ease;
+    box-shadow: var(--shadow-lg);
+    text-decoration: none; /* Ensure no underline on hover */
+}
+
+/* Keep hover effect for non-link cards too */
 .case-study-card:hover {
     transform: scale(1.08);
     transition: all 0.7s ease;
@@ -604,6 +621,12 @@ Work Experience */
     height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: auto; /* Ensure images in clickable cards are clickable */
+}
+
+/* Ensure images in clickable case-study-cards allow clicks to pass through */
+a.case-study-card .case-study-image img {
+    pointer-events: auto;
 }
 
 /* Remove all mockup/placeholder styling */
@@ -654,9 +677,11 @@ Work Experience */
     border-radius: 0.5rem;
     display: inline-block;
     transition: background-color 0.5s ease;
+    pointer-events: none; /* Prevent button from intercepting clicks */
 }
 
-.case-study-btn:hover {
+/* When inside a clickable card, the button should still look interactive */
+a.case-study-card:hover .case-study-btn {
     background: var(--border-color);
     font-weight: bold;
 }
@@ -860,7 +885,7 @@ Work Experience */
 
 .timeline-line-dual {
     position: absolute;
-    width:: calc(100% );
+    width: calc(100%);
     top: 13%;
     left: 140px;
     right: 1rem;
@@ -1898,6 +1923,13 @@ footer a:hover {
         overflow-wrap: break-word;
     }
     
+    /* Ensure role-switcher never wraps, even on mobile */
+    .hero-description .role-switcher {
+        white-space: nowrap !important;
+        word-wrap: normal !important;
+        overflow-wrap: normal !important;
+    }
+    
     /* Adjust section padding for better spacing */
     #work, #case-studies, #design-stack, #about, #contact {
         padding: 1.5rem 1rem;
@@ -2291,12 +2323,18 @@ footer a:hover {
   display: inline-block;
   position: relative;
   color: inherit;
+  white-space: nowrap; /* Prevent text wrapping during animation */
+  user-select: none; /* Prevent text selection during animation */
+  min-width: 0.5em; /* Prevent layout shift when text is empty */
+  vertical-align: baseline; /* Ensure proper alignment */
 }
 
 .role-switcher::after {
   content: '|';
   animation: blink 0.7s infinite;
   margin-left: 2px;
+  display: inline-block; /* Ensure cursor doesn't cause layout issues */
+  vertical-align: baseline;
 }
 
 @keyframes blink {
