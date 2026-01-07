@@ -1111,6 +1111,31 @@ a.case-study-card:hover .case-study-btn {
     line-height: 1.6;
 }
 
+/* Testimonial */
+.testimonial {
+    background: var(--background-primary);
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    margin-top: 3rem;
+    border-left: 4px solid var(--accent-color);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid darkred;
+}
+
+.testimonial p {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.testimonial cite {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-style: normal;
+}
+
 /* Contact Section */
 
 #contact {
