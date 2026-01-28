@@ -12,6 +12,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K1W60XD1FJ');
+</script>
+
+<!-- Custom GA event for page title and screen class -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var pageTitle = document.title;
+        var screenClass = document.body.className || 'default';
+        gtag('event', 'page_view_details', {
+            'page_title': pageTitle,
+            'screen_class': screenClass
+        });
+    });
+</script>
 <body>
 
 <header>
@@ -24,7 +44,7 @@
                 <li><a href="../index.html#work">Projects</a></li>
                 <li><a href="../index.html#about">About</a></li>
                 <li><a href="../index.html#contact">Contact</a></li>
-                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
             </ul>
         </nav>
         <button class="theme-toggle" id="theme-toggle">

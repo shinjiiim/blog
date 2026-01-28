@@ -38,32 +38,32 @@
         .persian-root li {
             text-align: justify;
             text-justify: inter-word;
-            direction: rtl;
         }
-
-        .persian-root h1,
-        .persian-root h2,
-        .persian-root h3,
-        .persian-root h4,
-        .persian-root strong,
-        .persian-root blockquote {
-            direction: rtl;
-            text-align: right;
-        }
-
-        /* Keep page navigation and header/footer untouched */
-        .persian-root .page-navigation,
-        .page-navigation {
-            direction: ltr; /* preserve existing styles */
-        }
-
-        /* Ensure hero image and illustration align to the right in RTL layout */
-        .persian-root .circular-illustration,
-        .persian-root .hero-content {
-            text-align: right;
-        }
-
+        /* ...existing code... */
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-K1W60XD1FJ');
+    </script>
+
+    <!-- Custom GA event for page title and screen class -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var pageTitle = document.title;
+            var screenClass = document.body.className || 'default';
+            gtag('event', 'page_view_details', {
+                'page_title': pageTitle,
+                'screen_class': screenClass
+            });
+        });
+    </script>
+ 
+
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -88,7 +88,7 @@
                 <li><a href="../index.html#work">Projects</a></li>
                 <li><a href="../index.html#about">About</a></li>
                 <li><a href="../index.html#contact">Contact</a></li>
-                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+                <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
             </ul>
         </nav>
         <button class="theme-toggle" id="theme-toggle">
