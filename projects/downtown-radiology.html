@@ -6,7 +6,7 @@
     <title>Downtown Radiology | Shahrzad Jafari</title>
     <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
     <link rel="stylesheet" href="../normalize.css">
-    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="../case-studies/case-study.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
@@ -34,6 +34,7 @@
 </script>
 <body>
 
+<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
 <header>
     <a href="../index.html" class="logo-link">
         <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
@@ -42,9 +43,10 @@
         <nav>
             <ul>
                 <li><a href="../index.html#work">Projects</a></li>
-                <li><a href="../index.html#about">About</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../academic.html">Academia</a></li>
+                <li><a href="../about-me.html">About Me</a></li>            
                 <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
+                <li><a href="../about/Persian.html">پارسی</a></li>
             </ul>
         </nav>
         <button class="theme-toggle" id="theme-toggle">
@@ -55,6 +57,10 @@
 
 <main>
     <section class="case-study-hero">
+         <nav class="page-navigation">
+        <a href="/projects/catt.html" class="nav-btn nav-prev">← Prev: CATT</a>
+        <a href="/projects/seizure.html" class="nav-btn nav-next">Next: Seizure Action Plan →</a>
+    </nav>
         <div class="hero-content">
             <h1>Downtown Radiology Digital Redesign</h1>
             <p class="subtitle">Human-Centered UX Research & Service Design for a Clinical Booking Transformation</p>
@@ -159,21 +165,11 @@
         <img src="../image/downtown-radiology/9.jpeg" alt="design2" />
     </section>
     <nav class="page-navigation">
-        <a href="seizure.html" class="nav-btn nav-prev">← Prev: SAP</a>
+        <a href="/projects/catt.html" class="nav-btn nav-prev">← Prev: CATT</a>
         <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
-        <a href="shahrzad-theatre.html" class="nav-btn nav-next">Next: Theatre Complex →</a>
+        <a href="/projects/seizure.html" class="nav-btn nav-next">Next: Seizure Action Plan →</a>
     </nav>
 </main>
-
-<footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="#">Dribbble</a>
-    </p>
-    <p>&copy; made and designed by Shahrzad Jafari — Version 3.0</p>
-</footer>
 
 <script>
 const themeToggle = document.getElementById('theme-toggle');
@@ -216,6 +212,17 @@ images.forEach(img => {
     });
 });
 </script>
+
+<!-- Footer: Social links and copyright -->
+<footer>
+    <p>
+        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="https://dribbble.com/shahrzading">Dribbble</a>
+      </p>
+    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+</footer>
 
 </body>
 </html>

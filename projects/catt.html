@@ -6,7 +6,7 @@
     <title>CATT Case Study | Shahrzad Jafari</title>
     <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
     <link rel="stylesheet" href="../normalize.css">
-    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="../case-studies/case-study.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
 
 <body>
 
-<!-- Header / Navigation -->
+<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
 <header>
     <a href="../index.html" class="logo-link">
         <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
@@ -47,9 +47,10 @@
         <nav>
             <ul>
                 <li><a href="../index.html#work">Projects</a></li>
-                <li><a href="../index.html#about">About</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="../academic.html">Academia</a></li>
+                <li><a href="../about-me.html">About Me</a></li>            
                 <li><a href="../Resume.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
+                <li><a href="../about/Persian.html">پارسی</a></li>
             </ul>
         </nav>
         <button class="theme-toggle" id="theme-toggle">
@@ -62,6 +63,11 @@
 <main>
     <!-- Hero Section -->
     <section class="case-study-hero">
+          <nav class="page-navigation">
+        <a href="/case-studies/stage-door.html" class="nav-btn nav-prev">← Prev: Stage Door Dance</a>
+       
+        <a href="/projects/downtown-radiology.html" class="nav-btn nav-next">Next: Downtown Radiology →</a>
+    </nav>
         <div class="hero-content">
             <h1>CATT: From Data to Direction</h1>
             <p class="subtitle">A Data-Driven UX Research and Design Strategy for a National Health Education Platform </p>
@@ -273,23 +279,12 @@
 
 
     <nav class="page-navigation">
-        <a href="/projects/downtown-radiology.html" class="nav-btn nav-prev">← Prev: Downtown Radiology</a>
+        <a href="/case-studies/stage-door.html" class="nav-btn nav-prev">← Prev: Stage Door Dance</a>
         <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
-        <a href="seizure.html" class="nav-btn nav-next">Next: Seizure Action Plan →</a>
+        <a href="/projects/downtown-radiology.html" class="nav-btn nav-next">Next: Downtown Radiology →</a>
     </nav>
 
 </main>
-
-<!-- Footer -->
-<footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="#">Dribbble</a>
-    </p>
-    <p>&copy; made and designed by Shahrzad Jafari — Version 3.0</p>
-</footer>
 
 <script>
 const themeToggle = document.getElementById('theme-toggle');
@@ -332,6 +327,17 @@ images.forEach(img => {
     });
 });
 </script>
+
+<!-- Footer: Social links and copyright -->
+<footer>
+    <p>
+        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="https://dribbble.com/shahrzading">Dribbble</a>
+      </p>
+    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me — Shahrzad Jafari</title>
+    <link rel="icon" type="image/jpeg" href="image/logo.jpg">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K1W60XD1FJ');
+</script>
+
+<!-- Custom GA event for page title and screen class -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var pageTitle = document.title;
+        var screenClass = document.body.className || 'default';
+        gtag('event', 'page_view_details', {
+            'page_title': pageTitle,
+            'screen_class': screenClass
+        });
+    });
+</script>
+
+<body>
+
+<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
+<header>
+    <a href="index.html" class="logo-link">
+        <img src="image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+    </a>
+    <div class="header-right">
+        <nav>
+            <ul>
+                <li><a href="index.html#work">Projects</a></li>
+                <li><a href="academic.html">Academia</a></li>
+                <li><a href="about-me.html">About Me</a></li>            
+                <li><a href="Resume.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
+                <li><a href="about/Persian.html">پارسی</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+</header>
+<!-- Main content -->
+<main>
+
+
+<section class="case-study-hero">
+    
+        <div class="hero-content">
+            
+            <h1>Who am I?</h1>
+        </div>
+        <div class="hero-cover-image">
+            <img src="../image/hobby/hobby.png" alt="Hobbies Cover Image">
+        </div>
+</section> 
+<section id="about">
+    <div class="testimonial">
+        <p>I’m Shahrzad, a designer who believes good design should simplify life, reduce friction, and create moments of calm.
+        <p>I started designing as a teenager, sketching not just forms, but the way people live and feel. <br>Over time, design became my way of understanding behavior, emotion, and everyday experience.</p>
+        <blockquote>"Good design is invisible because it fits our needs so well."</blockquote> <span>Don Norman</span>
+</section>  
+
+<!-- About Cards: quick links to sub-pages under /about -->
+ <section id="about-cards-section">
+            <div class="about-cards">
+                <a href="about/hobbies.html" class="about-card">
+                    <div class="about-card-icon"></div>
+                    <h1>MY Hobbies</h1>
+                    <img src="image/hobby/Hobby.jpg" alt="">
+                </a>
+                
+                <a href="about/artistic-work.html" class="about-card">
+                    <h1>MY Art Works</h1>
+                    <img src="image/artistic/art.jpg" alt="">
+                </a>
+            </div>
+    </section>
+
+ <!-- My Path Section -->
+    <section id="Path">
+        <h2>My Learning Journey</h2>
+        
+        <div class="path-journey">
+            <!-- Interactive Journey Line -->
+            <div class="journey-track">
+                <div class="journey-node" style="--delay: 0">
+                    <span class="node-year">2009</span>
+                    <div class="node-dot"></div>
+                    <span class="node-label">Graphic Design</span>
+                </div>
+                <div class="journey-node" style="--delay: 1">
+                    <span class="node-year">2014</span>
+                    <div class="node-dot"></div>
+                    <span class="node-label">Industrial Design | Product Design</span>
+                </div>
+                <div class="journey-node" style="--delay: 1">
+                    <span class="node-year">2016</span>
+                    <div class="node-dot"></div>
+                    <span class="node-label">Theatre Stage & Decor Design</span>
+                </div>
+                <div class="journey-node" style="--delay: 2">
+                    <span class="node-year">2017</span>
+                    <div class="node-dot"></div>
+                    <span class="node-label">Web Design </span>
+                </div>
+                <div class="journey-node" style="--delay: 2">
+                    <span class="node-year">2020</span>
+                    <div class="node-dot"></div>
+                    <span class="node-label">UX/UI Design | Product Design</span>
+                </div>
+                <div class="journey-node" style="--delay: 3">
+                    <span class="node-year">2021</span>
+                    <div class="node-dot"></div>
+                    <span class="node-label">UX Researcher</span>
+                </div>
+                <div class="journey-node active" style="--delay: 4">
+                    <span class="node-year">Now</span>
+                    <div class="node-dot pulse"></div>
+                    <span class="node-label">Lead UX/UI Designer</span>
+                </div>
+            </div>
+            
+            <!-- Current Highlights -->
+            <div class="path-highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">🎓</div>
+                    <div class="highlight-content">
+                        <h4>Doctoral of Design Philosophy (PhD)</h4>
+                         <p>Master of Industrial Design</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">🔬</div>
+                    <div class="highlight-content">
+                        <h4>Design Researcher, UX Writer</h4>
+                        <p>BC Children's Hospital (Digital Lab)</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">💼</div>
+                    <div class="highlight-content">
+                        <h4>Certificates</h4>
+                        <p>Creative Thinking (London Imperial College)</p>
+                        <p>Web Design Specialist (BCIT)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="academia-card">
+            <a href="academic.html" class="academic-link-btn">
+            <h4>My Academic Side</h4>
+                <p>My research work, publications, and teaching experience in Design.</p>
+                →</a>
+        </div>  -->
+    </section>
+<!-- Design Stack: Tools, methods and competencies -->
+    <section id="design-stack">
+        <h2>My Design Stack</h2>
+        <p>The tools and methods I use in my design and research work. I remain tool-agnostic and choose what best serves the user and business goals.</p>
+
+
+        <ul class="design-stack-list">
+            <li class="stack-item">
+                <span class="category-name">Product Design</span>
+                <span class="tools">Figma, Adobe XD, Sketch, Canva, Typography, Illustrator, Adobe Photoshop, InDesign, Color Theory,  Visual & Graphic Design
+                </span>
+            </li>
+            
+            <li class="stack-item">
+                <span class="category-name">UX/UI Design</span>
+                <span class="tools">Wireframing, Prototyping, Design Systems, Information Architecture, Micro interactions, Responsive Design, Accessibility </span>
+            </li>
+            
+            <li class="stack-item">
+                <span class="category-name">Evaluation & Analytics </span>
+                <span class="tools">Google Analytics, Tag Manager, Looker Studio, Data Mapping, Condens, Dscout, Dovetail</span>
+            </li>            
+            <li class="stack-item">
+                <span class="category-name">Usability Testing </span>
+                <span class="tools">Heuristic Evaluation, A/B Testing, Maze, Hotjar, User Behavior Analysis, Product Experimentation, Inclusive Design </span>
+            </li>
+            
+            <li class="stack-item">
+                <span class="category-name">Coding & WEB Solutions</span>
+                <span class="tools">HTML/CSS/JAVA, Webflow, Web Architecture, Wix, Unbounce,  Video & Audio Editing, Corsur</span>
+            </li>
+
+            <li class="stack-item">
+                <span class="category-name">Tools & Collaboration</span>
+                <span class="tools">FigJam, ProtoPie, Axure, Sketch, Miro, Notion, Jira, Trello, GitHub, Asana, Monday, Agile/Scrum</span>
+            </li>
+            
+            <li class="stack-item">
+                <span class="category-name">Currently Exploring</span>
+                <span class="tools">Motion Design, NotebookLM, Branding, Obsidian,Front-ending, Cursor, AI tools</span>
+            </li>
+        </ul>
+    </section>
+            
+ 
+</article>
+
+    
+</main>
+
+<!-- Footer: Social links and copyright -->
+<footer>
+    <p>
+        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="https://dribbble.com/shahrzading">Dribbble</a>
+      </p>
+    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+</footer>
+<script>
+// Dark Mode Toggle (Dark mode is default/main mode)
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem('theme') || 'dark';
+const themeIcon = themeToggle.querySelector('.theme-icon');
+htmlElement.setAttribute('data-theme', currentTheme);
+themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+});
+</script>
+
+
+
+</body>
+</html>
