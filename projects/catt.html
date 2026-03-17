@@ -977,9 +977,234 @@
 
 
 <!-- Mobile layouts -->
-<div class="hero-cover-image rv" style="margin-top:2rem;">
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CATT — Before & After Presentation</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f9fafb;
+    color: #374151;
+    padding: 2rem;
+    line-height: 1.5;
+  }
+  :root {
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
+    --color-text-tertiary: #9ca3af;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f3f4f6;
+    --color-border-tertiary: rgba(0,0,0,0.1);
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 2rem 0; max-width: 960px; margin: 0 auto;">
+
+  <!-- Header -->
+  <div style="margin-bottom: 2.5rem;">
+    <div style="display:flex; align-items:center; gap: 10px; margin-bottom: 0.5rem;">
+      <div style="width: 28px; height: 2px; background: #C94B2E; border-radius: 2px;"></div>
+      <!-- <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #C94B2E; font-weight: 500;">CATT · UX Research & Redesign</span> -->
+    </div>
+    <h1 style="font-size: 22px; font-weight: 500; margin: 0 0 0.25rem; color: #111827;">Before & After — Key Screen Improvements</h1>
+    <p style="font-size: 14px; color: #6b7280; margin: 0;">4 critical pain points identified · 3 design directions tested · navigation & completion flow improved</p>
+  </div>
+
+  <!-- ── Row 1: Homepage CTA ── -->
+  <div style="margin-bottom: 2rem;">
+    <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid rgba(0,0,0,0.1);">01 · Homepage — Role-Based Entry & CTA Hierarchy</div>
+    <div style="display: grid; grid-template-columns: 1fr 20px 1fr; gap: 0; align-items: center;">
+
+      <!-- Before card -->
+      <div style="background: #ffffff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;">
+        <div style="background: #f3f4f6; padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid rgba(0,0,0,0.1);">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #e24b4a;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #ef9f27;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #639922;"></div>
+          <span style="font-size: 11px; color: #9ca3af; margin-left: 4px;">catt.ca — before</span>
+        </div>
+        <div style="padding: 16px; min-height: 200px;">
+          <div style="background: #1a6b7c; padding: 8px 12px; border-radius: 4px; margin-bottom: 10px;">
+            <div style="font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 2px;">Concussion Awareness Training Tool</div>
+            <div style="font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Free resources and training for recognition, management, and recovery</div>
+          </div>
+          <div style="font-size: 10px; color: #6b7280; margin-bottom: 8px; font-style: italic;">I want to learn more about concussions as a...</div>
+          <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; margin-bottom: 8px; opacity: 0.7;">
+            <div style="background: #f3f4f6; border-radius: 4px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #d1d5d8; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; color: #6b7280;">Medical Prof.</div>
+            </div>
+            <div style="background: #f3f4f6; border-radius: 4px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #d1d5d8; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; color: #6b7280;">Coach</div>
+            </div>
+            <div style="background: #f3f4f6; border-radius: 4px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #d1d5d8; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; color: #6b7280;">Parent</div>
+            </div>
+            <div style="background: #f3f4f6; border-radius: 4px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #d1d5d8; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; color: #6b7280;">School Prof.</div>
+            </div>
+          </div>
+          <div style="border-left: 2px solid #e24b4a; padding-left: 8px; margin-top: 10px;">
+            <div style="font-size: 10px; color: #a32d2d; font-weight: 500; margin-bottom: 2px;">Issues identified</div>
+            <div style="font-size: 10px; color: #6b7280;">42% drop-off · no primary CTA · unclear start point · broken links</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="text-align: center; font-size: 18px; color: #C94B2E;">→</div>
+
+      <!-- After card -->
+      <div style="background: #ffffff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;">
+        <div style="background: #f3f4f6; padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid rgba(0,0,0,0.1);">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #e24b4a;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #ef9f27;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #639922;"></div>
+          <span style="font-size: 11px; color: #9ca3af; margin-left: 4px;">catt.ca — after</span>
+        </div>
+        <div style="padding: 16px; min-height: 200px;">
+          <div style="background: #1a6b7c; padding: 8px 12px; border-radius: 4px; margin-bottom: 10px;">
+            <div style="font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 2px;">Concussion Awareness Training Tool</div>
+            <div style="font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Free resources and training</div>
+            <div style="display: inline-block; background: #ef9f27; padding: 4px 12px; border-radius: 999px; font-size: 10px; font-weight: 500; color: #412402;">Start Your Training</div>
+          </div>
+          <div style="font-size: 10px; font-weight: 500; color: #6b7280; margin-bottom: 6px;">What is your role?</div>
+          <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; margin-bottom: 10px;">
+            <div style="border: 1px solid #1a6b7c; border-radius: 6px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #e1f5ee; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; font-weight: 500; color: #085041; margin-bottom: 3px;">Medical</div>
+              <div style="background: #1a6b7c; border-radius: 999px; padding: 2px 6px; font-size: 8px; color: #fff;">Go to Module</div>
+            </div>
+            <div style="border: 1px solid #1a6b7c; border-radius: 6px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #e1f5ee; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; font-weight: 500; color: #085041; margin-bottom: 3px;">Coach</div>
+              <div style="background: #1a6b7c; border-radius: 999px; padding: 2px 6px; font-size: 8px; color: #fff;">Go to Module</div>
+            </div>
+            <div style="border: 1px solid #1a6b7c; border-radius: 6px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #e1f5ee; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; font-weight: 500; color: #085041; margin-bottom: 3px;">Parent</div>
+              <div style="background: #1a6b7c; border-radius: 999px; padding: 2px 6px; font-size: 8px; color: #fff;">Go to Module</div>
+            </div>
+            <div style="border: 1px solid #1a6b7c; border-radius: 6px; padding: 6px 4px; text-align: center;">
+              <div style="width: 24px; height: 24px; background: #e1f5ee; border-radius: 2px; margin: 0 auto 3px;"></div>
+              <div style="font-size: 9px; font-weight: 500; color: #085041; margin-bottom: 3px;">School</div>
+              <div style="background: #1a6b7c; border-radius: 999px; padding: 2px 6px; font-size: 8px; color: #fff;">Go to Module</div>
+            </div>
+          </div>
+          <div style="border-left: 2px solid #639922; padding-left: 8px;">
+            <div style="font-size: 10px; color: #3b6d11; font-weight: 500; margin-bottom: 2px;">Improvements</div>
+            <div style="font-size: 10px; color: #6b7280;">Clear CTA · role-based entry · progress indicator added</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Row 2: Module flow + 404 ── -->
+  <div style="margin-bottom: 2rem;">
+    <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid rgba(0,0,0,0.1);">02 · Broken Navigation — 404 Page & Module Flow</div>
+    <div style="display: grid; grid-template-columns: 1fr 20px 1fr; gap: 0; align-items: start;">
+
+      <!-- Before: 404 -->
+      <div style="background: #ffffff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;">
+        <div style="background: #f3f4f6; padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid rgba(0,0,0,0.1);">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #e24b4a;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #ef9f27;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #639922;"></div>
+          <span style="font-size: 11px; color: #9ca3af; margin-left: 4px;">404 — dead end</span>
+        </div>
+        <div style="padding: 24px 16px; text-align: center; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div style="font-size: 36px; font-weight: 500; color: #111827; margin-bottom: 6px;">404</div>
+          <div style="font-size: 12px; font-weight: 500; color: #111827; margin-bottom: 4px;">Oops! Page not found.</div>
+          <div style="font-size: 10px; color: #6b7280; margin-bottom: 12px;">The page you're looking for does not exist or has been moved.</div>
+          <div style="background: #1a6b7c; padding: 5px 16px; border-radius: 999px; font-size: 10px; color: #fff;">Return to Home Page</div>
+          <div style="border-left: 2px solid #e24b4a; padding-left: 8px; margin-top: 14px; text-align: left; width: 100%;">
+            <div style="font-size: 10px; color: #a32d2d; font-weight: 500; margin-bottom: 2px;">Problem</div>
+            <div style="font-size: 10px; color: #6b7280;">No search · no breadcrumbs · no context · users stranded</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; font-size: 18px; color: #C94B2E; padding-top: 60px;">→</div>
+
+      <!-- After: Module with progress -->
+      <div style="background: #ffffff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;">
+        <div style="background: #f3f4f6; padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid rgba(0,0,0,0.1);">
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #e24b4a;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #ef9f27;"></div>
+          <div style="width: 7px; height: 7px; border-radius: 50%; background: #639922;"></div>
+          <span style="font-size: 11px; color: #9ca3af; margin-left: 4px;">Module page — with progress</span>
+        </div>
+        <div style="padding: 16px; min-height: 160px;">
+          <div style="font-size: 9px; color: #9ca3af; margin-bottom: 8px;">Home › Medical Professional › Module 1: Recognition</div>
+          <div style="font-size: 14px; font-weight: 500; color: #111827; margin-bottom: 10px;">Module 1: Recognition</div>
+          <div style="margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 9px; color: #6b7280;">29% Complete</span>
+            </div>
+            <div style="height: 4px; background: #f3f4f6; border-radius: 999px; margin-bottom: 6px;">
+              <div style="width: 29%; height: 100%; background: #1a6b7c; border-radius: 999px;"></div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <div style="flex:1; text-align:center; font-size: 9px; padding: 3px; border-radius: 4px; background: #1a6b7c; color: #fff;">Module 1</div>
+              <div style="flex:1; text-align:center; font-size: 9px; padding: 3px; border-radius: 4px; background: #f3f4f6; color: #6b7280;">Module 2</div>
+              <div style="flex:1; text-align:center; font-size: 9px; padding: 3px; border-radius: 4px; background: #f3f4f6; color: #6b7280;">Module 3</div>
+              <div style="flex:1; text-align:center; font-size: 9px; padding: 3px; border-radius: 4px; background: #f3f4f6; color: #6b7280;">Module 4</div>
+            </div>
+          </div>
+          <div style="font-size: 10px; color: #6b7280; line-height: 1.6; margin-bottom: 10px;">A concussion is a type of brain injury caused by a blow or impact to the head...</div>
+          <div style="background: #e1f5ee; border-radius: 6px; padding: 6px 10px; font-size: 10px; color: #085041; margin-bottom: 10px;">You've completed Module 1. Continue to Module 2 →</div>
+          <div style="border-left: 2px solid #639922; padding-left: 8px;">
+            <div style="font-size: 10px; color: #3b6d11; font-weight: 500; margin-bottom: 2px;">Improvements</div>
+            <div style="font-size: 10px; color: #6b7280;">Breadcrumbs · progress bar · contextual CTA · back navigation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Summary metrics ──
+  <div style="background: #f3f4f6; border-radius: 12px; padding: 1.25rem 1.5rem; border: 0.5px solid rgba(0,0,0,0.1);">
+    <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; margin-bottom: 1rem;">Key outcomes</div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+      <div style="background: #ffffff; border-radius: 8px; padding: 0.85rem; border: 0.5px solid rgba(0,0,0,0.1); text-align: center;">
+        <div style="font-size: 22px; font-weight: 500; color: #C94B2E; margin-bottom: 3px;">42%</div>
+        <div style="font-size: 10px; color: #6b7280; line-height: 1.4;">Homepage drop-off identified</div>
+      </div>
+      <div style="background: #ffffff; border-radius: 8px; padding: 0.85rem; border: 0.5px solid rgba(0,0,0,0.1); text-align: center;">
+        <div style="font-size: 22px; font-weight: 500; color: #1a6b7c; margin-bottom: 3px;">4</div>
+        <div style="font-size: 10px; color: #6b7280; line-height: 1.4;">Broken navigation paths fixed</div>
+      </div>
+      <div style="background: #ffffff; border-radius: 8px; padding: 0.85rem; border: 0.5px solid rgba(0,0,0,0.1); text-align: center;">
+        <div style="font-size: 22px; font-weight: 500; color: #3b6d11; margin-bottom: 3px;">3</div>
+        <div style="font-size: 10px; color: #6b7280; line-height: 1.4;">Design themes: Access · Continuity · Motivation</div>
+      </div>
+      <div style="background: #ffffff; border-radius: 8px; padding: 0.85rem; border: 0.5px solid rgba(0,0,0,0.1); text-align: center;">
+        <div style="font-size: 22px; font-weight: 500; color: #854f0b; margin-bottom: 3px;">3mo</div>
+        <div style="font-size: 10px; color: #6b7280; line-height: 1.4;">GA4 behavioral data analysed</div>
+      </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+
+<!-- </div> -->
+
+
+
+
+<!-- <div class="hero-cover-image rv" style="margin-top:2rem;">
   <img src="../image/Catt/6.png" alt="Mobile Layout">
-</div>
+</div> -->
 <div class="hero-cover-image rv" style="margin-top:1.25rem;">
   <img src="../image/Catt/7.png" alt="Mobile Layout">
 </div>
