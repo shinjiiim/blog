@@ -11,223 +11,843 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --ca: #C94B2E;       /* accent red-orange */
+  --ca-l: #F2D5CC;     /* accent light */
+  --ct: #2A6B6E;       /* teal */
+  --ct-l: #D4EAEB;     /* teal light */
+  --cg: #4A6B1A;       /* green */
+  --cg-l: #E4EDD0;     /* green light */
+  --ink: #1C1C1E;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+/* ── PROGRESS ── */
+#cp { position:fixed;top:0;left:0;height:3px;background:var(--ca);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear; }
+
+/* ── REVEAL ── */
+.rv { opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease; }
+.rv.on { opacity:1;transform:none; }
+
+/* ── HERO ── */
+.case-study-hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3.5rem clamp(1.25rem,4vw,3rem) 2.5rem;
+  text-align: left;
+}
+.dr-eye {
+  display:flex;align-items:center;gap:.75rem;margin-bottom:1.4rem;
+}
+.dr-eye-line { flex:0 0 32px;height:2px;background:var(--ct);border-radius:2px; }
+.dr-eye span {
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ct);
+}
+.case-study-hero h1 {
+  font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:.7rem;
+}
+.case-study-hero h1 em { font-style:italic;color:var(--ca); }
+.hero-sub {
+  font-size:1rem;line-height:1.75;opacity:.7;max-width:580px;margin-bottom:0;
+}
+
+/* ── META ROW ── */
+.meta-row {
+  display:flex;gap:2.5rem;flex-wrap:wrap;
+  margin-top:1.75rem;padding-top:1.5rem;
+  border-top:1px solid var(--border-color,#e5e7eb);
+}
+.meta-col { display:flex;flex-direction:column;gap:.25rem; }
+.meta-col strong {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.5;
+}
+.meta-col span { font-size:.92rem;font-weight:500;line-height:1.45; }
+
+/* ── TOOL CHIPS ── */
+.chip-row { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem; }
+.chip {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;
+  padding:.22rem .65rem;border-radius:999px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid var(--border-color,#e5e7eb);
+  color:var(--text-secondary,#6b7280);
+  white-space:nowrap;
+}
+
+/* ── STAT STRIP ── */
+.stat-strip {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:16px;overflow:hidden;margin:2.5rem 0 0;
+}
+.stat-cell {
+  background:var(--ct);color:#fff;
+  padding:2rem 1.5rem;text-align:center;
+}
+.stat-cell:nth-child(2){background:var(--ca);}
+.stat-cell:nth-child(3){background:var(--ink);}
+.stat-n {
+  font-family:var(--serif);font-size:2.8rem;font-weight:900;
+  line-height:1;margin-bottom:.3rem;
+}
+.stat-l {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.75;
+}
+
+/* ── SECTION WRAPPER ── */
+.cs {
+  max-width:860px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  padding:2.25rem clamp(1.5rem,3vw,2.5rem);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);border-radius:14px;
+}
+[data-theme="dark"] .cs {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+}
+
+/* Section number + title */
+.sh { display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.5rem; }
+.sn {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;
+  color:var(--ca);flex-shrink:0;
+}
+.sh h2 {
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,2.8vw,2rem);
+  font-weight:700;margin:0;line-height:1.15;
+}
+
+/* ── PULL QUOTE ── */
+.pullquote {
+  font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);
+  font-style:italic;line-height:1.55;
+  padding:.75rem 0 .75rem 1.5rem;
+  border-left:3px solid var(--ca);
+  color:var(--text-primary);margin:1.25rem 0;
+}
+
+/* ── HIGHLIGHT PILL ── */
+.hl {
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
+  padding:.3rem .8rem;border-radius:999px;font-weight:500;
+}
+.hl-blue  { background:var(--ca-l);color:var(--ca); }
+.hl-teal  { background:var(--ct-l);color:var(--ct); }
+.hl-green { background:var(--cg-l);color:var(--cg); }
+
+/* ── 2-COL SPLIT ── */
+.split {
+  display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;
+  margin-top:1.5rem;
+}
+.split-text p {
+  font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:.75rem;
+}
+
+/* ── ICON GRID ── */
+.icon-grid {
+  display:grid;gap:1px;
+  background:rgba(0,0,0,.07);
+  border-radius:14px;overflow:hidden;
+  margin-top:1.5rem;
+}
+.ig-2 { grid-template-columns:repeat(2,1fr); }
+.ig-3 { grid-template-columns:repeat(3,1fr); }
+.ig-4 { grid-template-columns:repeat(4,1fr); }
+
+.ig-card {
+  background:var(--background-primary,#fff);
+  padding:1.75rem 1.5rem;
+  transition:background .2s;
+}
+.ig-card:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ig-card { background:#1e1e1e; }
+[data-theme="dark"] .ig-card:hover { background:#252525; }
+
+.ig-label {
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ca);margin-bottom:.5rem;
+}
+.ig-icon { font-size:1.6rem;margin-bottom:.6rem;line-height:1; }
+.ig-title {
+  font-family:var(--serif);font-size:1rem;font-weight:700;
+  margin-bottom:.35rem;color:var(--text-primary);
+}
+.ig-body {
+  font-size:.8rem;line-height:1.6;
+  color:var(--text-secondary,#6b7280);
+}
+.ig-dots {
+  display:flex;flex-direction:column;gap:.3rem;margin-top:.75rem;
+}
+.ig-dot {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.05em;
+  color:var(--ct);display:flex;align-items:center;gap:.35rem;
+}
+.ig-dot::before { content:'→';color:var(--ca); }
+
+/* ── APPROACH STEPS ── */
+.approach-steps {
+  display:flex;flex-direction:column;gap:1px;
+  background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;
+  margin-top:1.5rem;
+}
+.ap-step {
+  background:var(--background-primary,#fff);
+  padding:1.1rem 1.5rem;
+  display:flex;align-items:center;gap:1.1rem;
+  transition:background .2s;
+}
+.ap-step:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ap-step { background:#1e1e1e; }
+[data-theme="dark"] .ap-step:hover { background:#252525; }
+.ap-num {
+  font-family:var(--serif);font-size:1.6rem;font-weight:900;
+  color:var(--ca-l);line-height:1;flex-shrink:0;width:2rem;
+  text-align:center;
+}
+.ap-text strong {
+  display:block;font-size:.88rem;font-weight:600;
+  color:var(--text-primary);margin-bottom:.1rem;
+}
+.ap-text span { font-size:.78rem;opacity:.65;line-height:1.5; }
+
+/* ── SOLUTION CARDS ── */
+.solution-grid {
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1.5rem;
+}
+.sol-card {
+  border:1px solid rgba(0,0,0,.09);border-radius:12px;
+  padding:1.5rem 1.4rem;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  background:var(--background-primary,#fff);
+}
+[data-theme="dark"] .sol-card {
+  background:#1e1e1e;border-color:rgba(255,255,255,.1);
+}
+.sol-card:hover {
+  border-color:var(--ca);
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,.09);
+}
+.sol-icon { font-size:1.5rem;margin-bottom:.65rem; }
+.sol-title {
+  font-family:var(--serif);font-size:.95rem;font-weight:700;
+  margin-bottom:.35rem;color:var(--text-primary);
+}
+.sol-desc { font-size:.78rem;line-height:1.6;opacity:.65; }
+
+/* ── PERSONA CARDS ── */
+.persona-row {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem;
+}
+.persona-card {
+  border-radius:12px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.09);
+}
+[data-theme="dark"] .persona-card { border-color:rgba(255,255,255,.1); }
+.persona-head {
+  padding:1.1rem 1.4rem;
+  display:flex;align-items:center;gap:.85rem;
+}
+.ph-blue  { background:var(--ca);color:#fff; }  /* red-orange */
+.ph-teal  { background:var(--ct);color:#fff; }  /* teal */
+.ph-green { background:var(--cg);color:#fff; }  /* green */
+.persona-emoji { font-size:1.5rem; }
+.persona-name {
+  font-family:var(--serif);font-size:.95rem;font-weight:700;line-height:1.2;
+}
+.persona-role { font-size:.68rem;opacity:.75; }
+.persona-body {
+  padding:.85rem 1.4rem 1.1rem;
+  background:var(--background-primary,#fff);
+}
+[data-theme="dark"] .persona-body { background:#1e1e1e; }
+.persona-tag {
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;opacity:.5;margin-bottom:.35rem;
+}
+.persona-item {
+  font-size:.75rem;line-height:1.6;opacity:.75;
+  display:flex;align-items:baseline;gap:.4rem;margin-bottom:.2rem;
+}
+.persona-item::before { content:'↳';color:var(--ca);flex-shrink:0; }
+
+/* ── OUTCOME METRICS ── */
+.outcome-metrics {
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;
+  margin-top:1.5rem;
+}
+.om-cell {
+  background:var(--background-primary,#fff);
+  padding:1.5rem 1.1rem;text-align:center;
+}
+[data-theme="dark"] .om-cell { background:#1e1e1e; }
+.om-n {
+  font-family:var(--serif);font-size:2.2rem;font-weight:900;
+  color:var(--ca);line-height:1;margin-bottom:.3rem;
+}
+.om-l {
+  font-family:var(--mono);font-size:.57rem;letter-spacing:.1em;
+  text-transform:uppercase;opacity:.55;line-height:1.4;
+}
+
+/* ── FRICTION LIST ── */
+.friction-list {
+  display:flex;flex-direction:column;gap:.6rem;margin-top:1rem;
+}
+.friction-item {
+  display:flex;align-items:center;gap:.9rem;
+  padding:.85rem 1.1rem;border-radius:10px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid rgba(0,0,0,.07);
+  font-size:.85rem;line-height:1.5;
+}
+[data-theme="dark"] .friction-item {
+  background:#1e1e1e;border-color:rgba(255,255,255,.07);
+}
+.friction-dot {
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.fd-blue  { background:var(--ca); }
+.fd-teal  { background:var(--ct); }
+.fd-green { background:var(--cg); }
+
+/* ── METRIC CHIPS ── */
+.metric-chips {
+  display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;
+}
+.mc {
+  padding:.3rem .75rem;border-radius:999px;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;
+  border:1px solid;
+}
+.mc-b { background:var(--ca-l);color:var(--ca);border-color:var(--ca); }
+.mc-t { background:var(--ct-l);color:var(--ct);border-color:var(--ct); }
+.mc-g { background:var(--cg-l);color:var(--cg);border-color:var(--cg); }
+
+/* ── REFLECTION DARK BAND ── */
+.reflection-band {
+  background:var(--ink);color:#fff;
+  margin:clamp(2rem,4vw,3.5rem) 0 0;
+  padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem);
+}
+.ref-inner { max-width:860px;margin:0 auto; }
+.ref-qmark {
+  font-family:var(--serif);font-size:6rem;line-height:.5;
+  color:var(--ca);opacity:.3;margin-bottom:1.5rem;
+}
+.ref-quote {
+  font-family:var(--serif);
+  font-size:clamp(1.2rem,2.3vw,1.6rem);
+  font-style:italic;line-height:1.55;
+  margin-bottom:2.5rem;
+}
+.outcome-row {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;
+}
+.outcome {
+  padding:1.5rem;border-radius:12px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+}
+.outcome-icon { font-size:1.4rem;margin-bottom:.6rem; }
+.outcome-text { font-size:.82rem;line-height:1.6;opacity:.7; }
+
+/* ── LIVE LINK ── */
+.live-link {
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:1.5rem;
+  padding:.65rem 1.4rem;border-radius:8px;
+  background:var(--ca);color:#fff;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;
+  transition:opacity .2s,transform .2s;
+}
+.live-link:hover { opacity:.85;transform:translateY(-2px); }
+.live-link::after { content:'↗'; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+  .split { grid-template-columns:1fr; }
+  .ig-4 { grid-template-columns:repeat(2,1fr); }
+  .ig-3,.persona-row { grid-template-columns:1fr 1fr; }
+  .solution-grid { grid-template-columns:1fr; }
+  .outcome-metrics { grid-template-columns:repeat(2,1fr); }
+  .outcome-row { grid-template-columns:1fr; }
+}
+@media(max-width:560px){
+  .stat-strip { grid-template-columns:1fr; }
+  .ig-2,.ig-3,.ig-4 { grid-template-columns:1fr; }
+  .persona-row { grid-template-columns:1fr; }
+  .outcome-metrics { grid-template-columns:repeat(2,1fr); }
+  .meta-row { gap:1.25rem; }
+}
+</style>
 </head>
-<!-- Google tag (gtag.js) -->
+
+<!-- GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-K1W60XD1FJ');
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-K1W60XD1FJ');
+  document.addEventListener('DOMContentLoaded',function(){
+    gtag('event','page_view_details',{'page_title':document.title,'screen_class':document.body.className||'default'});
+  });
 </script>
 
-<!-- Custom GA event for page title and screen class -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var pageTitle = document.title;
-        var screenClass = document.body.className || 'default';
-        gtag('event', 'page_view_details', {
-            'page_title': pageTitle,
-            'screen_class': screenClass
-        });
-    });
-</script>
 <body>
+<div id="cp"></div>
 
-<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
+<!-- Header -->
 <header>
-    <a href="../index.html" class="logo-link">
-        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
-    </a>
-    <div class="header-right">
-        <nav>
-            <ul>
-                <li><a href="../index.html#work">Projects</a></li>
-                <li><a href="../academic.html">Academia</a></li>
-                <li><a href="../about-me.html">About Me</a></li>            
-                <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
-                <li><a href="../about/Persian.html">پارسی</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </div>
+  <a href="../index.html" class="logo-link">
+    <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+  </a>
+  <div class="header-right">
+    <nav><ul>
+      <li><a href="../index.html#work">Projects</a></li>
+      <li><a href="../academic.html">Academia</a></li>
+      <li><a href="../about-me.html">About Me</a></li>
+      <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer"
+         onclick="gtag('event','resume_click',{'event_category':'navigation','event_label':'Resume Nav'});">Resume</a></li>
+      <li><a href="../about/Persian.html">پارسی</a></li>
+    </ul></nav>
+    <button class="theme-toggle" id="theme-toggle"><span class="theme-icon">🌙</span></button>
+  </div>
 </header>
 
 <main>
-    <section class="case-study-hero">
-         <!-- <nav class="page-navigation">
-        <a href="/projects/catt.html" class="nav-btn nav-prev">← Prev: CATT</a>
-        <a href="/projects/seizure.html" class="nav-btn nav-next">Next: Seizure Action Plan →</a>
-    </nav> -->
-       <div class="hero-cover-image">
-            <img src="../image/downtown-radiology/1.png" alt="Downtown Radiology Digital Redesign Cover" />
+
+<!-- ══ COVER ══ -->
+<div class="hero-cover-image rv">
+  <img src="../image/downtown-radiology/1.png" alt="Downtown Radiology Digital Redesign Cover">
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="case-study-hero rv">
+  <div class="dr-eye">
+    <div class="dr-eye-line"></div>
+    <span>UX/UI Design · Healthcare · Vancouver</span>
+  </div>
+
+  <h1>Downtown Radiology<br><em>Digital Redesign</em></h1>
+  <p class="hero-sub">Human-centered UX research and service design for a clinical booking transformation — modernizing 30 years of phone-and-fax workflows.</p>
+
+  <div class="meta-row">
+    <div class="meta-col">
+      <strong>Role</strong>
+      <span>UX/UI Designer</span>
+    </div>
+    <div class="meta-col">
+      <strong>Timeline</strong>
+      <span>6 months</span>
+    </div>
+    <div class="meta-col">
+      <strong>Team</strong>
+      <span>Clinic Admin · Radiologist Advisor · Operations Coordinator</span>
+    </div>
+    <div class="meta-col">
+      <strong>Tools</strong>
+      <div class="chip-row">
+        <span class="chip">Figma</span>
+        <span class="chip">Service Blueprinting</span>
+        <span class="chip">Business Model Canvas</span>
+        <span class="chip">IA Mapping</span>
+        <span class="chip">Stakeholder Interviews</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="stat-strip rv">
+    <div class="stat-cell">
+      <div class="stat-n">40%</div>
+      <div class="stat-l">Fewer phone calls post-MVP</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">30yr</div>
+      <div class="stat-l">Legacy workflow transformed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">WCAG</div>
+      <div class="stat-l">AA accessibility met</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ OVERVIEW ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">00</span>
+    <h2>Project at a Glance</h2>
+  </div>
+
+  <div class="icon-grid ig-4">
+    <div class="ig-card">
+      <div class="ig-label">Context</div>
+      <div class="ig-icon">🏥</div>
+      <div class="ig-title">Trusted Vancouver Clinic</div>
+      <div class="ig-body">A trusted imaging clinic relying on phone and fax booking for over 30 years — ready for a digital-first future.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Challenge</div>
+      <div class="ig-icon">📠</div>
+      <div class="ig-title">Legacy Workflows</div>
+      <div class="ig-body">Modernize booking and communication without disrupting established clinical workflows or the clinic's trusted identity.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Approach</div>
+      <div class="ig-icon">🔬</div>
+      <div class="ig-title">Lean, Research-Driven</div>
+      <div class="ig-body">Staff interviews, patient surveys, persona development, IA restructuring, and benchmarking — all before a single pixel.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Outcome</div>
+      <div class="ig-icon">🚀</div>
+      <div class="ig-title">Live & Shipping</div>
+      <div class="ig-body">Prototypes moved to phased implementation. Live website deployed with measurable reduction in inbound phone load.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CHALLENGE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">01</span>
+    <h2>The Challenge</h2>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <p>The clinic had built years of patient trust through personal, phone-based care — but that same system was creating bottlenecks for staff and friction for patients expecting digital options.</p>
+      <p>The risk: a poorly executed redesign could alienate long-standing patients, especially seniors, while a conservative approach would fail to reduce operational load.</p>
+    </div>
+    <div>
+      <div class="pullquote">How can we modernize booking and communication without disrupting established clinical workflows?</div>
+      <div style="margin-top:1rem;">
+        <span class="hl hl-blue">Phone & fax only</span>&nbsp;
+        <span class="hl hl-teal">No digital booking</span>&nbsp;
+        <span class="hl hl-green">Trust must be preserved</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screenshot -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/downtown-radiology/2.png" alt="Existing site screenshot">
+</div>
+
+<!-- ══ RESEARCH & APPROACH ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">02</span>
+    <h2>Research &amp; Approach</h2>
+  </div>
+
+  <div class="approach-steps">
+    <div class="ap-step">
+      <div class="ap-num">01</div>
+      <div class="ap-text">
+        <strong>Stakeholder Interviews</strong>
+        <span>Spoke with staff, radiologists, and referring physicians to map constraints and existing workflows.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">02</div>
+      <div class="ap-text">
+        <strong>Patient Surveys</strong>
+        <span>Surveyed patients to understand expectations, tech comfort levels, and pain points in the current experience.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">03</div>
+      <div class="ap-text">
+        <strong>Persona Development</strong>
+        <span>Defined three key personas: seniors, referring physicians, and walk-in patients — each with distinct needs.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">04</div>
+      <div class="ap-text">
+        <strong>Competitive Benchmarking</strong>
+        <span>Analysed healthcare booking systems to identify patterns and accessibility best practices.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">05</div>
+      <div class="ap-text">
+        <strong>IA Restructuring</strong>
+        <span>Rebuilt the information architecture to reduce cognitive load and surface the most critical tasks within 2 clicks.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personas -->
+  <p style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin:2rem 0 0;">Key personas identified</p>
+  <div class="persona-row">
+    <div class="persona-card">
+      <div class="persona-head ph-blue">
+        <span class="persona-emoji">🧓</span>
+        <div>
+          <div class="persona-name">Senior Patient</div>
+          <div class="persona-role">Low tech comfort</div>
         </div>
-        <section class="hero-content">
-            <h1>Downtown Radiology Digital Redesign</h1>
-            <p class="subtitle">Human-Centered UX Research & Service Design for a Clinical Booking Transformation</p>
-            
-            <div class="project-meta">
-                <div class="meta-item">
-                    <strong>Role</strong>
-                    <span>UX/UI Designer</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Team</strong>
-                    <span>Clinic Administrator · Radiologist Advisor · Operations Coordinator</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Timeline</strong>
-                    <span>6 months</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Tools</strong>
-                    <span>Figma · Stakeholder Interviews · Canvas Business Model . Service Blueprinting · Information Architecture</span>
-                </div>
-            </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-tag">Primary needs</div>
+        <div class="persona-item">Simple, large-text interface</div>
+        <div class="persona-item">Phone option always visible</div>
+        <div class="persona-item">No account required to book</div>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-head ph-teal">
+        <span class="persona-emoji">👨‍⚕️</span>
+        <div>
+          <div class="persona-name">Referring Physician</div>
+          <div class="persona-role">High task efficiency need</div>
         </div>
-       
-    </section>
-
-    <section class="content-section">
-        <h2>Project Overview</h2>
-        <p>A trusted Vancouver imaging clinic relied on phone- and fax-based booking for over 30 years. I led the redesign of its digital presence to introduce a modern, accessible booking experience while preserving the clinic’s approachable, trusted identity.</p>
-        <img src="../image/downtown-radiology/2.png" alt="screenshot" />
-    </section>
-
-    <section class="content-section">
-        <h2>My Role & Responsibilities</h2>
-        <ul>
-            <li>Led end-to-end UX/UI design for the clinic's digital transformation</li>
-            <li>Designed patient portal for appointment booking and result viewing</li>
-            <li>Conducted user research with patients and healthcare providers</li>
-            <li>Developed design systems for consistent healthcare interfaces</li>
-        </ul>
- 
-            <div class="research-card">
-                <h3>Key Challenges</h3>
-                <p>How can we modernize appointment booking and improve communication without disrupting established clinical workflows?</p>
-            </div>
-            <img src="../image/downtown-radiology/3.png" alt="screenshot" />
-    </section>
-        
-    <section class="content-section">
-        <h2>Approach (Lean, research-driven)</h2>
-        <ul>
-            <li>Spoke with staff, radiologists, and referring physicians to map constraints</li>
-            <li>Surveyed patients to understand expectations and tech familiarity</li>
-            <li>Defined key personas (seniors, physicians, walk-ins)</li>
-            <li>Benchmarked healthcare booking systems</li>
-            <li>Restructured information architecture to reduce friction</li>
-        </ul>
-
-        <h2>Design Solutions</h2>
-        <p>Mobile-first booking prototype (simple 3-step flow)</p>
-        <p>Clear CTA hierarchy (Book • Referral Upload • Location & Hours)</p>
-        <p>Service icons + preparation guidance</p>
-        <p>Updated visual materials aligned with the existing brand</p>
-    </section>
-    
-    <section class="hero-cover-image">
-        <img src="../image/downtown-radiology/radiology system.png" alt="design system" />
-    </section>
-    
-    <section class="hero-cover-image">
-        <img src="../image/downtown-radiology/6.png" alt="prototypes" />
-    </section>
-     <section class="hero-cover-image">
-        <img src="../image/downtown-radiology/7.png" alt="prototypes" />
-    </section>
-
-    <section class="content-section">
-        <div class="research-card"><h2>Outcomes</h2>
-        <ul><li>Prototypes prepared for phased implementation</li>
-            <li>Staff confidence increased toward digital workflows</li>
-            <li>Foundation established for future online booking rollout</li>
+      </div>
+      <div class="persona-body">
+        <div class="persona-tag">Primary needs</div>
+        <div class="persona-item">Fast referral upload flow</div>
+        <div class="persona-item">Clear status visibility</div>
+        <div class="persona-item">Minimal form fields</div>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-head ph-green">
+        <span class="persona-emoji">🚶</span>
+        <div>
+          <div class="persona-name">Walk-In Patient</div>
+          <div class="persona-role">First-time visitor</div>
         </div>
-    </section>
+      </div>
+      <div class="persona-body">
+        <div class="persona-tag">Primary needs</div>
+        <div class="persona-item">Hours & location up front</div>
+        <div class="persona-item">No-referral pathway clear</div>
+        <div class="persona-item">Preparation instructions visible</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="hero-cover-image">
-        <img src="../image/downtown-radiology/8.jpeg" alt="design" />
-    </section>
-    <section class="content-section">
-        <div class="research-card">
-            <h2>Findings After MVP test</h2>
-        <ul>
-            <li>Streamlined appointment booking process, reducing phone calls by 40%</li>
-            <li>Improved patient satisfaction with clear result presentation</li>
-            <li>Enhanced staff efficiency with intuitive internal tools</li>
-            <li>Implemented WCAG AA accessibility standards</li>
-        </ul>
-        <a href="https://downtownradiology.ca" target="_blank" rel="Website">Live Website</a>
-    </section>
-        <section class="hero-cover-image">
-        
-     <div class="hero-cover-image">
-           <img src="../image/downtown-radiology/9.jpeg" alt="design2" />
-        </div>
-    </section>
-    <nav class="page-navigation">
-        <a href="/projects/catt.html" class="nav-btn nav-prev">← Prev: CATT</a>
-        <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
-        <a href="/projects/seizure.html" class="nav-btn nav-next">Next: Seizure Action Plan →</a>
-    </nav>
+
+<!-- Screenshot 3 -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/downtown-radiology/3.png" alt="Research and wireframes">
+</div>
+
+
+<!-- ══ DESIGN SOLUTIONS ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">03</span>
+    <h2>Design Solutions</h2>
+  </div>
+
+  <div class="solution-grid">
+    <div class="sol-card">
+      <div class="sol-icon">📱</div>
+      <div class="sol-title">Mobile-First Booking Flow</div>
+      <div class="sol-desc">A simple 3-step booking prototype — service selection, time slot, confirmation — designed for all tech comfort levels.</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">🎯</div>
+      <div class="sol-title">Clear CTA Hierarchy</div>
+      <div class="sol-desc">Three primary actions surfaced immediately: <strong>Book · Referral Upload · Location &amp; Hours</strong>. Nothing buried.</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">🗂</div>
+      <div class="sol-title">Service Icons + Prep Guidance</div>
+      <div class="sol-desc">Visual service icons paired with preparation instructions reduce inbound "what do I need to bring?" calls.</div>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">🎨</div>
+      <div class="sol-title">Brand-Aligned Visual System</div>
+      <div class="sol-desc">Updated visual materials that preserved the clinic's approachable, trusted identity while introducing modern UI patterns.</div>
+    </div>
+  </div>
+
+  <!-- Metric chips -->
+  <p style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin:2rem 0 .5rem;">Design principles applied</p>
+  <div class="metric-chips">
+    <span class="mc mc-b">Mobile-First</span>
+    <span class="mc mc-b">WCAG AA</span>
+    <span class="mc mc-t">2-Click Access</span>
+    <span class="mc mc-t">Progressive Disclosure</span>
+    <span class="mc mc-g">Trust Preservation</span>
+    <span class="mc mc-g">Phased Rollout</span>
+  </div>
+</section>
+
+
+<!-- Design system -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/downtown-radiology/radiology system.png" alt="Design system">
+</div>
+
+<!-- Prototypes -->
+<div class="hero-cover-image rv" style="margin-top:1.5rem;">
+  <img src="../image/downtown-radiology/6.png" alt="Prototypes">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/downtown-radiology/7.png" alt="Prototypes">
+</div>
+
+
+<!-- ══ OUTCOMES ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">04</span>
+    <h2>Outcomes</h2>
+  </div>
+
+  <div class="outcome-metrics">
+    <div class="om-cell">
+      <div class="om-n">40%</div>
+      <div class="om-l">Reduction in phone calls post-MVP</div>
+    </div>
+    <div class="om-cell">
+      <div class="om-n">↑</div>
+      <div class="om-l">Staff confidence in digital workflows</div>
+    </div>
+    <div class="om-cell">
+      <div class="om-n">AA</div>
+      <div class="om-l">WCAG accessibility standards met</div>
+    </div>
+    <div class="om-cell">
+      <div class="om-n">✓</div>
+      <div class="om-l">Foundation for online booking rollout</div>
+    </div>
+  </div>
+
+  <div class="friction-list" style="margin-top:1.75rem;">
+    <div class="friction-item">
+      <span class="friction-dot fd-green"></span>
+      Streamlined appointment booking — measurably fewer inbound calls
+    </div>
+    <div class="friction-item">
+      <span class="friction-dot fd-green"></span>
+      Improved patient satisfaction with clearer result and service presentation
+    </div>
+    <div class="friction-item">
+      <span class="friction-dot fd-teal"></span>
+      Enhanced staff efficiency with intuitive internal tools
+    </div>
+    <div class="friction-item">
+      <span class="friction-dot fd-blue"></span>
+      Prototypes moved to phased implementation — currently live
+    </div>
+  </div>
+
+  <a href="https://downtownradiology.ca" target="_blank" rel="noopener noreferrer" class="live-link">
+    View Live Website &nbsp;
+  </a>
+</section>
+
+
+<!-- Final images -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/downtown-radiology/8.jpeg" alt="Design detail">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/downtown-radiology/9.jpeg" alt="Design detail 2">
+</div>
+
+
+<!-- ══ REFLECTION ══ -->
+<div class="reflection-band rv">
+  <div class="ref-inner">
+    <div class="ref-qmark">"</div>
+    <div class="ref-quote">The best healthcare design is invisible — it just works, for everyone, the first time.</div>
+
+    <div class="outcome-row">
+      <div class="outcome">
+        <div class="outcome-icon">🤝</div>
+        <div class="outcome-text">Preserved 30 years of patient trust while introducing a fully modern booking experience</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">♿</div>
+        <div class="outcome-text">Designed for the full patient spectrum — from tech-savvy physicians to seniors with low digital comfort</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">📈</div>
+        <div class="outcome-text">Laid the operational and UX foundation for a phased digital transformation that is now live</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page nav -->
+<nav class="page-navigation">
+  <a href="/projects/catt.html" class="nav-btn nav-prev">← Prev: CATT</a>
+  <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
+  <a href="/projects/seizure.html" class="nav-btn nav-next">Next: Seizure Action Plan →</a>
+</nav>
+
 </main>
 
 <script>
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
-const currentTheme = localStorage.getItem('theme') || 'light';
-const themeIcon = themeToggle.querySelector('.theme-icon');
-htmlElement.setAttribute('data-theme', currentTheme);
-themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('cp').style.width = pct + '%';
+  });
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-});
+  // Scroll reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// Prevent image downloads
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
+  // Theme toggle
+  const tt = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const ti = tt.querySelector('.theme-icon');
+  const th = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', th);
+  ti.textContent = th === 'dark' ? '☀️' : '🌙';
+  tt.addEventListener('click', () => {
+    const n = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', n);
+    localStorage.setItem('theme', n);
+    ti.textContent = n === 'dark' ? '☀️' : '🌙';
+  });
 
-// Prevent drag and drop of images
-document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// Disable right-click on images
-const images = document.querySelectorAll('img');
-images.forEach(img => {
-    img.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-});
+  // Image protection
+  document.addEventListener('contextmenu', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.addEventListener('dragstart', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.querySelectorAll('img').forEach(img => img.addEventListener('contextmenu', e => e.preventDefault()));
 </script>
 
-<!-- Footer: Social links and copyright -->
 <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="https://dribbble.com/shahrzading">Dribbble</a>
-      </p>
-    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+  <p>
+    <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+    <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+    <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+    <a href="https://dribbble.com/shahrzading">Dribbble</a>
+  </p>
+  <p><small>&copy; Code &amp; Design by Shahrzad Jafari</small></p>
 </footer>
-
 </body>
 </html>
-

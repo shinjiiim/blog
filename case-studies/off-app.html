@@ -7,272 +7,789 @@
     <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
     <link rel="stylesheet" href="../normalize.css">
     <link rel="stylesheet" href="../case-studies/case-study.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS (same as CATT) ── */
+:root {
+  --ca: #C94B2E;
+  --ca-l: #F2D5CC;
+  --ct: #2A6B6E;
+  --ct-l: #D4EAEB;
+  --cg: #4A6B1A;
+  --cg-l: #E4EDD0;
+  --ink: #1C1C1E;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+/* ── PROGRESS ── */
+#cp { position:fixed;top:0;left:0;height:3px;background:var(--ca);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear; }
+
+/* ── REVEAL ── */
+.rv { opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease; }
+.rv.on { opacity:1;transform:none; }
+
+/* ── HERO ── */
+.case-study-hero {
+  max-width:860px;margin:0 auto;
+  padding:3.5rem clamp(1.25rem,4vw,3rem) 2.5rem;
+  text-align:left;
+}
+.off-eye { display:flex;align-items:center;gap:.75rem;margin-bottom:1.4rem; }
+.off-eye-line { flex:0 0 32px;height:2px;background:var(--ct);border-radius:2px; }
+.off-eye span {
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ct);
+}
+.case-study-hero h1 {
+  font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:.7rem;
+}
+.case-study-hero h1 em { font-style:italic;color:var(--ca); }
+.hero-sub { font-size:1rem;line-height:1.75;opacity:.7;max-width:580px; }
+
+/* ── META ROW ── */
+.meta-row {
+  display:flex;gap:2.5rem;flex-wrap:wrap;
+  margin-top:1.75rem;padding-top:1.5rem;
+  border-top:1px solid var(--border-color,#e5e7eb);
+}
+.meta-col { display:flex;flex-direction:column;gap:.25rem; }
+.meta-col strong {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.5;
+}
+.meta-col span { font-size:.92rem;font-weight:500;line-height:1.45; }
+
+/* ── CHIPS ── */
+.chip-row { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem; }
+.chip {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;
+  padding:.22rem .65rem;border-radius:999px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid var(--border-color,#e5e7eb);
+  color:var(--text-secondary,#6b7280);white-space:nowrap;
+}
+
+/* ── STAT STRIP ── */
+.stat-strip {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:16px;overflow:hidden;margin:2.5rem 0 0;
+}
+.stat-cell { background:var(--ct);color:#fff;padding:2rem 1.5rem;text-align:center; }
+.stat-cell:nth-child(2){ background:var(--ca); }
+.stat-cell:nth-child(3){ background:var(--ink); }
+.stat-n { font-family:var(--serif);font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.3rem; }
+.stat-l { font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75; }
+
+/* ── SECTION WRAPPER ── */
+.cs {
+  max-width:860px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  padding:2.25rem clamp(1.5rem,3vw,2.5rem);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);border-radius:14px;
+}
+[data-theme="dark"] .cs { background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09); }
+
+.sh { display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.5rem; }
+.sn { font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;color:var(--ca);flex-shrink:0; }
+.sh h2 { font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;margin:0;line-height:1.15; }
+
+/* ── PULL QUOTE ── */
+.pullquote {
+  font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);
+  font-style:italic;line-height:1.55;
+  padding:.75rem 0 .75rem 1.5rem;
+  border-left:3px solid var(--ca);
+  color:var(--text-primary);margin:1.25rem 0;
+}
+
+/* ── SPLIT ── */
+.split { display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;margin-top:1.5rem; }
+.split-text p { font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:.75rem; }
+
+/* ── ICON GRID ── */
+.icon-grid { display:grid;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.ig-2 { grid-template-columns:repeat(2,1fr); }
+.ig-3 { grid-template-columns:repeat(3,1fr); }
+.ig-4 { grid-template-columns:repeat(4,1fr); }
+.ig-card { background:var(--background-primary,#fff);padding:1.75rem 1.5rem;transition:background .2s; }
+.ig-card:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ig-card { background:#1e1e1e; }
+[data-theme="dark"] .ig-card:hover { background:#252525; }
+.ig-label { font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ca);margin-bottom:.5rem; }
+.ig-icon { font-size:1.6rem;margin-bottom:.6rem;line-height:1; }
+.ig-title { font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:.35rem;color:var(--text-primary); }
+.ig-body { font-size:.8rem;line-height:1.6;color:var(--text-secondary,#6b7280); }
+
+/* ── PHASE LABEL ── */
+.phase-label {
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ca);
+  margin-bottom:1rem;
+}
+.phase-label::before {
+  content:'';display:block;width:24px;height:2px;
+  background:var(--ca);border-radius:2px;
+}
+
+/* ── APPROACH STEPS ── */
+.approach-steps { display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.ap-step { background:var(--background-primary,#fff);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1.1rem;transition:background .2s; }
+.ap-step:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ap-step { background:#1e1e1e; }
+[data-theme="dark"] .ap-step:hover { background:#252525; }
+.ap-num { font-family:var(--serif);font-size:1.6rem;font-weight:900;color:var(--ca-l);line-height:1;flex-shrink:0;width:2rem;text-align:center; }
+.ap-text strong { display:block;font-size:.88rem;font-weight:600;color:var(--text-primary);margin-bottom:.1rem; }
+.ap-text span { font-size:.78rem;opacity:.65;line-height:1.5; }
+
+/* ── FINDING STACK ── */
+.finding-stack { display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.fi { background:var(--background-primary,#fff);padding:1.25rem 1.5rem;display:flex;gap:.9rem;align-items:flex-start;transition:background .2s; }
+.fi:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .fi { background:#1e1e1e; }
+[data-theme="dark"] .fi:hover { background:#252525; }
+.fi-badge { flex-shrink:0;width:32px;height:32px;border-radius:8px;background:var(--ca);display:flex;align-items:center;justify-content:center;font-size:.85rem; }
+.fi-text strong { display:block;font-size:.85rem;font-weight:600;margin-bottom:.15rem;color:var(--text-primary); }
+.fi-text span { font-size:.76rem;opacity:.65;line-height:1.5; }
+
+/* ── FRICTION LIST ── */
+.friction-list { display:flex;flex-direction:column;gap:.6rem;margin-top:1rem; }
+.friction-item {
+  display:flex;align-items:center;gap:.9rem;
+  padding:.85rem 1.1rem;border-radius:10px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid rgba(0,0,0,.07);font-size:.85rem;line-height:1.5;
+}
+[data-theme="dark"] .friction-item { background:#1e1e1e;border-color:rgba(255,255,255,.07); }
+.friction-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+.fd-red  { background:var(--ca); }
+.fd-teal { background:var(--ct); }
+.fd-green{ background:var(--cg); }
+
+/* ── METRIC CHIPS ── */
+.metric-chips { display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem; }
+.mc { padding:.3rem .75rem;border-radius:999px;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;border:1px solid; }
+.mc-r { background:var(--ca-l);color:var(--ca);border-color:var(--ca); }
+.mc-t { background:var(--ct-l);color:var(--ct);border-color:var(--ct); }
+.mc-g { background:var(--cg-l);color:var(--cg);border-color:var(--cg); }
+
+/* ── SPRINT CARDS ── */
+.sprint-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem; }
+.sprint-card {
+  border-radius:12px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.09);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+[data-theme="dark"] .sprint-card { border-color:rgba(255,255,255,.1); }
+.sprint-card:hover { transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09);border-color:var(--ca); }
+.sprint-head {
+  padding:.9rem 1.3rem;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;
+}
+.sh-1 { background:var(--ct); }
+.sh-2 { background:var(--ca); }
+.sh-3 { background:var(--ink); }
+.sprint-body { padding:1rem 1.3rem;background:var(--background-primary,#fff); }
+[data-theme="dark"] .sprint-body { background:#1e1e1e; }
+.sprint-item {
+  font-size:.78rem;line-height:1.65;opacity:.8;
+  display:flex;align-items:baseline;gap:.4rem;margin-bottom:.3rem;
+}
+.sprint-item::before { content:'→';color:var(--ca);flex-shrink:0; }
+
+/* ── RESULT METRICS ── */
+.result-metrics { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.rm-cell { background:var(--background-primary,#fff);padding:1.75rem 1.25rem;text-align:center; }
+[data-theme="dark"] .rm-cell { background:#1e1e1e; }
+.rm-n { font-family:var(--serif);font-size:2.5rem;font-weight:900;color:var(--ca);line-height:1;margin-bottom:.2rem; }
+.rm-change { font-family:var(--mono);font-size:.68rem;color:var(--cg);letter-spacing:.06em;margin-bottom:.35rem; }
+.rm-l { font-family:var(--mono);font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;opacity:.55;line-height:1.4; }
+
+/* ── PHASE TIMELINE (design phases A–E) ── */
+.phase-timeline { display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.pt-card { background:var(--background-primary,#fff);padding:1.5rem 1.2rem;transition:background .2s; }
+.pt-card:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .pt-card { background:#1e1e1e; }
+[data-theme="dark"] .pt-card:hover { background:#252525; }
+.pt-letter { font-family:var(--serif);font-size:2.8rem;font-weight:900;color:var(--ca-l);line-height:1;margin-bottom:.5rem; }
+.pt-title { font-family:var(--serif);font-size:.9rem;font-weight:700;margin-bottom:.5rem;color:var(--text-primary); }
+.pt-desc { font-size:.72rem;line-height:1.55;opacity:.65;color:var(--text-secondary,#6b7280); }
+
+/* ── OPPORTUNITY CARDS ── */
+.opp-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem; }
+.opp-card {
+  border:1px solid rgba(0,0,0,.09);border-radius:12px;
+  padding:1.4rem;transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+[data-theme="dark"] .opp-card { border-color:rgba(255,255,255,.1); }
+.opp-card:hover { border-color:var(--ca);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09); }
+.opp-icon { font-size:1.4rem;margin-bottom:.6rem; }
+.opp-title { font-family:var(--serif);font-size:.92rem;font-weight:700;margin-bottom:.3rem;color:var(--text-primary); }
+.opp-desc { font-size:.76rem;line-height:1.6;opacity:.65; }
+
+/* ── REFLECTION BAND ── */
+.reflection-band {
+  background:var(--ink);color:#fff;
+  margin:clamp(2rem,4vw,3.5rem) 0 0;
+  padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem);
+}
+.ref-inner { max-width:860px;margin:0 auto; }
+.ref-qmark { font-family:var(--serif);font-size:6rem;line-height:.5;color:var(--ca);opacity:.3;margin-bottom:1.5rem; }
+.ref-quote { font-family:var(--serif);font-size:clamp(1.2rem,2.3vw,1.6rem);font-style:italic;line-height:1.55;margin-bottom:2.5rem; }
+.outcome-row { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem; }
+.outcome { padding:1.5rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1); }
+.outcome-icon { font-size:1.4rem;margin-bottom:.6rem; }
+.outcome-text { font-size:.82rem;line-height:1.6;opacity:.7; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+  .split { grid-template-columns:1fr; }
+  .phase-timeline { grid-template-columns:repeat(3,1fr); }
+  .ig-4,.sprint-grid,.opp-grid { grid-template-columns:repeat(2,1fr); }
+  .result-metrics { grid-template-columns:1fr 1fr; }
+  .outcome-row { grid-template-columns:1fr; }
+}
+@media(max-width:560px){
+  .stat-strip { grid-template-columns:1fr; }
+  .phase-timeline,.ig-2,.ig-3,.ig-4 { grid-template-columns:1fr 1fr; }
+  .sprint-grid,.opp-grid { grid-template-columns:1fr; }
+  .result-metrics { grid-template-columns:1fr; }
+  .meta-row { gap:1.25rem; }
+}
+</style>
 </head>
 
-<!-- Google tag (gtag.js) -->
+<!-- GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K1W60XD1FJ');
-</script>
-
-<!-- Custom GA event for page title and screen class -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var pageTitle = document.title;
-        var screenClass = document.body.className || 'default';
-        gtag('event', 'page_view_details', {
-            'page_title': pageTitle,
-            'screen_class': screenClass
-        });
-    });
+  gtag('js',new Date());gtag('config','G-K1W60XD1FJ');
+  document.addEventListener('DOMContentLoaded',function(){
+    gtag('event','page_view_details',{'page_title':document.title,'screen_class':document.body.className||'default'});
+  });
 </script>
 
 <body>
+<div id="cp"></div>
 
-<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
+<!-- Header -->
 <header>
-    <a href="../index.html" class="logo-link">
-        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
-    </a>
-    <div class="header-right">
-        <nav>
-            <ul>
-                <li><a href="../index.html#work">Projects</a></li>
-                <li><a href="../academic.html">Academia</a></li>
-                <li><a href="../about-me.html">About Me</a></li>            
-                <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
-                <li><a href="../about/Persian.html">پارسی</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </div>
+  <a href="../index.html" class="logo-link">
+    <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+  </a>
+  <div class="header-right">
+    <nav><ul>
+      <li><a href="../index.html#work">Projects</a></li>
+      <li><a href="../academic.html">Academia</a></li>
+      <li><a href="../about-me.html">About Me</a></li>
+      <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer"
+         onclick="gtag('event','resume_click',{'event_category':'navigation','event_label':'Resume Nav'});">Resume</a></li>
+      <li><a href="../about/Persian.html">پارسی</a></li>
+    </ul></nav>
+    <button class="theme-toggle" id="theme-toggle"><span class="theme-icon">🌙</span></button>
+  </div>
 </header>
 
-<!-- Main content -->
 <main>
-    <!-- Hero Section -->
-    <section class="case-study-hero">
-        <!-- <nav class="page-navigation">
-        <a href="/projects/seizure.html" class="nav-btn nav-prev">← Prev: Seizure Action Plan</a>
-        <a href="/projects/shahrzad-theatre.html" class="nav-btn nav-next">Next: Shahrzad Theatre →</a>
 
-    </nav> -->
-     <div class="hero-cover-image">
-            <img src="../image/off-app/1.png" alt="OFF-APP Case Study Cover" />
-        </div>
-        <div class="hero-content">
-            <h1>OFF-APP</h1>
-            <p class="subtitle">Designing Online Shopping App (full service) Using Design Thinking Methodology</p>
-            
-            <div class="project-meta">
-                <div class="meta-item">
-                    <strong>Role</strong>
-                    <span>UX/UI Designer</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Timeline</strong>
-                    <span>6 months</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Team</strong>
-                    <span>Data Analyst · Content Strategist · Product Owner . Developer</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Tools</strong>
-                    <span>Figma, Design Thinking, User Research, usability testing · Benchmarking · Persona definition · Design system</span>
-                </div>
-            </div>
-        </div>
-       
-    </section>
+<!-- ══ COVER ══ -->
+<div class="hero-cover-image rv">
+  <img src="../image/off-app/1.png" alt="OFF-APP Cover">
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="case-study-hero rv">
+  <div class="off-eye">
+    <div class="off-eye-line"></div>
+    <span>UX/UI Design · E-Commerce · Design Thinking</span>
+  </div>
+
+  <h1>OFF-<em>APP</em></h1>
+  <p class="hero-sub">A full-service online shopping app designed from the ground up using Design Thinking — 150+ screens, light & dark mode, built and shipped.</p>
+
+  <div class="meta-row">
+    <div class="meta-col">
+      <strong>Role</strong>
+      <span>UX/UI Designer</span>
+    </div>
+    <div class="meta-col">
+      <strong>Timeline</strong>
+      <span>6 months</span>
+    </div>
+    <div class="meta-col">
+      <strong>Team</strong>
+      <span>Data Analyst · Content Strategist · Product Owner · Developer</span>
+    </div>
+    <div class="meta-col">
+      <strong>Tools</strong>
+      <div class="chip-row">
+        <span class="chip">Figma</span>
+        <span class="chip">Design Thinking</span>
+        <span class="chip">User Research</span>
+        <span class="chip">Usability Testing</span>
+        <span class="chip">Benchmarking</span>
+        <span class="chip">Design System</span>
+        <span class="chip">SurveyMonkey</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-strip rv">
+    <div class="stat-cell">
+      <div class="stat-n">150+</div>
+      <div class="stat-l">Screens designed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">3</div>
+      <div class="stat-l">Design sprint rounds</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">25</div>
+      <div class="stat-l">Users per sprint test</div>
+    </div>
+  </div>
+</section>
 
 
-    <!-- Overview -->
-    <section class="content-section">
-        <h2>Project Overview</h2>
-        <p>OFF-APP is a comprehensive online shopping application designed from the ground up using Design Thinking methodology. The project involved creating a complete user experience with 150+ pages, featuring both Light & Dark Mode capabilities.</p>
-    </section>
+<!-- ══ OVERVIEW ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">00</span>
+    <h2>Project at a Glance</h2>
+  </div>
 
-    
-    <div class="hero-cover-image-small">
-            <img src="../image/off-app/2.png" alt="OFF-APP process" />
-        </div>
+  <div class="icon-grid ig-4">
+    <div class="ig-card">
+      <div class="ig-label">Product</div>
+      <div class="ig-icon">🛍</div>
+      <div class="ig-title">Full-Service Shopping App</div>
+      <div class="ig-body">End-to-end e-commerce experience built from zero — research, design system, prototypes, and live MVP delivery.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Focus 1</div>
+      <div class="ig-icon">🧭</div>
+      <div class="ig-title">Simplified Shopping Journey</div>
+      <div class="ig-body">Reduced friction across browse, search, cart, and checkout — designed for speed and clarity.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Focus 2</div>
+      <div class="ig-icon">🎁</div>
+      <div class="ig-title">Custom Pack Builder</div>
+      <div class="ig-body">Enabled product customization and bundle creation — a key differentiator validated in user testing.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Focus 3</div>
+      <div class="ig-icon">🔍</div>
+      <div class="ig-title">Product Request Feature</div>
+      <div class="ig-body">Supported access to rare or unavailable items — surfaced high interest in sprint 2 usability tests.</div>
+    </div>
+  </div>
+</section>
 
-    <!-- Challenge -->
-    <section class="content-section bg-light">
-        <h2>Design Focus</h2>
-        <p>The project centered on three key experience priorities:</p>
-        <ul>
-            <li>Simplifying the shopping journey</li>
-            <li>Enabling product customization and bundle creation</li>
-            <li>Supporting access to rare or unavailable items</li>
-        </ul>
-        <p>My approach followed the Design Thinking framework across discovery, definition, ideation, and prototyping stages.</p>
-        <h2>Research & Insight Development</h2>
-        <p>
-            <ul>
-                <li>Conducted <strong>qualitative and quantitative interviews</strong> to explore motivations, pain points, and shopping habits with 25 users via Surveymonkey and in person interviews</li>
-                <li>Created personas to represent distinct user needs and expectations</li>
-                <li>Performed competitor benchmarking to evaluate existing Iranian shopping apps and identify opportunity gaps</li>
-            </ul>
-        </p>
-         <div class="hero-cover-image">
-            <img src="../image/off-app/2b.jpg" alt="OFF-APP persona and user needs" />
-        </div>
-        <h2>A: Define phase</h2>
-        <p>Defining product persona and user needs through extensive research and stakeholder interviews.</p>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/4.png" alt="OFF-APP persona and user needs" />
-        </div>
 
-        <p>Benchmarking with other competitors and analyzing market trends.</p>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/4b.png" alt="OFF-APP process" />
-        </div>
-        <p>Key findings emphasized the importance of ease of use, customization, and meaningful engagement features.</p>
-        <h2>B: Ideate phase</h2>
-        <p>Brainstorming sessions to generate innovative solutions and design concepts.</p>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/5.png" alt="OFF-APP persona and user needs" />
-            <img src="../image/off-app/7a.png" alt="OFF-APP persona and user needs" />
-        </div>
-        <p>Defining user flows and product requests</p>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/7b.png" alt="OFF-APP process" />
-        </div>
+<!-- Process image -->
+<!-- <div class="hero-cover-image-small rv" style="margin-top:1.75rem;">
+  <img src="../image/off-app/2.png" alt="Design Thinking process">
+</div> -->
 
-         <h2>C: Prototyping phase</h2>
-        <p>Creating low fidelity then high fidelity interactive prototypes to test and refine design concepts.</p>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/8a.png" alt="OFF-APP persona and user needs" />
-            <img src="../image/off-app/8.png" alt="OFF-APP persona and user needs" />
-        </div>
-        <p>Designing color palette and typography and component library</p>
-         <div class="hero-cover-image">
-            <img src="../image/off-app/9.png" alt="OFF-APP persona and user needs" />
-            <img src="../image/off-app/10.png" alt="OFF-APP persona and user needs" />
-            <img src="../image/off-app/10a.png" alt="OFF-APP persona and user needs" />
-        </div>
-         <h2>D: Building phase</h2>
-        <p>Deploying the final product and ensuring all components are integrated correctly working and launching MVP with Developers help.</p>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/11.png" alt="OFF-APP persona and user needs" />
-        </div>
-         <h2>E: Analysis phase</h2>
-         <p>team design Sprints in 3 round and tested some hypothesis and app features in 3 months in agile rhythm after delivering to stakeholder</p>
-         <div class="hero-cover-image">
-            <img src="../image/off-app/usability test/17.png" alt="OFF-APP test" />
-        </div>
-        <p>Usability testing with usertesting platform and GA4 Google Analytics users showed aftre testing with 20-25 users in each sprint:</p>
-        <ul>
-            <li>Successful use of the custom pack feature for personalized shopping</li>
-            <li>High interest in product request functionality for unavailable items</li>
-            <li>Positive engagement with browsing and navigation experiences</li>
-        </ul>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/usability test/18.png" alt="OFF-APP persona and user needs" />
-        </div>
-        <div class="hero-cover-image">
-            <img src="../image/off-app/usability test/16.png" alt="OFF-APP persona and user needs" />
-        </div>
-        <p>These insights confirmed alignment between design decisions and user expectations.</p>
 
-    </section>
+<!-- ══ DESIGN PHASES OVERVIEW ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">→</span>
+    <h2>Design Thinking Phases</h2>
+  </div>
 
-    <!-- Process -->
-    <section class="content-section">
-        <h2>Reflection & Opportunities</h2>
-        <p>The project strengthened my experience in:
-            <ol>
-                <li>Research-driven UX decision-making</li>
-                <li>Complex interface structuring and scalable component design</li>
-                <li>Designing personalization-oriented product experiences</li>
-            </ol>
-            <p>Future opportunities include expanding social sharing, product discovery, and loyalty-based engagement features.</p>
-             </section>
-             
-        <div class="hero-cover-image">
-           <img src="../image/off-app/UI UX case study - OFF-SHOP.jpg" alt="OFF-APP persona and user needs" />
+  <div class="phase-timeline">
+    <div class="pt-card">
+      <div class="pt-letter">A</div>
+      <div class="pt-title">Define</div>
+      <div class="pt-desc">Personas, user needs, competitor benchmarking and market gap analysis.</div>
+    </div>
+    <div class="pt-card">
+      <div class="pt-letter">B</div>
+      <div class="pt-title">Ideate</div>
+      <div class="pt-desc">Brainstorming sessions, user flows, and product request mapping.</div>
+    </div>
+    <div class="pt-card">
+      <div class="pt-letter">C</div>
+      <div class="pt-title">Prototype</div>
+      <div class="pt-desc">Lo-fi → hi-fi, colour palette, typography, component library.</div>
+    </div>
+    <div class="pt-card">
+      <div class="pt-letter">D</div>
+      <div class="pt-title">Build</div>
+      <div class="pt-desc">MVP delivery with developers. All components integrated and launched.</div>
+    </div>
+    <div class="pt-card">
+      <div class="pt-letter">E</div>
+      <div class="pt-title">Analyse</div>
+      <div class="pt-desc">3 design sprint rounds. Usability testing + GA4 over 3 months.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ A: DEFINE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">A</span>
+    <h2>Define Phase</h2>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <p>Conducted <strong>qualitative and quantitative research</strong> with 25 users via SurveyMonkey and in-person interviews to map motivations, pain points, and shopping habits.</p>
+      <p>Competitor benchmarking across existing Iranian shopping apps identified opportunity gaps in customization and rare product access.</p>
+    </div>
+    <div>
+      <p style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:.75rem;">Key findings</p>
+      <div class="friction-list">
+        <div class="friction-item">
+          <span class="friction-dot fd-teal"></span>
+          Ease of use was the top priority across all user segments
         </div>
-    </section>
+        <div class="friction-item">
+          <span class="friction-dot fd-teal"></span>
+          Customization and bundle creation were unmet needs
+        </div>
+        <div class="friction-item">
+          <span class="friction-dot fd-green"></span>
+          Meaningful engagement features drove repeat usage
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <nav class="page-navigation">
-        <a href="/projects/seizure.html" class="nav-btn nav-prev">← Prev: Seizure Action Plan</a>
-        <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
-        <a href="/projects/shahrzad-theatre.html" class="nav-btn nav-next">Next: Shahrzad Theatre →</a>
+<!-- <div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/off-app/2b.jpg" alt="User research">
+</div> -->
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/4.png" alt="Persona and user needs">
+</div>
+<!-- <div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/4b.png" alt="Competitor benchmarking">
+</div> -->
 
-    </nav>
+
+<!-- ══ B: IDEATE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">B</span>
+    <h2>Ideate Phase</h2>
+  </div>
+
+  <p style="font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:1.25rem;">Brainstorming sessions generated innovative solutions across three core experience pillars, then collapsed into prioritized user flows.</p>
+
+  <div class="icon-grid ig-3">
+    <div class="ig-card">
+      <div class="ig-label">Pillar 1</div>
+      <div class="ig-icon">🛒</div>
+      <div class="ig-title">Shopping Flow</div>
+      <div class="ig-body">Simplified browse-to-checkout with smart filtering, quick add, and a minimal cart flow.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Pillar 2</div>
+      <div class="ig-icon">📦</div>
+      <div class="ig-title">Custom Pack Builder</div>
+      <div class="ig-body">Users can mix and bundle products into personalized packs — key differentiator validated in research.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Pillar 3</div>
+      <div class="ig-icon">📝</div>
+      <div class="ig-title">Product Requests</div>
+      <div class="ig-body">Allows users to request rare or currently unavailable items — turning demand into direct sourcing signal.</div>
+    </div>
+  </div>
+</section>
+
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/off-app/5.png" alt="Brainstorm sessions">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/7a.png" alt="User flows ideation">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/7b.png" alt="Product request flows">
+</div>
+
+
+<!-- ══ C: PROTOTYPE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">C</span>
+    <h2>Prototype Phase</h2>
+  </div>
+
+  <div class="approach-steps">
+    <div class="ap-step">
+      <div class="ap-num">🖊</div>
+      <div class="ap-text">
+        <strong>Lo-Fidelity Wireframes</strong>
+        <span>Rapid paper and digital sketches to validate layout logic and navigation hierarchy before investment in visual design.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">🎨</div>
+      <div class="ap-text">
+        <strong>Colour Palette & Typography</strong>
+        <span>Built a considered visual language — light & dark mode support designed in from the start.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">🧩</div>
+      <div class="ap-text">
+        <strong>Component Library</strong>
+        <span>Scalable design system covering 150+ screens — buttons, cards, navigation, forms, and product modules.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">📱</div>
+      <div class="ap-text">
+        <strong>Hi-Fidelity Interactive Prototype</strong>
+        <span>Full Figma prototype ready for developer handoff and usability testing.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-chips">
+    <span class="mc mc-r">150+ Screens</span>
+    <span class="mc mc-r">Light & Dark Mode</span>
+    <span class="mc mc-t">Figma Component Library</span>
+    <span class="mc mc-t">Interactive Prototype</span>
+    <span class="mc mc-g">Developer Handoff Ready</span>
+  </div>
+</section>
+
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/off-app/8a.png" alt="Lo-fi wireframes">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/8.png" alt="Hi-fi prototype">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/9.png" alt="Design system colours">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/10.png" alt="Component library">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/10a.png" alt="Component library detail">
+</div>
+
+
+<!-- ══ D: BUILD ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">D</span>
+    <h2>Build Phase</h2>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <p>Worked directly with developers to ensure design intent translated accurately into the live product — all components integrated, tested, and shipped as MVP.</p>
+      <p>Maintained design system consistency throughout handoff, resolving edge cases as they emerged during implementation.</p>
+    </div>
+    <div>
+      <div class="pullquote">From 150 Figma screens to a live product — shipped with developers in one MVP cycle.</div>
+    </div>
+  </div>
+</section>
+
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/off-app/11.png" alt="Live build screens">
+</div>
+
+
+<!-- ══ E: ANALYSE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">E</span>
+    <h2>Analysis &amp; Sprint Testing</h2>
+  </div>
+
+  <p style="font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:1.5rem;"><strong>3 design sprint rounds</strong> over 3 months in an agile rhythm — 20–25 users per sprint via usertesting platform and GA4.</p>
+
+  <div class="sprint-grid">
+    <div class="sprint-card">
+      <div class="sprint-head sh-1">Sprint 01</div>
+      <div class="sprint-body">
+        <div class="sprint-item">Core navigation flow validation</div>
+        <div class="sprint-item">Browse and search usability</div>
+        <div class="sprint-item">Cart and checkout friction audit</div>
+      </div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-head sh-2">Sprint 02</div>
+      <div class="sprint-body">
+        <div class="sprint-item">Custom pack builder testing</div>
+        <div class="sprint-item">Product request feature validation</div>
+        <div class="sprint-item">High interest confirmed in both features</div>
+      </div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-head sh-3">Sprint 03</div>
+      <div class="sprint-body">
+        <div class="sprint-item">Engagement and repeat-use patterns</div>
+        <div class="sprint-item">Browsing experience refinement</div>
+        <div class="sprint-item">Alignment between design & expectations ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key results -->
+  <div class="finding-stack" style="margin-top:1.75rem;">
+    <div class="fi">
+      <div class="fi-badge">🎁</div>
+      <div class="fi-text">
+        <strong>Custom Pack Feature: Successful Adoption</strong>
+        <span>Users successfully built personalized packs — key differentiator proved its value in real usage.</span>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="fi-badge">📝</div>
+      <div class="fi-text">
+        <strong>Product Request: High Interest</strong>
+        <span>Strong engagement with rare-item request functionality — confirmed a real unmet market need.</span>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="fi-badge">🧭</div>
+      <div class="fi-text">
+        <strong>Navigation & Browsing: Positive Engagement</strong>
+        <span>Users responded well to the simplified browsing flow — low drop-off across key screens.</span>
+      </div>
+    </div>
+  </div>
+  <img src="../image/off-app/usability test/17.png" alt="Usability testing sprint">
+</section>
+
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/usability test/18.png" alt="Usability test results">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/off-app/usability test/16.png" alt="Analytics dashboard">
+</div>
+
+
+<!-- ══ OPPORTUNITIES ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">↗</span>
+    <h2>Future Opportunities</h2>
+  </div>
+
+  <div class="opp-grid">
+    <div class="opp-card">
+      <div class="opp-icon">📲</div>
+      <div class="opp-title">Social Sharing</div>
+      <div class="opp-desc">Let users share curated packs and wishlists — turning shoppers into advocates.</div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-icon">✨</div>
+      <div class="opp-title">Product Discovery</div>
+      <div class="opp-desc">Personalized recommendation engine based on browsing history and pack preferences.</div>
+    </div>
+    <div class="opp-card">
+      <div class="opp-icon">🏆</div>
+      <div class="opp-title">Loyalty Engagement</div>
+      <div class="opp-desc">Points, milestones, and rewards tied to custom pack creation and product requests.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Final showcase image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/off-app/UI UX case study - OFF-SHOP.jpg" alt="OFF-APP full case study">
+</div>
+
+
+<!-- ══ REFLECTION ══ -->
+<div class="reflection-band rv">
+  <div class="ref-inner">
+    <div class="ref-qmark">"</div>
+    <div class="ref-quote">Great product design isn't built once — it's refined sprint by sprint, user by user.</div>
+
+    <div class="outcome-row">
+      <div class="outcome">
+        <div class="outcome-icon">🔬</div>
+        <div class="outcome-text">Research-driven UX decision-making — every feature traced back to a validated user need before a pixel was placed</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">🧩</div>
+        <div class="outcome-text">Complex interface structuring at scale — 150+ screens with a consistent, scalable component design system</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">🎁</div>
+        <div class="outcome-text">Personalization-oriented product thinking — custom packs and product requests turned user desires into shipped features</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page nav -->
+<nav class="page-navigation">
+  <a href="/projects/seizure.html" class="nav-btn nav-prev">← Prev: Seizure Action Plan</a>
+  <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
+  <a href="/projects/shahrzad-theatre.html" class="nav-btn nav-next">Next: Shahrzad Theatre →</a>
+</nav>
 
 </main>
 
 <script>
-// Dark Mode Toggle
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('cp').style.width = pct + '%';
+  });
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-const themeIcon = themeToggle.querySelector('.theme-icon');
-htmlElement.setAttribute('data-theme', currentTheme);
-themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  // Scroll reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-});
+  // Theme toggle
+  const tt = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const ti = tt.querySelector('.theme-icon');
+  const th = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', th);
+  ti.textContent = th === 'dark' ? '☀️' : '🌙';
+  tt.addEventListener('click', () => {
+    const n = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', n);
+    localStorage.setItem('theme', n);
+    ti.textContent = n === 'dark' ? '☀️' : '🌙';
+  });
 
-// Prevent image downloads
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// Prevent drag and drop of images
-document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// Disable right-click on images
-const images = document.querySelectorAll('img');
-images.forEach(img => {
-    img.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-});
+  // Image protection
+  document.addEventListener('contextmenu', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.addEventListener('dragstart', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.querySelectorAll('img').forEach(img => img.addEventListener('contextmenu', e => e.preventDefault()));
 </script>
 
-<!-- Footer: Social links and copyright -->
 <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="https://dribbble.com/shahrzading">Dribbble</a>
-      </p>
-    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+  <p>
+    <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+    <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+    <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+    <a href="https://dribbble.com/shahrzading">Dribbble</a>
+  </p>
+  <p><small>&copy; Code &amp; Design by Shahrzad Jafari</small></p>
 </footer>
-
 </body>
 </html>
-

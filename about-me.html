@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,270 +7,623 @@
     <link rel="icon" type="image/jpeg" href="image/logo.jpg">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════
+   EXACT same tokens as all other pages
+══════════════════════════════ */
+:root {
+  --ca: #C94B2E;
+  --ca-l: #F2D5CC;
+  --ct: #2A6B6E;
+  --ct-l: #D4EAEB;
+  --cg: #4A6B1A;
+  --cg-l: #E4EDD0;
+  --ink: #1C1C1E;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+#cp { position:fixed;top:0;left:0;height:3px;background:var(--ca);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear; }
+.rv { opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease; }
+.rv.on { opacity:1;transform:none; }
+
+/* ── HERO — same pattern as artistic/hobbies pages ── */
+.about-hero {
+  position:relative;min-height:82vh;
+  display:flex;align-items:flex-end;
+  overflow:hidden;margin-top:62px;
+}
+.about-hero-bg { position:absolute;inset:0;background:var(--ink); }
+.about-hero-bg img {
+  width:100%;height:100%;object-fit:cover;object-position:center 25%;
+  opacity:.5;display:block;
+  pointer-events:none;user-select:none;-webkit-user-drag:none;
+  transition:transform 10s ease;
+}
+.about-hero:hover .about-hero-bg img { transform:scale(1.03); }
+.about-hero::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:62%;
+  background:linear-gradient(to top,rgba(28,28,30,1) 0%,transparent 100%);
+  pointer-events:none;z-index:1;
+}
+.about-hero-content {
+  position:relative;z-index:2;
+  max-width:860px;width:100%;margin:0 auto;
+  padding:4rem clamp(1.25rem,4vw,3rem) 4.5rem;
+}
+.ab-eye { display:flex;align-items:center;gap:.75rem;margin-bottom:1.4rem; }
+.ab-eye-line { flex:0 0 32px;height:2px;background:var(--ca);border-radius:2px; }
+.ab-eye span {
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ca);
+}
+.about-hero h1 {
+  font-family:var(--serif);
+  font-size:clamp(3rem,8vw,6rem);
+  font-weight:900;line-height:.95;
+  letter-spacing:-.03em;color:#fff;margin:0 0 1rem;
+}
+.about-hero h1 em { font-style:italic;color:var(--ca); }
+.about-hero-sub {
+  font-size:1rem;line-height:1.75;
+  color:rgba(255,255,255,.6);max-width:480px;
+}
+
+/* ── CS CARD — identical to all case study pages ── */
+.cs {
+  max-width:860px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  padding:2.25rem clamp(1.5rem,3vw,2.5rem);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);border-radius:14px;
+}
+[data-theme="dark"] .cs {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.09);
+}
+
+/* Section header — identical to .sh/.sn */
+.sh { display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.5rem; }
+.sn {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;
+  color:var(--ca);flex-shrink:0;
+}
+.sh h2 {
+  font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2rem);
+  font-weight:700;margin:0;line-height:1.15;
+}
+
+/* Body text — uses global Fredoka via styles.css */
+.body-text {
+  font-size:1rem;line-height:1.8;
+  color:var(--text-secondary,#6b7280);
+  margin-bottom:.85rem;
+}
+
+/* Pull quote — identical to all pages */
+.pullquote {
+  font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);
+  font-style:italic;line-height:1.6;
+  padding:.6rem 0 .6rem 1.3rem;
+  border-left:3px solid var(--ca);
+  color:var(--text-primary);
+  margin:1.25rem 0 .4rem;opacity:.85;
+}
+.pullquote-cite {
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+  opacity:.4;padding-left:1.3rem;display:block;margin-bottom:.5rem;
+}
+
+/* ── EXPLORE CARDS — image + overlay ── */
+.explore-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem; }
+.explore-card {
+  position:relative;border-radius:12px;overflow:hidden;
+  text-decoration:none;display:block;height:280px;
+  background:var(--ink);
+}
+.explore-card img {
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.7;display:block;
+  transition:opacity .35s,transform .5s;
+  pointer-events:none;user-select:none;-webkit-user-drag:none;
+}
+.explore-card:hover img { opacity:.45;transform:scale(1.05); }
+.explore-card::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(28,28,30,.88) 0%,transparent 60%);
+}
+.explore-card-body {
+  position:absolute;bottom:0;left:0;right:0;
+  z-index:2;padding:1.5rem;
+}
+.explore-label {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ca);margin-bottom:.4rem;display:block;
+}
+.explore-title {
+  font-family:var(--serif);font-size:1.5rem;
+  font-weight:700;color:#fff;margin-bottom:.6rem;line-height:1.1;
+}
+.explore-btn {
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;
+  background:var(--ca);color:#fff;
+  padding:.35rem .9rem;border-radius:999px;
+  transition:background .2s,transform .2s;
+}
+.explore-card:hover .explore-btn { background:#a83a20;transform:translateX(3px); }
+
+/* ── JOURNEY — horizontal scrollable ── */
+.journey-track {
+  display:flex;gap:0;
+  overflow-x:auto;
+  padding:1.5rem 0 .5rem;
+  scrollbar-width:none;
+  position:relative;
+}
+.journey-track::-webkit-scrollbar { display:none; }
+/* connecting line */
+.journey-track::before {
+  content:'';
+  position:absolute;
+  top:calc(1.5rem + 7px);
+  left:0;right:0;height:1px;
+  background:var(--border-color,#e5e7eb);
+  z-index:0;
+}
+[data-theme="dark"] .journey-track::before { background:rgba(255,255,255,.1); }
+
+.j-node {
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;min-width:110px;
+  position:relative;z-index:1;
+  padding:0 .5rem;
+  cursor:default;
+}
+.j-dot {
+  width:15px;height:15px;border-radius:50%;
+  background:var(--background-primary,#fff);
+  border:2px solid var(--border-color,#e5e7eb);
+  margin-bottom:.6rem;flex-shrink:0;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+[data-theme="dark"] .j-dot {
+  background:var(--background-primary,#111827);
+  border-color:rgba(255,255,255,.2);
+}
+.j-node:hover .j-dot { border-color:var(--ca);background:var(--ca-l); }
+.j-node.active .j-dot {
+  background:var(--ca);border-color:var(--ca);
+  box-shadow:0 0 0 5px rgba(201,75,46,.2);
+  animation:jpulse 2s ease-in-out infinite;
+}
+@keyframes jpulse {
+  0%,100%{ box-shadow:0 0 0 5px rgba(201,75,46,.2); }
+  50%{ box-shadow:0 0 0 10px rgba(201,75,46,.06); }
+}
+.j-year {
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  color:var(--ca);margin-bottom:.3rem;
+}
+.j-label {
+  font-size:.78rem;text-align:center;line-height:1.4;
+  color:var(--text-secondary,#6b7280);
+}
+.j-node.active .j-label { color:var(--ca);font-weight:600; }
+
+/* ── HIGHLIGHT CARDS — same as ig-card on other pages ── */
+.hl-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:14px;overflow:hidden;margin-top:1.75rem;
+}
+[data-theme="dark"] .hl-grid { background:rgba(255,255,255,.07); }
+.hl-card {
+  background:var(--background-primary,#fff);
+  padding:1.5rem;transition:background .2s;
+}
+.hl-card:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .hl-card { background:rgba(255,255,255,.03); }
+[data-theme="dark"] .hl-card:hover { background:rgba(255,255,255,.07); }
+.hl-icon { font-size:1.5rem;margin-bottom:.6rem; }
+.hl-title {
+  font-size:.92rem;font-weight:600;
+  color:var(--text-primary);margin-bottom:.25rem;line-height:1.4;
+}
+.hl-sub { font-size:.8rem;opacity:.55;line-height:1.55; }
+
+/* ── DESIGN STACK — friction list style ── */
+.stack-list {
+  display:flex;flex-direction:column;gap:1px;
+  background:rgba(0,0,0,.07);border-radius:14px;
+  overflow:hidden;margin-top:1.5rem;
+}
+[data-theme="dark"] .stack-list { background:rgba(255,255,255,.07); }
+.stack-row {
+  background:var(--background-primary,#fff);
+  display:grid;grid-template-columns:180px 1fr;
+  gap:1rem;align-items:start;
+  padding:1.1rem 1.5rem;
+  transition:background .2s;
+}
+.stack-row:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .stack-row { background:rgba(255,255,255,.02); }
+[data-theme="dark"] .stack-row:hover { background:rgba(255,255,255,.06); }
+.stack-cat {
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ca);
+  padding-top:.3rem;flex-shrink:0;
+}
+.stack-row.now .stack-cat { color:var(--ct); }
+.chip-row { display:flex;flex-wrap:wrap;gap:.4rem; }
+.chip {
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.04em;
+  padding:.25rem .7rem;border-radius:999px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid var(--border-color,#e5e7eb);
+  color:var(--text-secondary,#6b7280);
+}
+[data-theme="dark"] .chip {
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.12);
+  color:rgba(255,255,255,.65);
+}
+.stack-row:hover .chip { border-color:rgba(201,75,46,.35); }
+.stack-row.now .chip { border-color:rgba(42,107,110,.35); }
+
+/* ── MUSIC ── */
+.music-wrap {
+  max-width:860px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  border-radius:14px;overflow:hidden;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+}
+[data-theme="dark"] .music-wrap {
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+}
+.music-header {
+  padding:1.25rem 1.75rem .75rem;
+  display:flex;align-items:center;gap:.65rem;
+}
+.music-dot { width:7px;height:7px;border-radius:50%;background:var(--ca);flex-shrink:0; }
+.music-lbl {
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ct);
+}
+.music-frame {
+  display:block;width:100%;aspect-ratio:16/7;border:none;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  max-width:860px;margin:clamp(2rem,4vw,3rem) auto 0;
+  display:flex;align-items:center;gap:1rem;
+  padding:0 clamp(1.5rem,3vw,2.5rem);
+}
+.div-line { flex:1;height:1px;background:var(--border-color,#e5e7eb); }
+[data-theme="dark"] .div-line { background:rgba(255,255,255,.09); }
+.div-mark { font-family:var(--serif);font-size:.9rem;color:var(--ca);opacity:.4;flex-shrink:0; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+  .about-hero { min-height:65vh; }
+  .about-hero h1 { font-size:clamp(2.6rem,8vw,4rem); }
+  .explore-grid { grid-template-columns:1fr; }
+  .explore-card { height:240px; }
+  .hl-grid { grid-template-columns:1fr 1fr; }
+  .stack-row { grid-template-columns:140px 1fr; }
+  .journey-track { padding:1.5rem 0 .5rem; }
+  .j-node { min-width:95px; }
+}
+@media(max-width:560px){
+  .about-hero h1 { font-size:clamp(2.2rem,9vw,3rem); }
+  .hl-grid { grid-template-columns:1fr; }
+  .stack-row { grid-template-columns:1fr;gap:.35rem; }
+  .stack-cat { padding-top:0;padding-bottom:.2rem; }
+  .j-node { min-width:80px; }
+  .j-label { font-size:.7rem; }
+}
+</style>
 </head>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K1W60XD1FJ');
-</script>
-
-<!-- Custom GA event for page title and screen class -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var pageTitle = document.title;
-        var screenClass = document.body.className || 'default';
-        gtag('event', 'page_view_details', {
-            'page_title': pageTitle,
-            'screen_class': screenClass
-        });
-    });
+  gtag('js',new Date());gtag('config','G-K1W60XD1FJ');
+  document.addEventListener('DOMContentLoaded',function(){
+    gtag('event','page_view_details',{'page_title':document.title,'screen_class':document.body.className||'default'});
+  });
 </script>
 
 <body>
+<div id="cp"></div>
 
-<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
 <header>
-    <a href="index.html" class="logo-link">
-        <img src="image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
-    </a>
-    <div class="header-right">
-        <nav>
-            <ul>
-                <li><a href="index.html#work">Projects</a></li>
-                <li><a href="academic.html">Academia</a></li>
-                <li><a href="about-me.html">About Me</a></li>            
-                <li><a href="Resume2.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
-                <li><a href="about/Persian.html">پارسی</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </div>
+  <a href="index.html" class="logo-link">
+    <img src="image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+  </a>
+  <div class="header-right">
+    <nav><ul>
+      <li><a href="index.html#work">Projects</a></li>
+      <li><a href="academic.html">Academia</a></li>
+      <li><a href="about-me.html">About Me</a></li>
+      <li><a href="Resume2.pdf" target="_blank" rel="noopener noreferrer"
+         onclick="gtag('event','resume_click',{'event_category':'navigation','event_label':'Resume Nav'});">Resume</a></li>
+      <li><a href="about/Persian.html">پارسی</a></li>
+    </ul></nav>
+    <button class="theme-toggle" id="theme-toggle"><span class="theme-icon">🌙</span></button>
+  </div>
 </header>
-<!-- Main content -->
+
 <main>
 
-
-<section class="case-study-hero">
-    
-        
-        <div class="hero-cover-image">
-            <img src="../image/hobby/hobby.png" alt="Hobbies Cover Image">
-        </div>
-        
-</section> 
-<section id="about">
-    <div class="testimonial">
-        <div class="hero-content">
-            
-            <h1>Who am I?</h1>
-        </div>
-        <p>I’m Shahrzad, a designer who believes good design should simplify life, reduce friction, and create moments of calm.
-        <p>I started designing as a teenager, sketching not just forms, but the way people live and feel. <br>Over time, design became my way of understanding behavior, emotion, and everyday experience.</p>
-        <blockquote>"Good design is invisible because it fits our needs so well."</blockquote> <span>Don Norman</span>
-</section>  
-
-<!-- About Cards: quick links to sub-pages under /about -->
- <section id="about-cards-section">
-            <div class="about-cards">
-                <a href="about/hobbies.html" class="about-card">
-                    <div class="about-card-icon"></div>
-                    <h1>MY Hobbies</h1>
-                    <img src="image/hobby/Hobby.jpg" alt="">
-                </a>
-                
-                <a href="about/artistic-work.html" class="about-card">
-                    <h1>MY Art Works</h1>
-                    <img src="image/artistic/art.jpg" alt="">
-                </a>
-            </div>
-    </section>
-
- <!-- My Path Section -->
-    <section id="Path">
-        <h2>My Learning Journey</h2>
-        
-        <div class="path-journey">
-            <!-- Interactive Journey Line -->
-            <div class="journey-track">
-                <div class="journey-node" style="--delay: 0">
-                    <span class="node-year">2009</span>
-                    <div class="node-dot"></div>
-                    <span class="node-label">Graphic Design</span>
-                </div>
-                <div class="journey-node" style="--delay: 1">
-                    <span class="node-year">2014</span>
-                    <div class="node-dot"></div>
-                    <span class="node-label">Industrial Design | Product Design</span>
-                </div>
-                <div class="journey-node" style="--delay: 1">
-                    <span class="node-year">2016</span>
-                    <div class="node-dot"></div>
-                    <span class="node-label">Theatre Stage & Decor Design</span>
-                </div>
-                <div class="journey-node" style="--delay: 2">
-                    <span class="node-year">2017</span>
-                    <div class="node-dot"></div>
-                    <span class="node-label">Web Design </span>
-                </div>
-                <div class="journey-node" style="--delay: 2">
-                    <span class="node-year">2020</span>
-                    <div class="node-dot"></div>
-                    <span class="node-label">UX/UI Design | Product Design</span>
-                </div>
-                <div class="journey-node" style="--delay: 3">
-                    <span class="node-year">2021</span>
-                    <div class="node-dot"></div>
-                    <span class="node-label">UX Researcher</span>
-                </div>
-                <div class="journey-node active" style="--delay: 4">
-                    <span class="node-year">Now</span>
-                    <div class="node-dot pulse"></div>
-                    <span class="node-label">Lead UX/UI Designer</span>
-                </div>
-            </div>
-            
-            <!-- Current Highlights -->
-            <div class="path-highlights">
-                <div class="highlight-card">
-                    <div class="highlight-icon">🎓</div>
-                    <div class="highlight-content">
-                        <h4>Doctoral of Design Philosophy (PhD)</h4>
-                         <p>Master of Industrial Design</p>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="highlight-icon">🔬</div>
-                    <div class="highlight-content">
-                        <h4>Design Researcher, UX Writer</h4>
-                        <p>BC Children's Hospital (Digital Lab)</p>
-                    </div>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">💼</div>
-                    <div class="highlight-content">
-                        <h4>Certificates</h4>
-                        <p>Creative Thinking (London Imperial College)</p>
-                        <p>Web Design Specialist (BCIT)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="academia-card">
-            <a href="academic.html" class="academic-link-btn">
-            <h4>My Academic Side</h4>
-                <p>My research work, publications, and teaching experience in Design.</p>
-                →</a>
-        </div>  -->
-    </section>
-<!-- Design Stack: Tools, methods and competencies -->
-    <section id="design-stack">
-        <h2>My Design Stack</h2>
-        <p>The tools and methods I use in my design and research work. I remain tool-agnostic and choose what best serves the user and business goals.</p>
+<!-- ══ HERO ══ -->
+<div class="about-hero">
+  <div class="about-hero-bg">
+    <img src="image/hobby/hobby.png" alt="Shahrzad Jafari">
+  </div>
+  <div class="about-hero-content rv">
+    <div class="ab-eye">
+      <div class="ab-eye-line"></div>
+      <span>Designer · Researcher · Storyteller</span>
+    </div>
+    <h1>Who<br><em>am I?</em></h1>
+    <p class="about-hero-sub">I'm Shahrzad — a designer who believes good design should simplify life, reduce friction, and create moments of calm.</p>
+  </div>
+</div>
 
 
-        <ul class="design-stack-list">
-            <li class="stack-item">
-                <span class="category-name">Product Design</span>
-                <span class="tools">Figma, Adobe XD, Sketch, Canva, Typography, Illustrator, Adobe Photoshop, InDesign, Color Theory,  Visual & Graphic Design
-                </span>
-            </li>
-            
-            <li class="stack-item">
-                <span class="category-name">UX/UI Design</span>
-                <span class="tools">Wireframing, Prototyping, Design Systems, Information Architecture, Micro interactions, Responsive Design, Accessibility </span>
-            </li>
-            
-            <li class="stack-item">
-                <span class="category-name">Evaluation & Analytics </span>
-                <span class="tools">Google Analytics, Tag Manager, Looker Studio, Data Mapping, Condens, Dscout, Dovetail</span>
-            </li>            
-            <li class="stack-item">
-                <span class="category-name">Usability Testing </span>
-                <span class="tools">Heuristic Evaluation, A/B Testing, Maze, Hotjar, User Behavior Analysis, Product Experimentation, Inclusive Design </span>
-            </li>
-            
-            <li class="stack-item">
-                <span class="category-name">Coding & WEB Solutions</span>
-                <span class="tools">HTML/CSS/JAVA, Webflow, Web Architecture, Wix, Unbounce,  Video & Audio Editing, Corsur</span>
-            </li>
-
-            <li class="stack-item">
-                <span class="category-name">Tools & Collaboration</span>
-                <span class="tools">FigJam, ProtoPie, Axure, Sketch, Miro, Notion, Jira, Trello, GitHub, Asana, Monday, Agile/Scrum</span>
-            </li>
-            
-            <li class="stack-item">
-                <span class="category-name">Currently Exploring</span>
-                <span class="tools">Motion Design, NotebookLM, Branding, Obsidian,Front-ending, Cursor, AI tools</span>
-            </li>
-        </ul>
-    </section>
-            
- <!-- Music: small gift-style YouTube embed — replace VIDEO_ID in embed URL to change track -->
-<section class="music-section music-gift" aria-label="A little music for you">
-    <p class="music-gift-label">Today’s sound, for whoever’s here.</p>
-    <div class="music-player-wrap music-youtube-wrap">
-        <iframe width="756" height="425" src="https://www.youtube.com/embed/VYCOg-yglNM"
-            
-            title="YouTube music player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            class="music-youtube-iframe"></iframe>
-       </div>
-    </section>
-    <section><br></section>
+<!-- ══ INTRO ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">→</span>
+    <h2>The Short Version</h2>
+  </div>
+  <p class="body-text">I started designing as a teenager, sketching not just forms — but the way people live and feel. Over time, design became my way of understanding behaviour, emotion, and everyday experience.</p>
+  <p class="body-text">From theatre stages in Tehran to digital health platforms in Vancouver, every project starts with the same question: <em>how can this feel more human?</em></p>
+  <div class="pullquote">"Good design is invisible because it fits our needs so well."</div>
+  <span class="pullquote-cite">— Don Norman</span>
 </section>
 
-</article>
 
-    
+<!-- ══ BEYOND THE SCREEN ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">✦</span>
+    <h2>Beyond the Screen</h2>
+  </div>
+  <p class="body-text">Design and life are not separate for me. Here's what happens when I step away from the laptop.</p>
+
+  <div class="explore-grid">
+    <a href="about/hobbies.html" class="explore-card">
+      <img src="image/hobby/Hobby.jpg" alt="My Hobbies">
+      <div class="explore-card-body">
+        <span class="explore-label">Personal</span>
+        <div class="explore-title">My Hobbies</div>
+        <span class="explore-btn">Explore →</span>
+      </div>
+    </a>
+    <a href="about/artistic-work.html" class="explore-card">
+      <img src="image/artistic/art.jpg" alt="My Art Works">
+      <div class="explore-card-body">
+        <span class="explore-label">Creative</span>
+        <div class="explore-title">My Art Works</div>
+        <span class="explore-btn">Explore →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+<div class="divider rv"><div class="div-line"></div><div class="div-mark">✦</div><div class="div-line"></div></div>
+
+
+<!-- ══ JOURNEY ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">01</span>
+    <h2>My Learning Journey</h2>
+  </div>
+  <p class="body-text" style="margin-bottom:.25rem;">A path that kept expanding — each discipline sharpening the next.</p>
+
+  <div class="journey-track">
+    <div class="j-node">
+      <div class="j-dot"></div>
+      <div class="j-year">2009</div>
+      <div class="j-label">Graphic Design</div>
+    </div>
+    <div class="j-node">
+      <div class="j-dot"></div>
+      <div class="j-year">2014</div>
+      <div class="j-label">Industrial &amp; Product Design</div>
+    </div>
+    <div class="j-node">
+      <div class="j-dot"></div>
+      <div class="j-year">2016</div>
+      <div class="j-label">Theatre Stage &amp; Décor</div>
+    </div>
+    <div class="j-node">
+      <div class="j-dot"></div>
+      <div class="j-year">2017</div>
+      <div class="j-label">Web Design</div>
+    </div>
+    <div class="j-node">
+      <div class="j-dot"></div>
+      <div class="j-year">2020</div>
+      <div class="j-label">UX / UI Design</div>
+    </div>
+    <div class="j-node">
+      <div class="j-dot"></div>
+      <div class="j-year">2021</div>
+      <div class="j-label">UX Researcher</div>
+    </div>
+    <div class="j-node active">
+      <div class="j-dot"></div>
+      <div class="j-year">Now</div>
+      <div class="j-label">Lead UX/UI Designer</div>
+    </div>
+  </div>
+
+  <div class="hl-grid">
+    <div class="hl-card">
+      <div class="hl-icon">🎓</div>
+      <div class="hl-title">PhD in Design Philosophy</div>
+      <div class="hl-sub">Master of Industrial Design</div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-icon">🔬</div>
+      <div class="hl-title">Design Researcher · UX Writer</div>
+      <div class="hl-sub">BC Children's Hospital Digital Lab</div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-icon">📜</div>
+      <div class="hl-title">Certificates</div>
+      <div class="hl-sub">Creative Thinking — Imperial College London<br>Web Design Specialist — BCIT</div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider rv"><div class="div-line"></div><div class="div-mark">✦</div><div class="div-line"></div></div>
+
+
+<!-- ══ DESIGN STACK ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">02</span>
+    <h2>My Design Stack</h2>
+  </div>
+  <p class="body-text" style="margin-bottom:.25rem;">Tool-agnostic — I choose what best serves the user and the problem.</p>
+
+  <div class="stack-list">
+    <div class="stack-row">
+      <div class="stack-cat">Product Design</div>
+      <div class="chip-row">
+        <span class="chip">Figma</span><span class="chip">Adobe XD</span>
+        <span class="chip">Illustrator</span><span class="chip">Photoshop</span>
+        <span class="chip">InDesign</span><span class="chip">Canva</span>
+        <span class="chip">Typography</span><span class="chip">Color Theory</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-cat">UX / UI Design</div>
+      <div class="chip-row">
+        <span class="chip">Wireframing</span><span class="chip">Prototyping</span>
+        <span class="chip">Design Systems</span><span class="chip">Information Architecture</span>
+        <span class="chip">Micro-interactions</span><span class="chip">Responsive Design</span>
+        <span class="chip">Accessibility</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-cat">Evaluation</div>
+      <div class="chip-row">
+        <span class="chip">GA4</span><span class="chip">Tag Manager</span>
+        <span class="chip">Looker Studio</span><span class="chip">Condens</span>
+        <span class="chip">Dscout</span><span class="chip">Dovetail</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-cat">Usability Testing</div>
+      <div class="chip-row">
+        <span class="chip">Heuristic Evaluation</span><span class="chip">A/B Testing</span>
+        <span class="chip">Maze</span><span class="chip">Hotjar</span>
+        <span class="chip">Behavioral Analysis</span><span class="chip">Inclusive Design</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-cat">Coding &amp; Web</div>
+      <div class="chip-row">
+        <span class="chip">HTML / CSS / JS</span><span class="chip">Webflow</span>
+        <span class="chip">Wix</span><span class="chip">Unbounce</span>
+        <span class="chip">Web Architecture</span>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-cat">Collaboration</div>
+      <div class="chip-row">
+        <span class="chip">FigJam</span><span class="chip">Miro</span>
+        <span class="chip">Notion</span><span class="chip">Jira</span>
+        <span class="chip">Asana</span><span class="chip">GitHub</span>
+        <span class="chip">Agile / Scrum</span><span class="chip">ProtoPie</span>
+      </div>
+    </div>
+    <div class="stack-row now">
+      <div class="stack-cat">Exploring Now ✦</div>
+      <div class="chip-row">
+        <span class="chip">Motion Design</span><span class="chip">AI Tools</span>
+        <span class="chip">NotebookLM</span><span class="chip">Cursor</span>
+        <span class="chip">Branding</span><span class="chip">Obsidian</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider rv"><div class="div-line"></div><div class="div-mark">✦</div><div class="div-line"></div></div>
+
+
+<!-- ══ MUSIC ══ -->
+<div class="music-wrap rv">
+  <div class="music-header">
+    <div class="music-dot"></div>
+    <span class="music-lbl">Today's sound, for whoever's here</span>
+  </div>
+  <iframe
+    class="music-frame"
+    src="https://www.youtube.com/embed/VYCOg-yglNM"
+    title="YouTube music player"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<div style="height:3rem;"></div>
+
 </main>
 
-<!-- Footer: Social links and copyright -->
 <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="https://dribbble.com/shahrzading">Dribbble</a>
-      </p>
-    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+  <p>
+    <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+    <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+    <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+    <a href="https://dribbble.com/shahrzading">Dribbble</a>
+  </p>
+  <p><small>&copy; Code &amp; Design by Shahrzad Jafari</small></p>
 </footer>
+
 <script>
-// Dark Mode Toggle (Dark mode is default/main mode)
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+    document.getElementById('cp').style.width=pct+'%';
+  });
+  const ro=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});
+  },{threshold:.06});
+  document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-// Check for saved theme preference or default to dark mode
-const currentTheme = localStorage.getItem('theme') || 'dark';
-const themeIcon = themeToggle.querySelector('.theme-icon');
-htmlElement.setAttribute('data-theme', currentTheme);
-themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-});
+  // Dark as default
+  const tt=document.getElementById('theme-toggle');
+  const html=document.documentElement;
+  const ti=tt.querySelector('.theme-icon');
+  const th=localStorage.getItem('theme')||'dark';
+  html.setAttribute('data-theme',th);
+  ti.textContent=th==='dark'?'🌙':'☀️';
+  tt.addEventListener('click',()=>{
+    const n=html.getAttribute('data-theme')==='dark'?'light':'dark';
+    html.setAttribute('data-theme',n);localStorage.setItem('theme',n);
+    ti.textContent=n==='dark'?'🌙':'☀️';
+  });
+  document.addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
+  document.addEventListener('dragstart',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
+  document.querySelectorAll('img').forEach(img=>img.addEventListener('contextmenu',e=>e.preventDefault()));
 </script>
-
-
-
 </body>
 </html>

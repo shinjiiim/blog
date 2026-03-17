@@ -3,437 +3,839 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>seizure-action-plan | Shahrzad Jafari</title>
+    <title>Seizure Action Plan | Shahrzad Jafari</title>
     <link rel="icon" type="image/jpeg" href="../image/logo.jpg">
     <link rel="stylesheet" href="../normalize.css">
     <link rel="stylesheet" href="../case-studies/case-study.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS (same as CATT) ── */
+:root {
+  --ca: #C94B2E;
+  --ca-l: #F2D5CC;
+  --ct: #2A6B6E;
+  --ct-l: #D4EAEB;
+  --cg: #4A6B1A;
+  --cg-l: #E4EDD0;
+  --ink: #1C1C1E;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+/* ── PROGRESS ── */
+#cp { position:fixed;top:0;left:0;height:3px;background:var(--ca);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear; }
+
+/* ── REVEAL ── */
+.rv { opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease; }
+.rv.on { opacity:1;transform:none; }
+
+/* ── HERO ── */
+.case-study-hero {
+  max-width:860px;margin:0 auto;
+  padding:3.5rem clamp(1.25rem,4vw,3rem) 2.5rem;
+  text-align:left;
+}
+.sap-eye { display:flex;align-items:center;gap:.75rem;margin-bottom:1.4rem; }
+.sap-eye-line { flex:0 0 32px;height:2px;background:var(--ct);border-radius:2px; }
+.sap-eye span {
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ct);
+}
+.case-study-hero h1 {
+  font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:.7rem;
+}
+.case-study-hero h1 em { font-style:italic;color:var(--ca); }
+.hero-sub { font-size:1rem;line-height:1.75;opacity:.7;max-width:580px; }
+
+/* ── META ROW ── */
+.meta-row {
+  display:flex;gap:2.5rem;flex-wrap:wrap;
+  margin-top:1.75rem;padding-top:1.5rem;
+  border-top:1px solid var(--border-color,#e5e7eb);
+}
+.meta-col { display:flex;flex-direction:column;gap:.25rem; }
+.meta-col strong {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.5;
+}
+.meta-col span { font-size:.92rem;font-weight:500;line-height:1.45; }
+
+/* ── CHIPS ── */
+.chip-row { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem; }
+.chip {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;
+  padding:.22rem .65rem;border-radius:999px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid var(--border-color,#e5e7eb);
+  color:var(--text-secondary,#6b7280);white-space:nowrap;
+}
+
+/* ── STAT STRIP ── */
+.stat-strip {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:16px;overflow:hidden;margin:2.5rem 0 0;
+}
+.stat-cell { background:var(--ct);color:#fff;padding:2rem 1.5rem;text-align:center; }
+.stat-cell:nth-child(2){ background:var(--ca); }
+.stat-cell:nth-child(3){ background:var(--ink); }
+.stat-n { font-family:var(--serif);font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.3rem; }
+.stat-l { font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75; }
+
+/* ── SECTION WRAPPER ── */
+.cs {
+  max-width:860px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  padding:2.25rem clamp(1.5rem,3vw,2.5rem);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);border-radius:14px;
+}
+[data-theme="dark"] .cs { background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09); }
+
+.sh { display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.5rem; }
+.sn { font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;color:var(--ca);flex-shrink:0; }
+.sh h2 { font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;margin:0;line-height:1.15; }
+
+/* ── PULL QUOTE ── */
+.pullquote {
+  font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);
+  font-style:italic;line-height:1.55;
+  padding:.75rem 0 .75rem 1.5rem;
+  border-left:3px solid var(--ca);
+  color:var(--text-primary);margin:1.25rem 0;
+}
+
+/* ── SPLIT ── */
+.split { display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;margin-top:1.5rem; }
+.split-text p { font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:.75rem; }
+
+/* ── ICON GRID ── */
+.icon-grid { display:grid;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.ig-2 { grid-template-columns:repeat(2,1fr); }
+.ig-3 { grid-template-columns:repeat(3,1fr); }
+.ig-4 { grid-template-columns:repeat(4,1fr); }
+.ig-card { background:var(--background-primary,#fff);padding:1.75rem 1.5rem;transition:background .2s; }
+.ig-card:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ig-card { background:#1e1e1e; }
+[data-theme="dark"] .ig-card:hover { background:#252525; }
+.ig-label { font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ca);margin-bottom:.5rem; }
+.ig-icon { font-size:1.6rem;margin-bottom:.6rem;line-height:1; }
+.ig-title { font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:.35rem;color:var(--text-primary); }
+.ig-body { font-size:.8rem;line-height:1.6;color:var(--text-secondary,#6b7280); }
+
+/* ── PROCESS TABLE ── */
+.phase-table { width:100%;border-collapse:collapse;margin-top:1.25rem; }
+.phase-table thead tr { border-bottom:2px solid rgba(0,0,0,.12); }
+[data-theme="dark"] .phase-table thead tr { border-bottom:2px solid rgba(255,255,255,.12); }
+.phase-table th {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.45;text-align:left;
+  padding:.6rem 1rem .6rem 0;
+}
+.phase-table td {
+  padding:1rem 1rem 1rem 0;border-bottom:1px solid rgba(0,0,0,.07);
+  vertical-align:top;font-size:.86rem;line-height:1.6;
+  color:var(--text-secondary,#6b7280);
+}
+[data-theme="dark"] .phase-table td { border-bottom:1px solid rgba(255,255,255,.07); }
+.phase-table td:first-child { font-weight:700;color:var(--text-primary);width:20%; }
+.phase-table tbody tr:last-child td { border-bottom:none; }
+.phase-table tbody tr:hover { background:rgba(0,0,0,.02); }
+.pt-tag {
+  display:inline-block;margin-top:.3rem;padding:.18rem .6rem;
+  border-radius:4px;font-family:var(--mono);font-size:.57rem;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.pt-a { background:var(--ct-l);color:var(--ct); }
+.pt-b { background:var(--ca-l);color:var(--ca); }
+.pt-c { background:var(--cg-l);color:var(--cg); }
+
+/* ── APPROACH STEPS ── */
+.approach-steps { display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.ap-step { background:var(--background-primary,#fff);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1.1rem;transition:background .2s; }
+.ap-step:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ap-step { background:#1e1e1e; }
+[data-theme="dark"] .ap-step:hover { background:#252525; }
+.ap-num { font-family:var(--serif);font-size:1.6rem;font-weight:900;color:var(--ca-l);line-height:1;flex-shrink:0;width:2rem;text-align:center; }
+.ap-text strong { display:block;font-size:.88rem;font-weight:600;color:var(--text-primary);margin-bottom:.1rem; }
+.ap-text span { font-size:.78rem;opacity:.65;line-height:1.5; }
+
+/* ── FINDING STACK ── */
+.finding-stack { display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.fi { background:var(--background-primary,#fff);padding:1.25rem 1.5rem;display:flex;gap:.9rem;align-items:flex-start;transition:background .2s; }
+.fi:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .fi { background:#1e1e1e; }
+[data-theme="dark"] .fi:hover { background:#252525; }
+.fi-badge { flex-shrink:0;width:32px;height:32px;border-radius:8px;background:var(--ca);display:flex;align-items:center;justify-content:center;font-size:.85rem; }
+.fi-text strong { display:block;font-size:.85rem;font-weight:600;margin-bottom:.15rem;color:var(--text-primary); }
+.fi-text span { font-size:.76rem;opacity:.65;line-height:1.5; }
+
+/* ── FRICTION LIST ── */
+.friction-list { display:flex;flex-direction:column;gap:.6rem;margin-top:1rem; }
+.friction-item {
+  display:flex;align-items:center;gap:.9rem;
+  padding:.85rem 1.1rem;border-radius:10px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid rgba(0,0,0,.07);font-size:.85rem;line-height:1.5;
+}
+[data-theme="dark"] .friction-item { background:#1e1e1e;border-color:rgba(255,255,255,.07); }
+.friction-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+.fd-red  { background:var(--ca); }
+.fd-teal { background:var(--ct); }
+.fd-green{ background:var(--cg); }
+.fd-gold { background:#B88A00; }
+
+/* ── METRIC CHIPS ── */
+.metric-chips { display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem; }
+.mc { padding:.3rem .75rem;border-radius:999px;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;border:1px solid; }
+.mc-r { background:var(--ca-l);color:var(--ca);border-color:var(--ca); }
+.mc-t { background:var(--ct-l);color:var(--ct);border-color:var(--ct); }
+.mc-g { background:var(--cg-l);color:var(--cg);border-color:var(--cg); }
+
+/* ── TESTING SPLIT ── */
+.test-split { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem; }
+.test-card { border-radius:12px;padding:1.5rem 1.4rem;border:1px solid rgba(0,0,0,.09);background:var(--background-primary,#fff); }
+[data-theme="dark"] .test-card { background:#1e1e1e;border-color:rgba(255,255,255,.1); }
+.test-card-label {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;
+  text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;
+  border-bottom:2px solid;display:inline-block;
+}
+.tc-goals .test-card-label { color:var(--ct);border-color:var(--ct); }
+.tc-results .test-card-label { color:var(--cg);border-color:var(--cg); }
+.test-item {
+  font-size:.8rem;line-height:1.65;opacity:.8;
+  display:flex;align-items:baseline;gap:.5rem;margin-bottom:.35rem;
+}
+.test-item::before { content:'→';color:var(--ca);flex-shrink:0;font-size:.75rem; }
+
+/* ── RESULT METRICS ── */
+.result-metrics { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.rm-cell { background:var(--background-primary,#fff);padding:1.75rem 1.25rem;text-align:center; }
+[data-theme="dark"] .rm-cell { background:#1e1e1e; }
+.rm-n { font-family:var(--serif);font-size:2.8rem;font-weight:900;color:var(--ca);line-height:1;margin-bottom:.25rem; }
+.rm-change { font-family:var(--mono);font-size:.7rem;color:var(--cg);letter-spacing:.06em;margin-bottom:.4rem; }
+.rm-l { font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.55;line-height:1.4; }
+
+/* ── DESIGN VERSIONS ── */
+.version-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem; }
+.ver-card {
+  border:1px solid rgba(0,0,0,.09);border-radius:12px;
+  padding:1.4rem;transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+[data-theme="dark"] .ver-card { border-color:rgba(255,255,255,.1); }
+.ver-card:hover { border-color:var(--ca);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09); }
+.ver-icon { font-size:1.4rem;margin-bottom:.6rem; }
+.ver-title { font-family:var(--serif);font-size:.92rem;font-weight:700;margin-bottom:.3rem;color:var(--text-primary); }
+.ver-desc { font-size:.76rem;line-height:1.6;opacity:.65; }
+
+/* ── LEARNINGS ── */
+.learning-row { display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem; }
+.learning-item {
+  display:flex;gap:1.1rem;align-items:flex-start;
+  padding:1.1rem 1.4rem;border-radius:10px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid rgba(0,0,0,.07);
+}
+[data-theme="dark"] .learning-item { background:#1e1e1e;border-color:rgba(255,255,255,.07); }
+.learning-num {
+  font-family:var(--serif);font-size:1.8rem;font-weight:900;
+  color:var(--ca-l);line-height:1;flex-shrink:0;
+}
+.learning-text strong { display:block;font-size:.9rem;font-weight:600;margin-bottom:.15rem;color:var(--text-primary); }
+.learning-text span { font-size:.78rem;opacity:.65;line-height:1.5; }
+
+/* ── REFLECTION BAND ── */
+.reflection-band {
+  background:var(--ink);color:#fff;
+  margin:clamp(2rem,4vw,3.5rem) 0 0;
+  padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem);
+}
+.ref-inner { max-width:860px;margin:0 auto; }
+.ref-qmark { font-family:var(--serif);font-size:6rem;line-height:.5;color:var(--ca);opacity:.3;margin-bottom:1.5rem; }
+.ref-quote { font-family:var(--serif);font-size:clamp(1.2rem,2.3vw,1.6rem);font-style:italic;line-height:1.55;margin-bottom:2.5rem; }
+.outcome-row { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem; }
+.outcome { padding:1.5rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1); }
+.outcome-icon { font-size:1.4rem;margin-bottom:.6rem; }
+.outcome-text { font-size:.82rem;line-height:1.6;opacity:.7; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+  .split,.test-split { grid-template-columns:1fr; }
+  .ig-4,.version-grid { grid-template-columns:repeat(2,1fr); }
+  .ig-3 { grid-template-columns:1fr 1fr; }
+  .result-metrics { grid-template-columns:1fr 1fr; }
+  .outcome-row { grid-template-columns:1fr; }
+}
+@media(max-width:560px){
+  .stat-strip { grid-template-columns:1fr; }
+  .ig-2,.ig-3,.ig-4,.version-grid { grid-template-columns:1fr; }
+  .result-metrics { grid-template-columns:1fr; }
+  .meta-row { gap:1.25rem; }
+}
+</style>
 </head>
 
-<!-- Google tag (gtag.js) -->
+<!-- GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K1W60XD1FJ');
-</script>
-
-<!-- Custom GA event for page title and screen class -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var pageTitle = document.title;
-        var screenClass = document.body.className || 'default';
-        gtag('event', 'page_view_details', {
-            'page_title': pageTitle,
-            'screen_class': screenClass
-        });
-    });
+  gtag('js',new Date());gtag('config','G-K1W60XD1FJ');
+  document.addEventListener('DOMContentLoaded',function(){
+    gtag('event','page_view_details',{'page_title':document.title,'screen_class':document.body.className||'default'});
+  });
 </script>
 
 <body>
+<div id="cp"></div>
 
-<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
+<!-- Header -->
 <header>
-    <a href="../index.html" class="logo-link">
-        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
-    </a>
-    <div class="header-right">
-        <nav>
-            <ul>
-                <li><a href="../index.html#work">Projects</a></li>
-                <li><a href="../academic.html">Academia</a></li>
-                <li><a href="../about-me.html">About Me</a></li>            
-                <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
-                <li><a href="../about/Persian.html">پارسی</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </div>
+  <a href="../index.html" class="logo-link">
+    <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+  </a>
+  <div class="header-right">
+    <nav><ul>
+      <li><a href="../index.html#work">Projects</a></li>
+      <li><a href="../academic.html">Academia</a></li>
+      <li><a href="../about-me.html">About Me</a></li>
+      <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer"
+         onclick="gtag('event','resume_click',{'event_category':'navigation','event_label':'Resume Nav'});">Resume</a></li>
+      <li><a href="../about/Persian.html">پارسی</a></li>
+    </ul></nav>
+    <button class="theme-toggle" id="theme-toggle"><span class="theme-icon">🌙</span></button>
+  </div>
 </header>
 
-<!-- Main content -->
 <main>
-    <!-- Hero Section -->
-        <!-- <nav class="page-navigation">
-        <a href="/projects/downtown-radiology.html" class="nav-btn nav-prev">← Prev: Downtown Radiology</a>
-        <a href="/case-studies/off-app.html" class="nav-btn nav-next"> Next: Off App →</a>
-    </nav> -->
-    <section class="case-study-hero">
-        <div class="hero-cover-image">
-            <img src="../image/seizure/Case Study Cover Image.png" alt="seizure Case Study Cover" />
-        </div>
-            <h1>Seizure-Action-Plan</h1>
-            <p class="subtitle">Value-Centric UX Research & Design for Rapid Pediatric Seizure Response </p>
 
-            
-            <div class="project-meta">
-                <div class="meta-item">
-                    <strong>Role</strong>
-                    <span>UX Researcher & Designer</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Timeline</strong>
-                    <span>4 months</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Team</strong>
-                    <span>Data Analyst · Content Strategist · Product Owner</span>
-                </div>
+<!-- ══ COVER ══ -->
+<div class="hero-cover-image rv">
+  <img src="../image/seizure/Case Study Cover Image.png" alt="Seizure Action Plan Cover">
+</div>
 
-                <div class="meta-item">
-                    <strong>Tools</strong>
-                    <span>Business Model Canvas · Figma · Maze · Journey Mapping · Interview · affinity diagramming </span>
-                </div>
-            </div>
-        </div>
-        
-    </section>
+<!-- ══ HERO ══ -->
+<section class="case-study-hero rv">
+  <div class="sap-eye">
+    <div class="sap-eye-line"></div>
+    <span>UX Research & Design · Pediatric Health · BC Children's Hospital</span>
+  </div>
 
-    <!-- Overview -->
-    <section class="content-section">
-        <h2>About the Project</h2>
-        <p>SAP (Seizure Action Plan) is a mobile health application that securely hosts patient-specific seizure action plans to support caregivers, educators, and clinicians in responding to seizures effectively (for BC children Hospital patients).
-        <br>The platform ensures every child's care plan is accessible anytime, anywhere ,when seconds matter most.</p>
-        
-        <!-- Planning & Product Mapping -->
-        <h3>Design Process Overview</h3>            
-            <table class="thematic-insights-table">
-                <thead>
-                    <tr>
-                        <th>Phase</th>
-                        <th>Focus</th>
-                        <th>Key Outcome</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Planning</strong></td>
-                        <td>Page & flow mapping, feature inventory, defining goals
-                        </td>
-                        <td>Structured product map & prioritized evaluation plan
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Research & Audit</strong></td>
-                        <td>Stakeholder and caregiver interviews, heuristic review
-                        </td>
-                        <td>Pain points in readability & decision-making speed
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Value Prioritization</strong></td>
-                        <td>Assigning importance weights to features
-                        </td>
-                        <td>Aligned user and stakeholder goals (BCCH & caregivers)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ideation & Design</strong></td>
-                        <td>UX redesign of the Action Plan Flow</td>
-                        <td>Two design versions for testing</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Testing & Refinement</strong></td>
-                        <td>Behavioral A/B testing via Maze (50 users)</td>
-                        <td>Reduced reading time & unnecessary 911 calls</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Future Phase</strong></td>
-                        <td>Digital nudges & decision support</td>
-                        <td>Improved focus and reduced task friction</td>
-                    </tr>
-                </tbody>
-            </table>
-            <section class="hero-cover-image">
-        <img src="../image/diamond/reverse.png" alt="screenshot" />
-    </section>
-        </section>
-        <!-- Figure 1-->
-    <section class="hero-cover-image">
-        <img src="../image/seizure/1.png" alt="screenshot" />
-    </section>
+  <h1>Seizure<br><em>Action Plan</em></h1>
+  <p class="hero-sub">Value-centric UX research and design for rapid pediatric seizure response — when seconds matter most.</p>
 
-    <!-- Phase 1 -->
-        
-        <section class="content-section">
-            <h2>Phase 1 : Planning & Product Mapping</h2>
-            <p>The project began with systematic planning of all pages, user flows, and app structure, listing every feature and its intended purpose.
-            <br>
-            We adopted a value-centric design evaluation approach, aligning product goals with the stakeholder's mission (BC Children's Hospital) whose priorities mirrored those of caregivers: clarity, speed, and safety.</p>
-                <div class="features-list">
-                    <div class="feature">
-                        <h3>Activities</h3>
-                        <ul><li>Created a complete application sitemap and feature list.</li>
-                            <li>Defined user journeys across roles (clinician, caregiver, educator).</li>
-                            <li>Evaluated the product through a value hierarchy: assigning numerical weights to each goal according to its clinical and user significance.</li>
-                            <li>Identified the primary user goal:
-                                “Access, understand, and act on the child's personalized seizure plan and call 911 only when necessary.”</li>
-                            </ul></p>
-                    </div>
-                </div>
-        
-    </section>
-
-    <!-- Figure 2 -->
-    <section class="hero-cover-image">
-        <img src="../image/seizure/2.png" alt="app flow" />
-    </section>
-
-    <!-- Phase 2 -->
-    <section class="content-section">
-        <h2>Phase 2 : Research & Audit</h2>
-        
-        <p>Interviewing 20 caregivers to find out their thoughts, concerns and needs. listing the information in a organized affinity map and clustering them</p>
-       
-        
-        <div class="insight-box" style="background: linear-gradient(135deg, #374151 0%, #1f2937 100%);">
-            <h3>🔻 Key Findings Problems</h3>
-            <ul style="color: white; margin: 0;">
-                <li>Complex, text-heavy layouts delayed comprehension of urgent steps.</li>
-                <li>Main CTA (“Call 911”) visually competed with non-critical options.</li>
-                <li>Lack of structure for personal plan data led to user confusion and overreaction.</li>
-                <li>High number of unnecessary emergency calls traced to poor UI hierarchy and missing visual cues.</li>
-            </ul>
-            <small>in next figure you can see them as P icon in Yellow</small>
-        </div>
-    </section>
-     
-     <!-- Figure 3: About the Project -->
-      <section class="hero-cover-image">
-        <img src="../image/seizure/3.png" alt="user emotion map" />
-    </section>
-
-  <!-- Phase 3 -->
-  <section class="content-section">
-    <h2>Phase 3 : Value Prioritization & Core Goal Definition</h2>
-    <p>After mapping all features and flows, each goal was rated by importance based on:
-    </p>
-        <ul>
-            <li>Stakeholder priorities (BCCH clinical protocols)</li>
-            <li>User goals (caregiver clarity and rapid access)</li>
-            <li>Risk level (impact on safety and time-sensitivity)</li>
-    <p><b>🔻Top-Rated Value Goal:</b>
-        <br>
-        Enable caregivers to read and act on the personalized seizure plan quickly <b>(speed)</b> and call 911 only if the plan fails. <b>(readability)</b></p>
-        <small>in next figure you can see them as G icon in Blue and the proxy mesuarement in Red</small>
-  </section>
-   <!-- Figure 4: Challenge -->
-        <section class="hero-cover-image">
-            <img src="../image/seizure/4.png" alt="value, goal, feature map" />
-        </section> 
-
-    <!-- Phase 4 -->
-    <section class="content-section">
-        <h2>Phase 4 : Ideation & Design Direction</h2>
-        <p><em>Based on insights and value mapping, the design team brainstormed ways to:</em> </p>
-        <ul><li> Improve visibility and accessibility of the primary CTA.</li>
-        <li>Simplify the Seizure Action Plan reading experience.</li>
-        <li>Support dual-system decision-making (fast vs. deliberate thinking).</li>
-        <li>Clarify thresholds (when to intervene vs. when to call 911). 
-        <br>
-        <small>(all proposed value are in green color mapped in figure above and in brain stroming we focused on finding more valuable answer for each problem for eaching the goals).</small>
-    </li></ul>       
-   
-        
-        <div class="research-grid">
-            <div class="research-card">
-                <h3>Eight design versions were developed for comparative testing:</h3>
-                <ul>
-                    <li>Color cues and more contrast</li>
-                    <li>Different call to action button position</li>
-                    <li>Minimal hierarchy</li>
-                    <li>New logo design for reduce missclick</li>
-                    <li>Button shadowe and size change</li>
-                    <li>Affordance rule follow</li>
-                </ul>
-            </div>
-        </div>
-        <div><p>After many review on new designs with the lens of the goals, problem and values , Two design versions were choose and developed for comparative testing.</p></div>
-            
-    </section>
-    <!-- Figure 5: versions -->
-            <section class="hero-cover-image">
-                <img src="../image/seizure/5.png" alt="brainstorm" />
-            </section> 
-            
-     <!-- Phase 5 -->
-    <section class="content-section">
-            <h2>Phase 5 : User Testing (Maze)</h2>
-            <p>To evaluate behavior and comprehension, both versions were tested with 50 participants (caregivers and general users simulating caregiver roles).</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 2rem;">
-            <div style="background: #f9fafb; padding: 2rem; border-radius: 1rem; border-left: 4px solid #3b82f6;">
-                <h3 style="color: #3b82f6; margin-top: 0;">Testing Goals</h3>
-                <ul style="color: #6b7280; line-height: 1.8;">
-                    <li>Measure <strong>time-to-CTA</strong> and <strong>reading duration</strong>for personalized plan data.</li>
-                    <li>Observe task success under time constraints.</li>
-                    <li><strong>Analyze error rates</strong>and cognitive detours (e.g., incorrect 911 calls).</li>
-                </ul>
-            </div>
-            
-            <div style="background: #f9fafb; padding: 2rem; border-radius: 1rem; border-left: 4px solid #10b981;">
-                <h3 style="color: #10b981; margin-top: 0;">Results</h3>
-                <ul style="color: #6b7280; line-height: 1.8;">
-                    <li>Average reading time <u>reduced significantly</u>, improving response speed.</li>
-                    <li><u>Fewer unnecessary 911 calls</u> reported in follow-up analysis.</li>
-                    <li>Version B achieved higher comprehension and faster task completion.</li>
-                    <li>Caregivers reported greater confidence in following the plan accurately.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- Figure 7: design -->
-        <section class="hero-cover-image">
-            <img src="../image/seizure/6.png" alt="new version design" />
-        </section> 
-        
-        <!-- Phase 6 -->
-    <section class="content-section">
-            <h2>Phase 6 : Refinement & Next Steps</h2>
-            <p>Post-testing, the design evolved into a value-centric system emphasizing readability, safety, and personalization.</p>
-            <h3>Upcoming Enhancements</h3>
-            <ul style="color: #6b7280; line-height: 1.8;">
-                <li><strong>Digital Nudges:</strong> Subtle prompts to sustain user attention and guide dual-system thinking (e.g., color feedback, defaults for high-stress actions).</li>
-                <li><strong>Default Settings:</strong> Pre-filled thresholds to reduce decision-making time.</li>
-                <li><strong>Contextual cues:</strong> Visual reinforcements that help caregivers verify correctness under stress</li>
-                <li><strong>Behavioral analytics:</strong> Future tracking of task flow and dwell time.</li>
-            </ul>
-    </section> 
-    <section class="hero-cover-image">
-                <img src="../image/seizure/7.png" alt="next test plan" />
-                
-            </section> 
-           
-  <!-- Testing Results -->
-<section class="content-section">
-    <h2>Measured & Projected usability changes</h2>
-    
-    <div class="results-grid">
-        <div class="result-card">
-            <div class="result-number">🎯</div>
-            <h3>Reading time for action plan</h3>
-            <p> Before: ~45 sec
-                <br>Aftre: ~25 sec
-                <br>Change: ↓ 44 %</p>
-        </div>
-        <div class="result-card">
-            <div class="result-number">🎯</div>
-            <h3>Unnecessary 911 calls</h3>
-            <p> Before: High frequency
-                <br>Aftre: Significantly reduced
-                <br>Change: ↓ 35 % (pilot phase)
-            </p>
-        </div>
-
-        <div class="result-card">
-            <div class="result-number">🎯</div>
-            <h3>Task success (open plan quickly)</h3>
-            <p> Before: 58 %
-                <br>Aftre: 91 %
-                <br>Change: ↑ 33 pts</p>
-        </div>
+  <div class="meta-row">
+    <div class="meta-col">
+      <strong>Role</strong>
+      <span>UX Researcher & Designer</span>
     </div>
-     <h2>Reflection</h2>
-        <p>This project demonstrated how <strong>value-centric research</strong> and behavioral analysis design thinking can align institutional and user priorities.
-        By connecting clinical safety, UX accessibility, and decision psychology, the SAP redesign turned a static medical document into a responsive digital tool for life-saving care.</p>
-        
-        
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <div>
-                    <h3>Value prioritization sharpens design focus in health UX.</h3>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <div>
-                    <h3>Time-to-comprehension is a critical metric in emergency contexts.
-                    </h3>
-                </div>
-            </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <div>
-                    <h3>Digital nudges can bridge the gap between intent and action.</h3>
-                </div>
-            </div>
-            <h3><B>“Each second saved is a life-saving opportunity design can make that difference.”</B></h3>
-            
+    <div class="meta-col">
+      <strong>Timeline</strong>
+      <span>4 months</span>
+    </div>
+    <div class="meta-col">
+      <strong>Team</strong>
+      <span>Data Analyst · Content Strategist · Product Owner</span>
+    </div>
+    <div class="meta-col">
+      <strong>Tools</strong>
+      <div class="chip-row">
+        <span class="chip">Figma</span>
+        <span class="chip">Maze</span>
+        <span class="chip">Journey Mapping</span>
+        <span class="chip">Interviews</span>
+        <span class="chip">Affinity Diagramming</span>
+        <span class="chip">Business Model Canvas</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-strip rv">
+    <div class="stat-cell">
+      <div class="stat-n">44%</div>
+      <div class="stat-l">Faster reading time</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">35%</div>
+      <div class="stat-l">Fewer unnecessary 911 calls</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">91%</div>
+      <div class="stat-l">Task success rate</div>
+    </div>
+  </div>
 </section>
 
 
+<!-- ══ ABOUT ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">00</span>
+    <h2>About the Project</h2>
+  </div>
+
+  <div class="icon-grid ig-4">
+    <div class="ig-card">
+      <div class="ig-label">Platform</div>
+      <div class="ig-icon">📱</div>
+      <div class="ig-title">SAP Mobile App</div>
+      <div class="ig-body">A mobile health app that securely hosts patient-specific seizure action plans for BC Children's Hospital patients.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Users</div>
+      <div class="ig-icon">👨‍👩‍👧</div>
+      <div class="ig-title">Caregivers, Educators & Clinicians</div>
+      <div class="ig-body">Three distinct roles who need fast, accurate access to a child's care plan — anytime, anywhere.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Problem</div>
+      <div class="ig-icon">⏱</div>
+      <div class="ig-title">Seconds Matter</div>
+      <div class="ig-body">Complex, text-heavy layouts delayed comprehension of urgent steps — leading to unnecessary 911 calls.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Method</div>
+      <div class="ig-icon">🎯</div>
+      <div class="ig-title">Value-Centric Design</div>
+      <div class="ig-body">Assigned numerical importance weights to features, aligning clinical safety goals with caregiver needs.</div>
+    </div>
+  </div>
+</section>
 
 
-    <nav class="page-navigation">
-        <a href="/projects/downtown-radiology.html" class="nav-btn nav-prev">← Prev: Downtown Radiology</a>
-        <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
-        <a href="/case-studies/off-app.html" class="nav-btn nav-next"> Next: Off App →</a>
-    </nav>
+<!-- ══ DESIGN PROCESS TABLE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">→</span>
+    <h2>Design Process Overview</h2>
+  </div>
+
+  <table class="phase-table">
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>Focus</th>
+        <th>Key Outcome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Planning<br><span class="pt-tag pt-a">01</span></td>
+        <td>Page & flow mapping, feature inventory, defining goals</td>
+        <td>Structured product map & prioritized evaluation plan</td>
+      </tr>
+      <tr>
+        <td>Research<br><span class="pt-tag pt-b">02</span></td>
+        <td>Stakeholder and caregiver interviews, heuristic review</td>
+        <td>Pain points in readability & decision-making speed</td>
+      </tr>
+      <tr>
+        <td>Prioritization<br><span class="pt-tag pt-a">03</span></td>
+        <td>Assigning importance weights to features</td>
+        <td>Aligned user and stakeholder goals (BCCH & caregivers)</td>
+      </tr>
+      <tr>
+        <td>Ideation<br><span class="pt-tag pt-c">04</span></td>
+        <td>UX redesign of the Action Plan Flow</td>
+        <td>Eight versions developed → two selected for testing</td>
+      </tr>
+      <tr>
+        <td>Testing<br><span class="pt-tag pt-b">05</span></td>
+        <td>Behavioral A/B testing via Maze (50 users)</td>
+        <td>Reduced reading time & unnecessary 911 calls</td>
+      </tr>
+      <tr>
+        <td>Future<br><span class="pt-tag pt-c">06</span></td>
+        <td>Digital nudges & decision support</td>
+        <td>Improved focus and reduced task friction</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- Diamond / process image -->
+<!-- <div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/diamond/reverse.png" alt="Design process diagram">
+</div> -->
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/seizure/1.png" alt="App overview">
+</div>
+
+
+<!-- ══ PHASE 1 ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">01</span>
+    <h2>Planning &amp; Product Mapping</h2>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <p>Systematic mapping of all pages, user flows, and app structure — every feature listed with its intended purpose before any design decisions were made.</p>
+      <p>A value hierarchy assigned <strong>numerical weights</strong> to each goal based on clinical and user significance.</p>
+    </div>
+    <div>
+      <div class="pullquote">Primary user goal: access, understand, and act on the child's seizure plan — and call 911 only when necessary.</div>
+    </div>
+  </div>
+
+  <div class="approach-steps">
+    <div class="ap-step">
+      <div class="ap-num">🗺</div>
+      <div class="ap-text">
+        <strong>Complete Application Sitemap</strong>
+        <span>Full feature list with purpose and priority level for every screen.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">👤</div>
+      <div class="ap-text">
+        <strong>Role-Based User Journeys</strong>
+        <span>Mapped flows for clinicians, caregivers, and educators — three distinct mental models.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">⚖️</div>
+      <div class="ap-text">
+        <strong>Value Hierarchy Framework</strong>
+        <span>Numerical weights assigned to each goal by clinical significance and time-sensitivity.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-chips">
+    <span class="mc mc-r">Speed</span>
+    <span class="mc mc-r">Readability</span>
+    <span class="mc mc-t">Safety</span>
+    <span class="mc mc-t">Clarity</span>
+    <span class="mc mc-g">Personalization</span>
+    <span class="mc mc-g">Accessibility</span>
+  </div>
+</section>
+
+
+<!-- App flow image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/seizure/2.png" alt="App user flow">
+</div>
+
+
+<!-- ══ PHASE 2 ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">02</span>
+    <h2>Research &amp; Audit</h2>
+  </div>
+
+  <p style="font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:1.25rem;">Interviewed <strong>20 caregivers</strong> to surface real concerns, mental models, and needs. Findings clustered via affinity mapping.</p>
+
+  <div class="finding-stack">
+    <div class="fi">
+      <div class="fi-badge">📖</div>
+      <div class="fi-text">
+        <strong>Text-Heavy Layouts Delayed Response</strong>
+        <span>Complex, dense layouts slowed comprehension of the most urgent steps during a seizure event.</span>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="fi-badge">🔴</div>
+      <div class="fi-text">
+        <strong>CTA Competed with Non-Critical Options</strong>
+        <span>The "Call 911" button visually competed with lower-priority actions — leading to confusion under stress.</span>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="fi-badge">🗂</div>
+      <div class="fi-text">
+        <strong>No Structure for Personal Plan Data</strong>
+        <span>Lack of visual hierarchy for individualized care data caused user confusion and emotional overreaction.</span>
+      </div>
+    </div>
+    <div class="fi">
+      <div class="fi-badge">📞</div>
+      <div class="fi-text">
+        <strong>Unnecessary Emergency Calls</strong>
+        <span>High rate of unneeded 911 calls traced directly to poor UI hierarchy and missing visual cues.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Emotion map -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/seizure/3.png" alt="User emotion map">
+</div>
+
+
+<!-- ══ PHASE 3 ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">03</span>
+    <h2>Value Prioritization</h2>
+  </div>
+
+  <div class="split">
+    <div>
+      <p style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:.75rem;">Rating dimensions</p>
+      <div class="friction-list">
+        <div class="friction-item">
+          <span class="friction-dot fd-red"></span>
+          <strong>Clinical protocols</strong> — BCCH stakeholder priorities
+        </div>
+        <div class="friction-item">
+          <span class="friction-dot fd-teal"></span>
+          <strong>Caregiver clarity</strong> — speed of understanding
+        </div>
+        <div class="friction-item">
+          <span class="friction-dot fd-gold"></span>
+          <strong>Risk level</strong> — safety and time-sensitivity impact
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="pullquote">Top-rated goal: enable caregivers to read and act on the seizure plan quickly — and call 911 only if the plan fails.</div>
+      <div style="margin-top:.75rem;">
+        <span class="mc mc-r">Speed</span>&nbsp;
+        <span class="mc mc-t">Readability</span>&nbsp;
+        <span class="mc mc-g">Safety</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Value/goal map -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/seizure/4.png" alt="Value goal feature map">
+</div>
+
+
+<!-- ══ PHASE 4 ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">04</span>
+    <h2>Ideation &amp; Design Direction</h2>
+  </div>
+
+  <p style="font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:1.5rem;">Eight versions developed across six design dimensions. Two were selected for A/B testing based on value-goal alignment.</p>
+
+  <div class="version-grid">
+    <div class="ver-card">
+      <div class="ver-icon">🎨</div>
+      <div class="ver-title">Colour Cues & Contrast</div>
+      <div class="ver-desc">High-contrast visual hierarchy to separate urgent from non-urgent actions at a glance.</div>
+    </div>
+    <div class="ver-card">
+      <div class="ver-icon">📍</div>
+      <div class="ver-title">CTA Repositioning</div>
+      <div class="ver-desc">Tested different placements of the primary action button to reduce accidental taps.</div>
+    </div>
+    <div class="ver-card">
+      <div class="ver-icon">🧱</div>
+      <div class="ver-title">Minimal Hierarchy</div>
+      <div class="ver-desc">Stripped-back layouts showing only what's needed at each step of the response flow.</div>
+    </div>
+    <div class="ver-card">
+      <div class="ver-icon">🔖</div>
+      <div class="ver-title">New Logo Design</div>
+      <div class="ver-desc">Redesigned app icon to reduce misclicks during high-stress emergency situations.</div>
+    </div>
+    <div class="ver-card">
+      <div class="ver-icon">🖱</div>
+      <div class="ver-title">Button Size & Shadow</div>
+      <div class="ver-desc">Larger touch targets with depth cues following affordance principles for stress scenarios.</div>
+    </div>
+    <div class="ver-card">
+      <div class="ver-icon">🧠</div>
+      <div class="ver-title">Dual-System Thinking</div>
+      <div class="ver-desc">Supports both fast (intuitive) and deliberate decision-making within the same interface.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Brainstorm image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/seizure/5.png" alt="Design versions brainstorm">
+</div>
+
+
+<!-- ══ PHASE 5 ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">05</span>
+    <h2>User Testing</h2>
+  </div>
+
+  <p style="font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:1.5rem;"><strong>50 participants</strong> — caregivers and general users simulating caregiver roles — tested both versions via Maze under time constraints.</p>
+
+  <div class="test-split">
+    <div class="test-card tc-goals">
+      <div class="test-card-label">Testing Goals</div>
+      <div class="test-item">Measure <strong>time-to-CTA</strong> and reading duration for personalized plan data</div>
+      <div class="test-item">Observe task success under time constraints</div>
+      <div class="test-item">Analyze <strong>error rates</strong> and cognitive detours (incorrect 911 calls)</div>
+    </div>
+    <div class="test-card tc-results">
+      <div class="test-card-label">Results</div>
+      <div class="test-item">Average reading time <strong>reduced by 44%</strong></div>
+      <div class="test-item">Unnecessary 911 calls <strong>down 35%</strong> in pilot phase</div>
+      <div class="test-item">Version B: higher comprehension & faster task completion</div>
+      <div class="test-item">Caregivers reported <strong>greater confidence</strong> following the plan</div>
+    </div>
+  </div>
+
+  <!-- Result metrics -->
+  <div class="result-metrics">
+    <div class="rm-cell">
+      <div class="rm-n">44%</div>
+      <div class="rm-change">↓ Before: ~45s → After: ~25s</div>
+      <div class="rm-l">Reading time for action plan</div>
+    </div>
+    <div class="rm-cell">
+      <div class="rm-n">35%</div>
+      <div class="rm-change">↓ Pilot phase reduction</div>
+      <div class="rm-l">Unnecessary 911 calls</div>
+    </div>
+    <div class="rm-cell">
+      <div class="rm-n">91%</div>
+      <div class="rm-change">↑ From 58% baseline</div>
+      <div class="rm-l">Task success rate</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- New design image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/seizure/6.png" alt="New design versions">
+</div>
+
+
+<!-- ══ PHASE 6 ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">06</span>
+    <h2>Refinement &amp; Next Steps</h2>
+  </div>
+
+  <div class="icon-grid ig-2">
+    <div class="ig-card">
+      <div class="ig-label">Upcoming</div>
+      <div class="ig-icon">🔔</div>
+      <div class="ig-title">Digital Nudges</div>
+      <div class="ig-body">Subtle prompts to sustain attention and guide dual-system thinking — colour feedback and stress-aware defaults for high-stakes actions.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Upcoming</div>
+      <div class="ig-icon">⚙️</div>
+      <div class="ig-title">Smart Defaults</div>
+      <div class="ig-body">Pre-filled thresholds to reduce decision-making time. Contextual visual cues to help caregivers verify correctness under stress.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Upcoming</div>
+      <div class="ig-icon">👁</div>
+      <div class="ig-title">Contextual Cues</div>
+      <div class="ig-body">Visual reinforcements helping caregivers confirm they are following the right steps — reducing second-guessing in critical moments.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Upcoming</div>
+      <div class="ig-icon">📊</div>
+      <div class="ig-title">Behavioral Analytics</div>
+      <div class="ig-body">Future tracking of task flow and dwell time to surface where users hesitate and further optimize the response sequence.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Next test plan -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/seizure/7.png" alt="Next test plan">
+</div>
+
+
+<!-- ══ REFLECTION ══ -->
+<div class="reflection-band rv">
+  <div class="ref-inner">
+    <div class="ref-qmark">"</div>
+    <div class="ref-quote">Each second saved is a life-saving opportunity — design can make that difference.</div>
+
+    <div class="outcome-row">
+      <div class="outcome">
+        <div class="outcome-icon">⚖️</div>
+        <div class="outcome-text">Value-centric research aligns institutional and user priorities — sharpening design focus in high-stakes health contexts</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">⏱</div>
+        <div class="outcome-text">Time-to-comprehension is a critical UX metric in emergency contexts — every second of friction costs real-world safety</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">🧠</div>
+        <div class="outcome-text">Digital nudges bridge the gap between intent and action — turning a static medical document into a responsive care tool</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page nav -->
+<nav class="page-navigation">
+  <a href="/projects/downtown-radiology.html" class="nav-btn nav-prev">← Prev: Downtown Radiology</a>
+  <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
+  <a href="/case-studies/off-app.html" class="nav-btn nav-next">Next: Off App →</a>
+</nav>
 
 </main>
 
 <script>
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
-const currentTheme = localStorage.getItem('theme') || 'light';
-const themeIcon = themeToggle.querySelector('.theme-icon');
-htmlElement.setAttribute('data-theme', currentTheme);
-themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('cp').style.width = pct + '%';
+  });
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-});
+  // Scroll reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// Prevent image downloads
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
+  // Theme toggle
+  const tt = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const ti = tt.querySelector('.theme-icon');
+  const th = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', th);
+  ti.textContent = th === 'dark' ? '☀️' : '🌙';
+  tt.addEventListener('click', () => {
+    const n = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', n);
+    localStorage.setItem('theme', n);
+    ti.textContent = n === 'dark' ? '☀️' : '🌙';
+  });
 
-// Prevent drag and drop of images
-document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// Disable right-click on images
-const images = document.querySelectorAll('img');
-images.forEach(img => {
-    img.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-});
+  // Image protection
+  document.addEventListener('contextmenu', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.addEventListener('dragstart', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.querySelectorAll('img').forEach(img => img.addEventListener('contextmenu', e => e.preventDefault()));
 </script>
 
-<!-- Footer: Social links and copyright -->
 <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="https://dribbble.com/shahrzading">Dribbble</a>
-      </p>
-    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+  <p>
+    <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+    <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+    <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+    <a href="https://dribbble.com/shahrzading">Dribbble</a>
+  </p>
+  <p><small>&copy; Code &amp; Design by Shahrzad Jafari</small></p>
 </footer>
-
 </body>
 </html>
-

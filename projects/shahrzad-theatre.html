@@ -11,203 +11,632 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS (same as CATT) ── */
+:root {
+  --ca: #C94B2E;
+  --ca-l: #F2D5CC;
+  --ct: #2A6B6E;
+  --ct-l: #D4EAEB;
+  --cg: #4A6B1A;
+  --cg-l: #E4EDD0;
+  --ink: #1C1C1E;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+}
+
+/* ── PROGRESS ── */
+#cp { position:fixed;top:0;left:0;height:3px;background:var(--ca);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear; }
+
+/* ── REVEAL ── */
+.rv { opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease; }
+.rv.on { opacity:1;transform:none; }
+
+/* ── HERO ── */
+.case-study-hero {
+  max-width:860px;margin:0 auto;
+  padding:3.5rem clamp(1.25rem,4vw,3rem) 2.5rem;
+  text-align:left;
+}
+.st-eye { display:flex;align-items:center;gap:.75rem;margin-bottom:1.4rem; }
+.st-eye-line { flex:0 0 32px;height:2px;background:var(--ct);border-radius:2px; }
+.st-eye span {
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ct);
+}
+.case-study-hero h1 {
+  font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:.7rem;
+}
+.case-study-hero h1 em { font-style:italic;color:var(--ca); }
+.hero-sub { font-size:1rem;line-height:1.75;opacity:.7;max-width:580px; }
+
+/* ── META ROW ── */
+.meta-row {
+  display:flex;gap:2.5rem;flex-wrap:wrap;
+  margin-top:1.75rem;padding-top:1.5rem;
+  border-top:1px solid var(--border-color,#e5e7eb);
+}
+.meta-col { display:flex;flex-direction:column;gap:.25rem; }
+.meta-col strong {
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.5;
+}
+.meta-col span { font-size:.92rem;font-weight:500;line-height:1.45; }
+
+/* ── CHIPS ── */
+.chip-row { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem; }
+.chip {
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;
+  padding:.22rem .65rem;border-radius:999px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid var(--border-color,#e5e7eb);
+  color:var(--text-secondary,#6b7280);white-space:nowrap;
+}
+
+/* ── STAT STRIP ── */
+.stat-strip {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:16px;overflow:hidden;margin:2.5rem 0 0;
+}
+.stat-cell { background:var(--ct);color:#fff;padding:2rem 1.5rem;text-align:center; }
+.stat-cell:nth-child(2){ background:var(--ca); }
+.stat-cell:nth-child(3){ background:var(--ink); }
+.stat-n { font-family:var(--serif);font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.3rem; }
+.stat-l { font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75; }
+
+/* ── SECTION WRAPPER ── */
+.cs {
+  max-width:860px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  padding:2.25rem clamp(1.5rem,3vw,2.5rem);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);border-radius:14px;
+}
+[data-theme="dark"] .cs { background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09); }
+
+.sh { display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.5rem; }
+.sn { font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;color:var(--ca);flex-shrink:0; }
+.sh h2 { font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;margin:0;line-height:1.15; }
+
+/* ── PULL QUOTE ── */
+.pullquote {
+  font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);
+  font-style:italic;line-height:1.55;
+  padding:.75rem 0 .75rem 1.5rem;
+  border-left:3px solid var(--ca);
+  color:var(--text-primary);margin:1.25rem 0;
+}
+
+/* ── SPLIT ── */
+.split { display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;margin-top:1.5rem; }
+.split-text p { font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:.75rem; }
+
+/* ── ICON GRID ── */
+.icon-grid { display:grid;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.ig-2 { grid-template-columns:repeat(2,1fr); }
+.ig-3 { grid-template-columns:repeat(3,1fr); }
+.ig-4 { grid-template-columns:repeat(4,1fr); }
+.ig-card { background:var(--background-primary,#fff);padding:1.75rem 1.5rem;transition:background .2s; }
+.ig-card:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ig-card { background:#1e1e1e; }
+[data-theme="dark"] .ig-card:hover { background:#252525; }
+.ig-label { font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ca);margin-bottom:.5rem; }
+.ig-icon { font-size:1.6rem;margin-bottom:.6rem;line-height:1; }
+.ig-title { font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:.35rem;color:var(--text-primary); }
+.ig-body { font-size:.8rem;line-height:1.6;color:var(--text-secondary,#6b7280); }
+
+/* ── APPROACH STEPS ── */
+.approach-steps { display:flex;flex-direction:column;gap:1px;background:rgba(0,0,0,.07);border-radius:14px;overflow:hidden;margin-top:1.5rem; }
+.ap-step { background:var(--background-primary,#fff);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1.1rem;transition:background .2s; }
+.ap-step:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .ap-step { background:#1e1e1e; }
+[data-theme="dark"] .ap-step:hover { background:#252525; }
+.ap-num { font-family:var(--serif);font-size:1.6rem;font-weight:900;color:var(--ca-l);line-height:1;flex-shrink:0;width:2rem;text-align:center; }
+.ap-text strong { display:block;font-size:.88rem;font-weight:600;color:var(--text-primary);margin-bottom:.1rem; }
+.ap-text span { font-size:.78rem;opacity:.65;line-height:1.5; }
+
+/* ── COLOUR PRINCIPLE CARDS ── */
+.colour-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem;
+}
+.colour-card {
+  border-radius:12px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.09);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+[data-theme="dark"] .colour-card { border-color:rgba(255,255,255,.1); }
+.colour-card:hover { transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09);border-color:var(--ca); }
+.colour-swatch { height:56px; }
+.sw-1 { background:#1a1a1a; }
+.sw-2 { background:#8B4A3C; }
+.sw-3 { background:#C4A882; }
+.colour-body { padding:1.1rem 1.3rem;background:var(--background-primary,#fff); }
+[data-theme="dark"] .colour-body { background:#1e1e1e; }
+.colour-title { font-family:var(--serif);font-size:.9rem;font-weight:700;margin-bottom:.3rem;color:var(--text-primary); }
+.colour-desc { font-size:.75rem;line-height:1.6;opacity:.65; }
+
+/* ── FRICTION LIST ── */
+.friction-list { display:flex;flex-direction:column;gap:.6rem;margin-top:1rem; }
+.friction-item {
+  display:flex;align-items:center;gap:.9rem;
+  padding:.85rem 1.1rem;border-radius:10px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid rgba(0,0,0,.07);font-size:.85rem;line-height:1.5;
+}
+[data-theme="dark"] .friction-item { background:#1e1e1e;border-color:rgba(255,255,255,.07); }
+.friction-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+.fd-red  { background:var(--ca); }
+.fd-teal { background:var(--ct); }
+.fd-green{ background:var(--cg); }
+
+/* ── METRIC CHIPS ── */
+.metric-chips { display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem; }
+.mc { padding:.3rem .75rem;border-radius:999px;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;border:1px solid; }
+.mc-r { background:var(--ca-l);color:var(--ca);border-color:var(--ca); }
+.mc-t { background:var(--ct-l);color:var(--ct);border-color:var(--ct); }
+.mc-g { background:var(--cg-l);color:var(--cg);border-color:var(--cg); }
+
+/* ── LIVE LINK ── */
+.live-link {
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:1.5rem;padding:.65rem 1.4rem;border-radius:8px;
+  background:var(--ca);color:#fff;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:opacity .2s,transform .2s;
+}
+.live-link:hover { opacity:.85;transform:translateY(-2px); }
+.live-link::after { content:'↗'; }
+
+/* ── FIBONACCI CALLOUT ── */
+.fib-callout {
+  display:flex;gap:1.5rem;align-items:center;
+  padding:1.5rem 1.75rem;border-radius:12px;
+  background:var(--ink);color:#fff;
+  margin-top:1.5rem;
+}
+.fib-num {
+  font-family:var(--serif);font-size:3.5rem;font-weight:900;
+  color:var(--ca);line-height:1;flex-shrink:0;
+}
+.fib-text strong { display:block;font-size:.95rem;font-weight:600;margin-bottom:.3rem; }
+.fib-text span { font-size:.8rem;opacity:.65;line-height:1.55; }
+
+/* ── REFLECTION BAND ── */
+.reflection-band {
+  background:var(--ink);color:#fff;
+  margin:clamp(2rem,4vw,3.5rem) 0 0;
+  padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem);
+}
+.ref-inner { max-width:860px;margin:0 auto; }
+.ref-qmark { font-family:var(--serif);font-size:6rem;line-height:.5;color:var(--ca);opacity:.3;margin-bottom:1.5rem; }
+.ref-quote { font-family:var(--serif);font-size:clamp(1.2rem,2.3vw,1.6rem);font-style:italic;line-height:1.55;margin-bottom:2.5rem; }
+.outcome-row { display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem; }
+.outcome { padding:1.5rem;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1); }
+.outcome-icon { font-size:1.4rem;margin-bottom:.6rem; }
+.outcome-text { font-size:.82rem;line-height:1.6;opacity:.7; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+  .split { grid-template-columns:1fr; }
+  .ig-4 { grid-template-columns:repeat(2,1fr); }
+  .ig-3,.colour-grid { grid-template-columns:1fr 1fr; }
+  .outcome-row { grid-template-columns:1fr; }
+}
+@media(max-width:560px){
+  .stat-strip { grid-template-columns:1fr; }
+  .ig-2,.ig-3,.ig-4 { grid-template-columns:1fr; }
+  .colour-grid { grid-template-columns:1fr; }
+  .meta-row { gap:1.25rem; }
+  .fib-callout { flex-direction:column;gap:.75rem; }
+}
+</style>
 </head>
-<!-- Google tag (gtag.js) -->
+
+<!-- GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-K1W60XD1FJ');
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-K1W60XD1FJ');
+  document.addEventListener('DOMContentLoaded',function(){
+    gtag('event','page_view_details',{'page_title':document.title,'screen_class':document.body.className||'default'});
+  });
 </script>
 
-<!-- Custom GA event for page title and screen class -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var pageTitle = document.title;
-        var screenClass = document.body.className || 'default';
-        gtag('event', 'page_view_details', {
-            'page_title': pageTitle,
-            'screen_class': screenClass
-        });
-    });
-</script>
 <body>
+<div id="cp"></div>
 
-<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
+<!-- Header -->
 <header>
-    <a href="../index.html" class="logo-link">
-        <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
-    </a>
-    <div class="header-right">
-        <nav>
-            <ul>
-                <li><a href="../index.html#work">Projects</a></li>
-                <li><a href="../academic.html">Academia</a></li>
-                <li><a href="../about-me.html">About Me</a></li>            
-                <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
-                <li><a href="../about/Persian.html">پارسی</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </div>
+  <a href="../index.html" class="logo-link">
+    <img src="../image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+  </a>
+  <div class="header-right">
+    <nav><ul>
+      <li><a href="../index.html#work">Projects</a></li>
+      <li><a href="../academic.html">Academia</a></li>
+      <li><a href="../about-me.html">About Me</a></li>
+      <li><a href="../Resume2.pdf" target="_blank" rel="noopener noreferrer"
+         onclick="gtag('event','resume_click',{'event_category':'navigation','event_label':'Resume Nav'});">Resume</a></li>
+      <li><a href="../about/Persian.html">پارسی</a></li>
+    </ul></nav>
+    <button class="theme-toggle" id="theme-toggle"><span class="theme-icon">🌙</span></button>
+  </div>
 </header>
 
 <main>
-    <section class="case-study-hero">
-        <!-- <nav class="page-navigation">
 
-        <a href="/case-studies/off-app.html" class="nav-btn nav-prev">← Prev: Off App </a>
-        <a href="/case-studies/stage-door.html" class="nav-btn nav-next">Next: Stage Door Dance →</a>
+<!-- ══ COVER ══ -->
+<div class="hero-cover-image rv">
+  <img src="../image/shahrzad-theatre/1.png" alt="Shahrzad Theatre Cover">
+</div>
 
-    </nav> -->
-     <div class="hero-cover-image">
-            <img src="../image/shahrzad-theatre/1.png" alt="shahrzad Cover" />
+<!-- ══ HERO ══ -->
+<section class="case-study-hero rv">
+  <div class="st-eye">
+    <div class="st-eye-line"></div>
+    <span>Art Direction · Brand Identity · Tehran, Iran</span>
+  </div>
+
+  <h1>Shahrzad<br><em>Visual Identity</em></h1>
+  <p class="hero-sub">Product strategy and digital brand creation for Iran's largest private theatre complex — built on the Fibonacci sequence as both structure and metaphor.</p>
+
+  <div class="meta-row">
+    <div class="meta-col">
+      <strong>Role</strong>
+      <span>Art Director & Graphic Designer</span>
+    </div>
+    <div class="meta-col">
+      <strong>Timeline</strong>
+      <span>40 Days</span>
+    </div>
+    <div class="meta-col">
+      <strong>Team</strong>
+      <span>Marketing Manager · Illustrator</span>
+    </div>
+    <div class="meta-col">
+      <strong>Tools</strong>
+      <div class="chip-row">
+        <span class="chip">Adobe Illustrator</span>
+        <span class="chip">Adobe Photoshop</span>
+        <span class="chip">InDesign</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-strip rv">
+    <div class="stat-cell">
+      <div class="stat-n">40</div>
+      <div class="stat-l">Days to delivery</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">φ</div>
+      <div class="stat-l">Fibonacci foundation</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">#1</div>
+      <div class="stat-l">Iran's largest private theatre</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ OVERVIEW ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">00</span>
+    <h2>Project at a Glance</h2>
+  </div>
+
+  <div class="icon-grid ig-4">
+    <div class="ig-card">
+      <div class="ig-label">Client</div>
+      <div class="ig-icon">🎭</div>
+      <div class="ig-title">Shahrzad Theatre</div>
+      <div class="ig-body">Iran's largest private theatre complex — requiring a mark that carries the weight of cultural heritage and contemporary stage presence.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Brief</div>
+      <div class="ig-icon">✍️</div>
+      <div class="ig-title">Symbol of Regeneration</div>
+      <div class="ig-body">Design a visual identity that represents artistic regeneration, cultural continuity, and the expanding relationship between audience and space.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Approach</div>
+      <div class="ig-icon">🌀</div>
+      <div class="ig-title">Fibonacci as Foundation</div>
+      <div class="ig-body">The golden ratio used not just as a geometric guide — but as a metaphor for layered artistic growth, harmony, and evolving creative movement.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Deliverable</div>
+      <div class="ig-icon">📐</div>
+      <div class="ig-title">Full Brand System</div>
+      <div class="ig-body">Logo, colour palette, typography, brand guidelines, and application across print, signage, and digital environments.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Overview image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/shahrzad-theatre/3.png" alt="Logo and identity overview">
+</div>
+
+
+<!-- ══ CONCEPT ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">01</span>
+    <h2>The Concept</h2>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <p>The spiral proportions of the Fibonacci sequence were refined into a form that simultaneously evokes three things: the opening of a stage curtain, the motion of live performance, and the expanding relationship between theatre and its audience.</p>
+      <p>The mark balances precision and expression — positioned at the intersection of architecture, narrative form, and theatrical emotion.</p>
+    </div>
+    <div>
+      <div class="fib-callout">
+        <div class="fib-num">φ</div>
+        <div class="fib-text">
+          <strong>The Fibonacci Sequence</strong>
+          <span>Used as the structural skeleton of the logo — each proportion derived from the golden ratio to ensure harmony at every scale.</span>
         </div>
-        <div class="hero-content">
-            <h1>Shahrzad Visual Identity</h1>
-            <p class="subtitle">Product Strategy & Digital Brand Creation for Iran's Largest Private Theatre Complex</p>
-            
-            <div class="project-meta">
-                <div class="meta-item">
-                    <strong>Role</strong>
-                    <span>Art Director and Graphic Designer</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Team</strong>
-                    <span>Marketing Manager, Illustrator</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Timeline</strong>
-                    <span>40 Days</span>
-                </div>
-                <div class="meta-item">
-                    <strong>Tools</strong>
-                    <span>Adobe Illustrator, Adobe Photoshop, InDesign</span>
-                </div>
-            </div>
-        </div>
-       
-    </section>
+      </div>
+    </div>
+  </div>
 
-    <section class="content-section">
-        <h2>Project Overview</h2>
-        <p>As Art Director and Product Designer, I developed the logo and visual identity for Shahrzad Theatre as a symbol of artistic regeneration and cultural continuity. The logo was designed using <strong>the Fibonacci sequence</strong> as the structural foundation — not only as a geometric guide, but as a metaphor for layered artistic growth, harmony, and evolving creative movement.</p>
+  <div class="metric-chips">
+    <span class="mc mc-r">Stage Curtain Motion</span>
+    <span class="mc mc-r">Architectural Proportion</span>
+    <span class="mc mc-t">Cultural Continuity</span>
+    <span class="mc mc-t">Persian Heritage</span>
+    <span class="mc mc-g">Artistic Regeneration</span>
+    <span class="mc mc-g">Narrative Form</span>
+  </div>
+</section>
 
-        <p>The spiral proportions were refined into a form that evokes the opening of a stage curtain, the motion of performance, and the expanding relationship between audience and space. The mark balances precision and expression — positioned between architecture, narrative form, and theatrical emotion.</p>
-         <div class="hero-cover-image">
-            <img src="../image/shahrzad-theatre/3.png" alt="shahrzad Cover" />
-        </div>
-    </section>
 
-    <section class="content-section">
-        <h2>Method & Design Process</h2>
-        <ul>
-            <li>Structural exploration using Fibonacci grid and proportional modules
-                <li>Form reduction through iterative sketching and vector refinement</li> 
-               <li>Semiotic analysis to align symbolism with theatre identity</li>  
-            <li>Color theory application for emotional and cultural resonance</li>
-            <li>Typography selection to complement logo aesthetics</li>
-            <li>Development of brand guidelines for consistent application</li>
-        </ul>
-        <p>This method ensured that the logo operated as both visual system and cultural symbol.</p>
-        <div class="hero-cover-image">
-            <img src="../image/shahrzad-theatre/4.png" alt="shahrzad Cover" />
-        </div>
-        <div class="hero-cover-image">
-            <img src="../image/shahrzad-theatre/5.jpeg" alt="shahrzad Cover" />
-        </div>
-    </section>
+<!-- ══ DESIGN PROCESS ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">02</span>
+    <h2>Design Process</h2>
+  </div>
 
-    <section class="content-section">
-        <h2>Color Palette Development</h2>
-        <p>The color system was developed around three visual principles:</p>
-        <ul>
-            <li>Depth & contrast to support stage and performance photography</li>
-            <li>Cultural subtlety inspired by Persian architectural tones</li>
-            <li>Scalability across print, signage, and digital environments</li>
-        </ul>
-        <p>The final palette prioritizes monochrome foundations with rich accent tones, allowing the performances (not the interface) to remain at the emotional center.</p>
-        <div class="hero-cover-image">
-            <img src="../image/shahrzad-theatre/6.png" alt="shahrzad Cover" />
-        </div>
-    </section>
+  <div class="approach-steps">
+    <div class="ap-step">
+      <div class="ap-num">🔢</div>
+      <div class="ap-text">
+        <strong>Fibonacci Grid Exploration</strong>
+        <span>Structural exploration using golden ratio proportional modules as the foundational skeleton.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">✏️</div>
+      <div class="ap-text">
+        <strong>Iterative Sketching & Vector Refinement</strong>
+        <span>Form reduction through multiple rounds of sketch-to-vector translation — removing until only the essential remained.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">🔣</div>
+      <div class="ap-text">
+        <strong>Semiotic Analysis</strong>
+        <span>Systematic alignment of symbolism with theatre identity — ensuring the mark reads culturally and emotionally correctly.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">🎨</div>
+      <div class="ap-text">
+        <strong>Colour Theory Application</strong>
+        <span>Palette developed for emotional and cultural resonance — Persian architectural tones meeting contemporary stage presence.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">🔡</div>
+      <div class="ap-text">
+        <strong>Typography Selection</strong>
+        <span>Type chosen to complement logo aesthetics — balancing formal authority with theatrical warmth.</span>
+      </div>
+    </div>
+    <div class="ap-step">
+      <div class="ap-num">📖</div>
+      <div class="ap-text">
+        <strong>Brand Guidelines Development</strong>
+        <span>Comprehensive rules for consistent application across print, signage, digital, and environmental contexts.</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="content-section">
-        <h2>Cultural Considerations</h2>
-        <p>This project required deep understanding of Persian cultural norms, traditional theatre experiences, and audience expectations. The design balanced modern digital experiences with respect for cultural heritage and theatrical traditions.</p>
-        <p>The final palette prioritizes monochrome foundations with rich accent tones, allowing the performances — not the interface — to remain at the emotional center.</p>
-         <a href="https://shahrzadtheater.ir/" target="_blank" rel="Website">Live Website</a>
-        
-    </section>
-    <div class="hero-cover-image">
-            <img src="../image/shahrzad-theatre/7.jpeg" alt="shahrzad Cover" />
-        </div>
-    
-    <nav class="page-navigation">
+<!-- Process images -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/shahrzad-theatre/4.png" alt="Logo construction process">
+</div>
+<div class="hero-cover-image rv" style="margin-top:1.25rem;">
+  <img src="../image/shahrzad-theatre/5.jpeg" alt="Vector refinement sketches">
+</div>
 
-        <a href="/case-studies/off-app.html" class="nav-btn nav-prev">← Prev: Off App </a>
-        <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
-        <a href="/case-studies/stage-door.html" class="nav-btn nav-next">Next: Stage Door Dance →</a>
 
-    </nav>
+<!-- ══ COLOUR PALETTE ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">03</span>
+    <h2>Colour Palette</h2>
+  </div>
+
+  <p style="font-size:.95rem;line-height:1.8;opacity:.8;margin-bottom:1.5rem;">Three visual principles shaped every colour decision — the palette lets the performances, not the interface, remain at the emotional centre.</p>
+
+  <div class="colour-grid">
+    <div class="colour-card">
+      <div class="colour-swatch sw-1"></div>
+      <div class="colour-body">
+        <div class="colour-title">Stage Black</div>
+        <div class="colour-desc">Depth and contrast to support performance photography and dramatic stage presence at any scale.</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch sw-2"></div>
+      <div class="colour-body">
+        <div class="colour-title">Persian Warmth</div>
+        <div class="colour-desc">Cultural subtlety drawn from Persian architectural tones — terracotta, brick, and sun-baked earth.</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch sw-3"></div>
+      <div class="colour-body">
+        <div class="colour-title">Sandstone Accent</div>
+        <div class="colour-desc">Scalable across print, signage, and digital — a bridge between the dark foundation and the warm accent.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="friction-list" style="margin-top:1.75rem;">
+    <div class="friction-item">
+      <span class="friction-dot fd-teal"></span>
+      Monochrome foundation keeps visual hierarchy clean across all contexts
+    </div>
+    <div class="friction-item">
+      <span class="friction-dot fd-red"></span>
+      Rich accent tones activated selectively — never competing with performance visuals
+    </div>
+    <div class="friction-item">
+      <span class="friction-dot fd-green"></span>
+      Palette validated across print, environmental signage, and digital screens
+    </div>
+  </div>
+</section>
+
+<!-- Colour image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/shahrzad-theatre/6.png" alt="Colour palette application">
+</div>
+
+
+<!-- ══ CULTURAL CONSIDERATIONS ══ -->
+<section class="cs rv">
+  <div class="sh">
+    <span class="sn">04</span>
+    <h2>Cultural Considerations</h2>
+  </div>
+
+  <div class="split">
+    <div class="split-text">
+      <p>This project required deep understanding of Persian cultural norms, traditional theatre experiences, and audience expectations across multiple generations.</p>
+      <p>The design balanced modern digital expression with respect for cultural heritage — ensuring the identity felt both contemporary and rooted.</p>
+    </div>
+    <div>
+      <div class="pullquote">The performances — not the interface — must remain at the emotional centre.</div>
+      <a href="https://shahrzadtheater.ir/" target="_blank" rel="noopener noreferrer" class="live-link">View Live Website &nbsp;</a>
+    </div>
+  </div>
+
+  <div class="icon-grid ig-3" style="margin-top:1.75rem;">
+    <div class="ig-card">
+      <div class="ig-label">Persian Heritage</div>
+      <div class="ig-icon">🏛</div>
+      <div class="ig-title">Architectural Reference</div>
+      <div class="ig-body">Proportions and tones drawn from Persian architectural traditions — making the mark feel native rather than imported.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Theatre Culture</div>
+      <div class="ig-icon">🎭</div>
+      <div class="ig-title">Audience Expectations</div>
+      <div class="ig-body">Iranian theatre audiences carry deep cultural memory of the art form — the identity had to honour that without feeling nostalgic.</div>
+    </div>
+    <div class="ig-card">
+      <div class="ig-label">Modern Context</div>
+      <div class="ig-icon">💻</div>
+      <div class="ig-title">Digital Scalability</div>
+      <div class="ig-body">The mark was tested and refined across every application — from a 16px favicon to full-scale exterior signage.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Final image -->
+<div class="hero-cover-image rv" style="margin-top:1.75rem;">
+  <img src="../image/shahrzad-theatre/7.jpeg" alt="Final brand application">
+</div>
+
+
+<!-- ══ REFLECTION ══ -->
+<div class="reflection-band rv">
+  <div class="ref-inner">
+    <div class="ref-qmark">"</div>
+    <div class="ref-quote">A logo built on the golden ratio doesn't just look right — it feels right, because nature already solved the proportions.</div>
+
+    <div class="outcome-row">
+      <div class="outcome">
+        <div class="outcome-icon">🌀</div>
+        <div class="outcome-text">Mathematics as metaphor — the Fibonacci sequence gave the mark both structural rigour and poetic meaning simultaneously</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">🏛</div>
+        <div class="outcome-text">Cultural grounding before aesthetic decisions — understanding Persian theatre identity shaped every proportion and colour choice</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-icon">🎭</div>
+        <div class="outcome-text">Identity design as stage design — the brand steps back so the performances can step forward, at every scale and application</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page nav -->
+<nav class="page-navigation">
+  <a href="/case-studies/off-app.html" class="nav-btn nav-prev">← Prev: Off App</a>
+  <a href="/index.html" class="nav-btn nav-back">Back to Home</a>
+  <a href="/case-studies/stage-door.html" class="nav-btn nav-next">Next: Stage Door Dance →</a>
+</nav>
+
 </main>
 
 <script>
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
-const currentTheme = localStorage.getItem('theme') || 'light';
-const themeIcon = themeToggle.querySelector('.theme-icon');
-htmlElement.setAttribute('data-theme', currentTheme);
-themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('cp').style.width = pct + '%';
+  });
 
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-});
+  // Scroll reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
 
-// Prevent image downloads
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
+  // Theme toggle
+  const tt = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const ti = tt.querySelector('.theme-icon');
+  const th = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', th);
+  ti.textContent = th === 'dark' ? '☀️' : '🌙';
+  tt.addEventListener('click', () => {
+    const n = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', n);
+    localStorage.setItem('theme', n);
+    ti.textContent = n === 'dark' ? '☀️' : '🌙';
+  });
 
-// Prevent drag and drop of images
-document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// Disable right-click on images
-const images = document.querySelectorAll('img');
-images.forEach(img => {
-    img.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-});
+  // Image protection
+  document.addEventListener('contextmenu', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.addEventListener('dragstart', e => { if(e.target.tagName==='IMG') e.preventDefault(); });
+  document.querySelectorAll('img').forEach(img => img.addEventListener('contextmenu', e => e.preventDefault()));
 </script>
 
-<!-- Footer: Social links and copyright -->
 <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="https://dribbble.com/shahrzading">Dribbble</a>
-      </p>
-    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+  <p>
+    <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+    <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+    <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+    <a href="https://dribbble.com/shahrzading">Dribbble</a>
+  </p>
+  <p><small>&copy; Code &amp; Design by Shahrzad Jafari</small></p>
 </footer>
-
 </body>
 </html>
-

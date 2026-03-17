@@ -11,253 +11,666 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Academic page: 2 fonts only — Playfair Display (headings) + Source Serif 4 (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ── ACADEMIC PAGE: 2-FONT CLASSIC SYSTEM ──
+   Playfair Display → all headings, numbers, labels
+   Source Serif 4   → all body text, metadata, links
+   No DM Mono. No Fredoka. No DM Sans. No Macondo on this page.
+*/
+
+:root {
+  --ca: #C94B2E;
+  --ca-l: #F2D5CC;
+  --ct: #2A6B6E;
+  --ct-l: #D4EAEB;
+  --cg: #4A6B1A;
+  --cg-l: #E4EDD0;
+  --ink: #1C1C1E;
+  /* The only two fonts used on this page */
+  --acad-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --acad-body:    'Source Serif 4', Georgia, 'Times New Roman', serif;
+}
+
+/* Override global font for entire academic page */
+.acad-page, .acad-page * {
+  font-family: var(--acad-body) !important;
+}
+
+/* Headings always use display */
+.acad-page h1,
+.acad-page h2,
+.acad-page h3,
+.acad-page h4,
+.acad-page .stat-n,
+.acad-page .acad-hero h1,
+.acad-page .acad-sh h2,
+.framework-cta strong {
+  font-family: var(--acad-display) !important;
+}
+
+#cp { position:fixed;top:0;left:0;height:3px;background:var(--ca);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear; }
+
+.rv { opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease; }
+.rv.on { opacity:1;transform:none; }
+
+/* ── PAGE WRAPPER ── */
+.acad-page {
+  max-width:860px;
+  margin:0 auto;
+  padding:0 clamp(1.25rem,4vw,3rem);
+  padding-top:clamp(5rem,8vw,7rem);
+  padding-bottom:3rem;
+}
+
+/* ── HERO ── */
+.acad-hero { margin-bottom:clamp(2.5rem,5vw,4rem); }
+
+.acad-eye {
+  display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;
+}
+.acad-eye-line { flex:0 0 32px;height:2px;background:var(--ct);border-radius:2px; }
+.acad-eye span {
+  font-size:.8rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ct);
+  font-style:italic;
+}
+
+.acad-hero h1 {
+  font-size:clamp(2.4rem,5vw,3.6rem);
+  font-weight:700;line-height:1.05;letter-spacing:-.01em;
+  margin-bottom:.75rem;
+  color:var(--text-primary,#374151);
+}
+.acad-hero h1 em { font-style:italic;color:var(--ca); }
+
+.acad-hero-sub {
+  font-size:1.1rem;line-height:1.8;
+  opacity:.7;max-width:560px;
+  font-style:italic;
+}
+
+/* ── STAT STRIP ── */
+.stat-strip {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:14px;overflow:hidden;margin:2rem 0 0;
+}
+.stat-cell {
+  background:var(--ct);color:#fff;
+  padding:1.75rem 1.25rem;text-align:center;
+}
+.stat-cell:nth-child(2){ background:var(--ca); }
+.stat-cell:nth-child(3){ background:var(--cg); }
+.stat-cell:nth-child(4){ background:var(--ink); }
+.stat-n {
+  font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:.3rem;
+}
+.stat-l {
+  font-size:.75rem;letter-spacing:.06em;
+  text-transform:uppercase;opacity:.8;
+  font-style:italic;
+}
+
+/* ── SECTION CARD ── */
+.acad-card {
+  padding:2.25rem clamp(1.5rem,3vw,2.5rem);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.22);border-radius:14px;
+  margin-bottom:clamp(1.5rem,3vw,2.5rem);
+}
+[data-theme="dark"] .acad-card {
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+}
+
+.acad-sh {
+  display:flex;align-items:baseline;gap:1rem;
+  margin-bottom:1.75rem;
+  padding-bottom:1.25rem;
+  border-bottom:1px solid var(--border-color,#e5e7eb);
+}
+[data-theme="dark"] .acad-sh { border-color:rgba(255,255,255,.09); }
+
+.acad-sn {
+  font-size:.75rem;letter-spacing:.14em;
+  color:var(--ca);flex-shrink:0;font-style:italic;
+}
+.acad-sh h2 {
+  font-size:clamp(1.5rem,2.8vw,1.9rem);
+  font-weight:700;margin:0;line-height:1.15;
+  color:var(--text-primary,#374151);
+}
+
+/* ── PROFILE LINKS ── */
+.profile-grid { display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem; }
+.profile-pill {
+  display:flex;align-items:center;gap:1rem;
+  padding:1.25rem 1.5rem;border-radius:10px;
+  border:1px solid rgba(0,0,0,.09);
+  background:var(--background-primary,#fff);
+  text-decoration:none;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+[data-theme="dark"] .profile-pill { background:#1e1e1e;border-color:rgba(255,255,255,.1); }
+.profile-pill:hover {
+  border-color:var(--ca);transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+.profile-pill-icon {
+  width:40px;height:40px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.15rem;flex-shrink:0;
+}
+.pi-scholar { background:var(--ct-l);color:var(--ct); }
+.pi-orcid   { background:var(--cg-l);color:var(--cg); }
+.profile-pill-text strong {
+  display:block;font-size:1rem;font-weight:600;
+  color:var(--text-primary,#374151);margin-bottom:.2rem;
+}
+.profile-pill-text span {
+  font-size:.82rem;opacity:.55;font-style:italic;
+}
+
+/* ── PAPER LIST ── */
+.paper-list {
+  display:flex;flex-direction:column;gap:1px;
+  background:rgba(0,0,0,.07);border-radius:14px;
+  overflow:hidden;margin-top:1.25rem;
+}
+.paper-item {
+  background:var(--background-primary,#fff);
+  padding:1.75rem 2rem;
+  transition:background .2s;
+  position:relative;
+}
+.paper-item::before {
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--ca);opacity:0;
+  transition:opacity .2s;
+}
+.paper-item:hover { background:var(--background-secondary,#f9fafb); }
+.paper-item:hover::before { opacity:1; }
+[data-theme="dark"] .paper-item { background:#1e1e1e; }
+[data-theme="dark"] .paper-item:hover { background:#252525; }
+
+.paper-year {
+  font-size:.8rem;font-style:italic;
+  color:var(--ca);margin-bottom:.5rem;
+  opacity:.9;
+}
+.paper-title {
+  font-size:1rem;font-weight:600;
+  color:var(--text-primary,#374151);
+  line-height:1.6;margin-bottom:.5rem;
+}
+.paper-meta {
+  font-size:.85rem;font-style:italic;
+  opacity:.55;line-height:1.6;margin-bottom:.75rem;
+}
+.paper-link {
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.82rem;font-style:italic;
+  color:var(--ct);text-decoration:none;
+  transition:color .2s;
+  border-bottom:1px solid transparent;
+}
+.paper-link:hover { color:var(--ca);border-bottom-color:var(--ca); }
+.paper-link::after { content:'↗';font-style:normal; }
+
+/* ── BOOK CARD ── */
+.book-card {
+  display:flex;align-items:flex-start;gap:1.25rem;
+  padding:1.75rem;border-radius:12px;
+  border:1px solid rgba(0,0,0,.09);
+  background:var(--background-primary,#fff);
+  margin-top:1.25rem;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+[data-theme="dark"] .book-card { background:#1e1e1e;border-color:rgba(255,255,255,.1); }
+.book-card:hover {
+  border-color:var(--ca);transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+.book-spine {
+  flex-shrink:0;width:10px;align-self:stretch;
+  border-radius:3px;
+  background:linear-gradient(to bottom,var(--ca),var(--ct));
+}
+.book-tag {
+  font-size:.8rem;font-style:italic;
+  color:var(--ca);margin-bottom:.45rem;opacity:.9;
+}
+.book-title {
+  font-size:1rem;font-weight:600;
+  color:var(--text-primary,#374151);
+  margin-bottom:.4rem;line-height:1.5;
+}
+.book-meta {
+  font-size:.85rem;font-style:italic;
+  opacity:.55;line-height:1.7;margin-bottom:.7rem;
+}
+.book-link {
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.82rem;font-style:italic;
+  color:var(--ct);text-decoration:none;
+  transition:color .2s;
+  border-bottom:1px solid transparent;
+}
+.book-link:hover { color:var(--ca);border-bottom-color:var(--ca); }
+.book-link::after { content:'↗';font-style:normal; }
+
+/* ── TEACHING ── */
+.teaching-list {
+  display:flex;flex-direction:column;gap:1px;
+  background:rgba(0,0,0,.07);border-radius:14px;
+  overflow:hidden;margin-top:1.25rem;
+}
+.teaching-item {
+  background:var(--background-primary,#fff);
+  padding:2rem;
+  transition:background .2s;
+  position:relative;overflow:hidden;
+}
+.teaching-item::after {
+  content:'';position:absolute;top:0;right:0;
+  width:3px;height:100%;
+}
+.teaching-item:nth-child(1)::after { background:var(--ct); }
+.teaching-item:nth-child(2)::after { background:var(--ca); }
+.teaching-item:nth-child(3)::after { background:var(--cg); }
+.teaching-item:nth-child(4)::after { background:var(--ink); }
+.teaching-item:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .teaching-item { background:#1e1e1e; }
+[data-theme="dark"] .teaching-item:hover { background:#252525; }
+
+.teaching-period {
+  font-size:.8rem;font-style:italic;
+  color:var(--ca);margin-bottom:.5rem;opacity:.9;
+}
+.teaching-role {
+  font-size:1rem;font-weight:600;
+  color:var(--text-primary,#374151);
+  line-height:1.4;margin-bottom:.3rem;
+}
+.teaching-institution {
+  font-size:.87rem;font-style:italic;
+  opacity:.55;margin-bottom:.7rem;
+}
+.teaching-desc {
+  font-size:.9rem;line-height:1.8;opacity:.72;margin-bottom:.85rem;
+}
+.teaching-link {
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.82rem;font-style:italic;
+  color:var(--ct);text-decoration:none;
+  transition:color .2s;
+  border-bottom:1px solid transparent;
+}
+.teaching-link:hover { color:var(--ca);border-bottom-color:var(--ca); }
+.teaching-link::after { content:'→';font-style:normal; }
+
+/* ── COURSE CHIPS ── */
+.course-chips { display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 .85rem; }
+.cc {
+  font-size:.78rem;font-style:italic;
+  padding:.25rem .75rem;border-radius:999px;
+  background:var(--background-secondary,#f9fafb);
+  border:1px solid rgba(0,0,0,.09);
+  color:var(--text-secondary,#6b7280);
+}
+[data-theme="dark"] .cc { background:#2a2a2a;border-color:rgba(255,255,255,.08); }
+
+/* ── RESEARCH INTERESTS ── */
+.interests-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,0,0,.07);
+  border-radius:14px;overflow:hidden;margin-top:1.25rem;
+}
+.interest-cell {
+  background:var(--background-primary,#fff);
+  padding:1.5rem 1.25rem;text-align:center;
+  transition:background .2s;
+}
+.interest-cell:hover { background:var(--background-secondary,#f9fafb); }
+[data-theme="dark"] .interest-cell { background:#1e1e1e; }
+[data-theme="dark"] .interest-cell:hover { background:#252525; }
+.interest-icon { font-size:1.5rem;margin-bottom:.5rem; }
+.interest-label {
+  font-size:.82rem;font-style:italic;
+  opacity:.7;line-height:1.5;
+}
+
+/* ── FRAMEWORK CTA ── */
+.framework-cta {
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  padding:1.6rem 2rem;border-radius:12px;
+  background:var(--ink);color:#fff;
+  text-decoration:none;margin-bottom:clamp(1.5rem,3vw,2.5rem);
+  transition:opacity .2s,transform .2s;
+}
+.framework-cta:hover { opacity:.9;transform:translateY(-2px); }
+.fwl-text strong {
+  display:block;font-size:1.05rem;font-weight:700;margin-bottom:.25rem;
+}
+.fwl-text span { font-size:.82rem;font-style:italic;opacity:.5; }
+.fwl-arrow { font-size:1.5rem;color:var(--ca);flex-shrink:0; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:720px){
+  .stat-strip { grid-template-columns:repeat(2,1fr); }
+  .profile-grid { grid-template-columns:1fr; }
+  .interests-grid { grid-template-columns:repeat(2,1fr); }
+  .paper-item,.teaching-item { padding:1.5rem; }
+}
+@media(max-width:480px){
+  .stat-strip { grid-template-columns:1fr 1fr; }
+  .interests-grid { grid-template-columns:1fr 1fr; }
+  .acad-hero h1 { font-size:2rem; }
+  .stat-n { font-size:1.9rem; }
+}
+</style>
 </head>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1W60XD1FJ"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K1W60XD1FJ');
-</script>
-
-<!-- Custom GA event for page title and screen class -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var pageTitle = document.title;
-        var screenClass = document.body.className || 'default';
-        gtag('event', 'page_view_details', {
-            'page_title': pageTitle,
-            'screen_class': screenClass
-        });
-    });
+  gtag('js',new Date());gtag('config','G-K1W60XD1FJ');
+  document.addEventListener('DOMContentLoaded',function(){
+    gtag('event','page_view_details',{'page_title':document.title,'screen_class':document.body.className||'default'});
+  });
 </script>
 
 <body>
+<div id="cp"></div>
 
-<!-- Header / Navigation: Site logo, primary nav links, theme toggle button -->
 <header>
-    <a href="index.html" class="logo-link">
-        <img src="image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
-    </a>
-    <div class="header-right">
-        <nav>
-            <ul>
-                <li><a href="index.html#work">Projects</a></li>
-                <li><a href="/academic.html">Academia</a></li>
-                <li><a href="about-me.html">About Me</a></li>            
-                <li><a href="Resume2.pdf" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'resume_click', { 'event_category': 'navigation', 'event_label': 'Resume Nav' });">Resume</a></li>
-                <li><a href="about/Persian.html">پارسی</a></li>
-            </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </div>
+  <a href="index.html" class="logo-link">
+    <img src="image/logo.jpg" alt="Shahrzad Jafari Logo" class="logo-img">
+  </a>
+  <div class="header-right">
+    <nav><ul>
+      <li><a href="index.html#work">Projects</a></li>
+      <li><a href="/academic.html">Academia</a></li>
+      <li><a href="about-me.html">About Me</a></li>
+      <li><a href="Resume2.pdf" target="_blank" rel="noopener noreferrer"
+         onclick="gtag('event','resume_click',{'event_category':'navigation','event_label':'Resume Nav'});">Resume</a></li>
+      <li><a href="about/Persian.html">پارسی</a></li>
+    </ul></nav>
+    <button class="theme-toggle" id="theme-toggle"><span class="theme-icon">🌙</span></button>
+  </div>
 </header>
 
-
 <main>
-    
-    <section id="academic-page">
-        <nav class="page-navigation">
-        <div class="academic-subsection">
-        <a href="/Big-Picture.html" class="nav-btn nav-prev">My Research framework</a>
-        <!-- <hr> -->
-    </nav>
-    <div class="academic-content">
-          
-    <!-- Scholar Profiles -->
-            <div class="academic-subsection">
-                <h3>🔬 Academic Profiles</h3>
-                <div class="profile-links">
-                    <a href="https://scholar.google.com/citations?user=czY5XVoAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="profile-link">
-                        <span class="profile-icon">💼</span>
-                        <div>
-                            <strong>Google Scholar</strong>
-                            <!-- <span class="profile-id">shahrzadjafari</span> -->
-                        </div>
-                    </a>
-                    <a href="https://orcid.org/0000-0002-4789-7893" target="_blank" rel="noopener noreferrer" class="profile-link">
-                        <span class="profile-icon">📓</span>
-                        <div>
-                            <strong>ORCID</strong>
-                            <!-- <span class="profile-id">Research & Projects</span> -->
-                        </div>
-                    </a>
-                </div>
-            </div>
-            </section>
-    
-    <!-- Papers Section -->
-            <section>
-        
-                <div class="academic-subsection">
-                <h3>📚 Research Papers</h3>
-                <hr>
-                <ul class="academic-list">
-                    <li>
-                        <strong>Designing for Behavior Change: Exploring Challenges and Opportunities from a Designer's Perspective</strong>
-                        <span class="academic-meta">Authors: Jafari, Sh, Khodadadeh, Love, T. | ICD Conference | October 2025</span>
-                        <a href="https://www.researchgate.net/publication/392100841_Designing_for_Behavior_Change_Exploring_Challenges_and_Opportunities_from_a_Designer's_Perspective" target="_blank" rel="noopener noreferrer">View Publication →</a>
-                    </li>
-                    <li>
-                        <strong>Exploring User Preferences for Health-Focused Digital Nudges: Insights from a Preliminary Study</strong>
-                        <span class="academic-meta">Authors: Jafari, Sh, Khodadadeh | AHFE 2025, JW Marriott, Orlando, Florida, USA | July 2025</span>
-                        <a href="https://openaccess.cms-conferences.org/publications/book/978-1-964867-70-0/article/978-1-964867-70-0_13" target="_blank" rel="noopener noreferrer">View Publication →</a>
-                    </li>
-                    <li>
-                        <strong>Comparison of the effectiveness of modern and traditional games on improving children's acquired skills in two cultures of Iran and Turkey</strong>
-                        <span class="academic-meta">Authors: Jafari, Sh, Merrikhpour, Z, Khodadadeh, Y. | Journal of Design Thinking, Volume 3, Issue 1 | June 2022</span>
-                        <a href="http://dx.doi.org/10.22059/JDT.2023.351321.1087" target="_blank" rel="noopener noreferrer">View Publication →</a>
-                    </li>
-                    <li>
-                        <strong>The study of interactive services design and how they interact in designing a serving package for students' successful planning</strong>
-                        <span class="academic-meta">Authors: Parvane Rezakhanli, Shahrzad Jafari, Ahmad Nedaei Fard | International Conference on Marketing and Design, Faro, Portugal | 2018</span>
-                        <a href="https://www.researchgate.net/publication/358280786_The_Study_of_Interactive_Services_Design_and_How_They_Interact_in_Designing_a_Serving_Package_for_Students'_Successful_Planning" target="_blank" rel="noopener noreferrer">View Publication →</a>
-                    </li>
-                </ul>
-            </div>
-            </section>
-            <br>
-            <br>
+<div class="acad-page">
 
-    <!-- Books Section -->
-            <section><div class="academic-subsection">
-                <h3>📖 Translated Books</h3>
-                <ul class="academic-list">
-                    <li>
-                        <strong>Digital Theatre</strong>
-                        <span class="academic-meta">Originally Published by European Theatre Convention | Translated to Persian by Shahrzad Jafari | Daryabeygi Publications | 2020</span>
-                        <a href="https://www.adinehbook.com/product/6009968666/%DA%A9%D8%AA%D8%A7%D8%A8-%D8%AA%D8%A6%D8%A7%D8%AA%D8%B1-%D8%AF%DB%8C%D8%AC%DB%8C%D8%AA%D8%A7%D9%84-%D9%86%D8%AA%DB%8C%D8%AC%D9%87-%DB%8C%DA%A9-%D9%85%D8%B7%D8%A7%D9%84%D8%B9%D9%87-%D9%85%D9%88%D8%B1%D8%AF%DB%8C-%D8%A7%D8%AB%D8%B1-%D8%B4%D9%87%D8%B1%D8%B2%D8%A7%D8%AF-%D8%AC%D8%B9%D9%81%D8%B1%DB%8C-%D9%86%D8%B4%D8%B1-%D8%AF%D8%B1%DB%8C%D8%A7%D8%A8%DB%8C%DA%AF%DB%8C" target="_blank" rel="noopener noreferrer">View Book →</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <br>
-        <br>
+  <!-- ══ HERO ══ -->
+  <div class="acad-hero rv">
+    <div class="acad-eye">
+      <div class="acad-eye-line"></div>
+      <span>Research · Teaching · Publication</span>
+    </div>
+    <h1>Academic<br><em>Contributions</em></h1>
+    <p class="acad-hero-sub">Bridging design research, behavioural science, and teaching — from Tehran to Vancouver.</p>
 
-    <!-- Teaching Experiences -->
-             <section><div class="academic-subsection">
-                <h3>👨‍🏫 Teaching Experience</h3>
-                <ul class="teaching-list">
-                    <li>
-                        <strong>Instructor - User Experience Design and Design Sprint Camp</strong>
-                        <span class="academic-meta">Tamwood College and ILACIC | Jan 2026 - Feb 2026</span>
-                        <p class="teaching-description">Guest speaker for Web dvelopment students and running brainstorming and prototyping workshops, guiding students for practical mockup and low fidelity and rapid prototyping methods.</p>
-                        <a href="https://tamwood.com" target="_blank" rel="noopener noreferrer"> More →</a>
-                    </li>
-                    <li>
-                        <strong>Instructor - Prototyping and Design Thinking</strong>
-                        <span class="academic-meta">University of British Columbia, UX Camp | October 2025 - November 2025</span>
-                        <p class="teaching-description">Led intensive UX design and design sprint workshops, guiding students through practical user experience design methodologies and rapid prototyping techniques.</p>
-                        <a href="https://www.ubcuxhub.ca/" target="_blank" rel="noopener noreferrer"> More →</a>
-                    </li>
-                    <li>
-                        <strong>Instructor & Faculty Member - Faculty of Arts and Architecture</strong>
-                        <span class="academic-meta">Islamic Azad University, Central Tehran Branch | September 2019 - June 2022</span>
-                        <p class="teaching-description">Taught courses including Industrial Design Fundamentals, Sketching, History of Industrial Design, Design Methods, Product Development Studio, Materials/Processes, Prototyping, Design Thinking, Academic Writing and Research, Ideation, Human Factors Applications, Model Building, Principles of Marketing, Form and Space in Design, Industrial Design Projects, Bionic Design, Urban Furniture Design, and Creativity and Innovation Methods in Design.</p>
-                        <a href="https://en.wikipedia.org/wiki/Islamic_Azad_University,_Central_Tehran_Branch" target="_blank" rel="noopener noreferrer"> More →</a>
-                    </li>
-                    <li>
-                        <strong>Instructor & Faculty Member - Department of Graphic Design</strong>
-                        <span class="academic-meta">Tehran Valiasr Girl's Technical University | September 2019 - June 2022</span>
-                        <p class="teaching-description">Instructed courses in Design Principles, Visual Communication, Typography, Branding, Graphic Design, and User Experience (UX) Design, helping students develop comprehensive skills in visual and digital design.</p>
-                        <a href="https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87_%D9%81%D9%86%DB%8C_%D9%88_%D8%AD%D8%B1%D9%81%D9%87%E2%80%8C%D8%A7%DB%8C_%D8%AF%DA%A9%D8%AA%D8%B1_%D8%B4%D8%B1%DB%8C%D8%B9%D8%AA%DB%8C_(%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87_%D9%85%D9%84%DB%8C_%D9%85%D9%87%D8%A7%D8%B1%D8%AA)" target="_blank" rel="noopener noreferrer"> More →</a>
-                    </li>
-                </ul>
-            </div>
-            </section>
-            <br>
-            <br>
 
-            
-            <!-- Research Interests -->
-            <section><div class="academic-subsection">
-                <h3>🔍 Research Interests</h3>
-                <p class="research-interests">User experiences, Cultural design, User interaction design, DEI design, Design thinking, HCI</p>
-            </div>
-            <section id="work">            
-            
-        <!-- <section><div id="colored-card"><h2>Teaching practices in Canada</h2>
-        <hr/>
+  <!-- Framework CTA -->
+  <a href="/Big-Picture.html" class="framework-cta rv">
+    <div class="fwl-text">
+      <strong>My Research Framework</strong>
+      <span>Double Diamond · Reverse Diamond · Design Strategy</span>
+    </div>
+    <div class="fwl-arrow">→</div>
+  </a>
 
-        <div class="case-studies-grid">
 
-        <article class="case-study-card">
-                <figure class="case-study-image">
-                    <img src="/image/workshop/1761154003126.jpeg" alt="Workshops">
-                </figure>
-                <div class="case-study-content">
-                    <h3>Design Sprint Workshops </h3>
-                    <h4>UX HUB, UBC University </h4>
-                    <p>10 Days design sprint session with UBC university students</p>
-                </div>
-            </article> -->
-           
-    </section>
+  <!-- ══ PROFILES ══ -->
+  <div class="acad-card rv">
+    <div class="acad-sh">
+      <span class="acad-sn">01</span>
+      <h2>Academic Profiles</h2>
+    </div>
+    <div class="profile-grid">
+      <a href="https://scholar.google.com/citations?user=czY5XVoAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="profile-pill">
+        <div class="profile-pill-icon pi-scholar">📊</div>
+        <div class="profile-pill-text">
+          <strong>Google Scholar</strong>
+          <span>Citations & publications</span>
+        </div>
+      </a>
+      <a href="https://orcid.org/0000-0002-4789-7893" target="_blank" rel="noopener noreferrer" class="profile-pill">
+        <div class="profile-pill-icon pi-orcid">🆔</div>
+        <div class="profile-pill-text">
+          <strong>ORCID</strong>
+          <span>0000-0002-4789-7893</span>
+        </div>
+      </a>
+    </div>
+  </div>
 
-    
+<!-- <div class="stat-strip">
+      <div class="stat-cell">
+        <div class="stat-n">4</div>
+        <div class="stat-l">Publications</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">1</div>
+        <div class="stat-l">Translated book</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">4</div>
+        <div class="stat-l">Teaching roles</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n">PhD</div>
+        <div class="stat-l">Candidate</div>
+      </div>
+    </div>
+  </div> -->
+  <!-- ══ PAPERS ══ -->
+  <div class="acad-card rv">
+    <div class="acad-sh">
+      <span class="acad-sn">02</span>
+      <h2>Research Papers</h2>
+    </div>
 
+    <div class="paper-list">
+      <div class="paper-item">
+        <div class="paper-year">ICD Conference · October 2025</div>
+        <div class="paper-title">Designing for Behavior Change: Exploring Challenges and Opportunities from a Designer's Perspective</div>
+        <div class="paper-meta">Jafari, Sh · Khodadadeh · Love, T.</div>
+        <a href="https://www.researchgate.net/publication/392100841_Designing_for_Behavior_Change_Exploring_Challenges_and_Opportunities_from_a_Designer's_Perspective" target="_blank" rel="noopener noreferrer" class="paper-link">View Publication</a>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-year">AHFE 2025 · Orlando, Florida · July 2025</div>
+        <div class="paper-title">Exploring User Preferences for Health-Focused Digital Nudges: Insights from a Preliminary Study</div>
+        <div class="paper-meta">Jafari, Sh · Khodadadeh</div>
+        <a href="https://openaccess.cms-conferences.org/publications/book/978-1-964867-70-0/article/978-1-964867-70-0_13" target="_blank" rel="noopener noreferrer" class="paper-link">View Publication</a>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-year">Journal of Design Thinking · Vol. 3, Issue 1 · June 2022</div>
+        <div class="paper-title">Comparison of the effectiveness of modern and traditional games on improving children's acquired skills in two cultures of Iran and Turkey</div>
+        <div class="paper-meta">Jafari, Sh · Merrikhpour, Z · Khodadadeh, Y.</div>
+        <a href="http://dx.doi.org/10.22059/JDT.2023.351321.1087" target="_blank" rel="noopener noreferrer" class="paper-link">View Publication</a>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-year">International Conference on Marketing and Design · Faro, Portugal · 2018</div>
+        <div class="paper-title">The Study of Interactive Services Design and How They Interact in Designing a Serving Package for Students' Successful Planning</div>
+        <div class="paper-meta">Rezakhanli, P · Jafari, Sh · Nedaei Fard, A.</div>
+        <a href="https://www.researchgate.net/publication/358280786_The_Study_of_Interactive_Services_Design_and_How_They_Interact_in_Designing_a_Serving_Package_for_Students'_Successful_Planning" target="_blank" rel="noopener noreferrer" class="paper-link">View Publication</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ BOOK ══ -->
+  <div class="acad-card rv">
+    <div class="acad-sh">
+      <span class="acad-sn">03</span>
+      <h2>Translated Book</h2>
+    </div>
+
+    <div class="book-card">
+      <div class="book-spine"></div>
+      <div class="book-info">
+        <div class="book-tag">Translation · Persian · 2020</div>
+        <div class="book-title">Digital Theatre</div>
+        <div class="book-meta">Originally published by the European Theatre Convention<br>Translated to Persian by Shahrzad Jafari · Daryabeygi Publications · 2020</div>
+        <a href="https://www.adinehbook.com/product/6009968666/" target="_blank" rel="noopener noreferrer" class="book-link">View Book</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ TEACHING ══ -->
+  <div class="acad-card rv">
+    <div class="acad-sh">
+      <span class="acad-sn">04</span>
+      <h2>Teaching Experience</h2>
+    </div>
+
+    <div class="teaching-list">
+
+      <div class="teaching-item">
+        <div class="teaching-period">Jan 2026 – Feb 2026</div>
+        <div class="teaching-role">Instructor — UX Design & Design Sprint Camp</div>
+        <div class="teaching-institution">Tamwood College & ILACIC</div>
+        <div class="course-chips">
+          <span class="cc">Rapid Prototyping</span>
+          <span class="cc">Lo-fi Methods</span>
+          <span class="cc">Brainstorming Workshops</span>
+        </div>
+        <div class="teaching-desc">Guest speaker for web development students — running brainstorming and prototyping workshops, guiding practical mockup and rapid prototyping methods.</div>
+        <a href="https://tamwood.com" target="_blank" rel="noopener noreferrer" class="teaching-link">Tamwood College</a>
+      </div>
+
+      <div class="teaching-item">
+        <div class="teaching-period">Oct 2025 – Nov 2025</div>
+        <div class="teaching-role">Instructor — Prototyping & Design Thinking</div>
+        <div class="teaching-institution">University of British Columbia · UX Camp</div>
+        <div class="course-chips">
+          <span class="cc">Design Sprints</span>
+          <span class="cc">UX Methodology</span>
+          <span class="cc">Rapid Prototyping</span>
+        </div>
+        <div class="teaching-desc">Led intensive UX design and design sprint workshops, guiding students through practical user experience design methodologies and rapid prototyping techniques.</div>
+        <a href="https://www.ubcuxhub.ca/" target="_blank" rel="noopener noreferrer" class="teaching-link">UBC UX Hub</a>
+      </div>
+
+      <div class="teaching-item">
+        <div class="teaching-period">Sep 2019 – Jun 2022</div>
+        <div class="teaching-role">Instructor & Faculty Member — Faculty of Arts and Architecture</div>
+        <div class="teaching-institution">Islamic Azad University, Central Tehran Branch</div>
+        <div class="course-chips">
+          <span class="cc">Industrial Design</span>
+          <span class="cc">Design Methods</span>
+          <span class="cc">Design Thinking</span>
+          <span class="cc">Human Factors</span>
+          <span class="cc">Prototyping</span>
+          <span class="cc">Bionic Design</span>
+          <span class="cc">Urban Furniture</span>
+          <span class="cc">Ideation</span>
+        </div>
+        <div class="teaching-desc">Full faculty member teaching 15+ courses across industrial design, product development, design thinking, and research methods.</div>
+        <a href="https://en.wikipedia.org/wiki/Islamic_Azad_University,_Central_Tehran_Branch" target="_blank" rel="noopener noreferrer" class="teaching-link">IAU Central Tehran</a>
+      </div>
+
+      <div class="teaching-item">
+        <div class="teaching-period">Sep 2019 – Jun 2022</div>
+        <div class="teaching-role">Instructor & Faculty Member — Department of Graphic Design</div>
+        <div class="teaching-institution">Tehran Valiasr Girl's Technical University</div>
+        <div class="course-chips">
+          <span class="cc">Visual Communication</span>
+          <span class="cc">Typography</span>
+          <span class="cc">Branding</span>
+          <span class="cc">UX Design</span>
+          <span class="cc">Design Principles</span>
+        </div>
+        <div class="teaching-desc">Instructed courses in design principles, visual communication, typography, branding, and UX design — developing comprehensive skills in visual and digital design.</div>
+        <a href="https://fa.wikipedia.org/wiki/" target="_blank" rel="noopener noreferrer" class="teaching-link">Tehran Technical University</a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══ RESEARCH INTERESTS ══ -->
+  <div class="acad-card rv">
+    <div class="acad-sh">
+      <span class="acad-sn">05</span>
+      <h2>Research Interests</h2>
+    </div>
+
+    <div class="interests-grid">
+      <div class="interest-cell">
+        <div class="interest-icon">🧠</div>
+        <div class="interest-label">User Experience Design</div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-icon">🌍</div>
+        <div class="interest-label">Cultural Design</div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-icon">🤝</div>
+        <div class="interest-label">DEI Design</div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-icon">💡</div>
+        <div class="interest-label">Design Thinking</div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-icon">🖥</div>
+        <div class="interest-label">HCI</div>
+      </div>
+      <div class="interest-cell">
+        <div class="interest-icon">🔬</div>
+        <div class="interest-label">Behavioural Research</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.acad-page -->
 </main>
 
-<!-- Footer: Social links and copyright -->
 <footer>
-    <p>
-        <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-        <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
-        <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
-        <a href="https://dribbble.com/shahrzading">Dribbble</a>
-      </p>
-    <p><small>&copy; Code & Design by Shahrzad Jafari</small></p>
+  <p>
+    <a href="https://www.linkedin.com/in/shahrzadjafari/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+    <a href="https://notion.so/shahrzading/Shahrzad-Jafari-fc5b2efddce342159e3199b4dfb16d47?pvs=142" target="_blank" rel="noopener noreferrer">Notion Notebook</a> |
+    <a href="https://github.com/shinjiiim" target="_blank" rel="noopener noreferrer">GitHub</a> |
+    <a href="https://dribbble.com/shahrzading">Dribbble</a>
+  </p>
+  <p><small>&copy; Code &amp; Design by Shahrzad Jafari</small></p>
 </footer>
 
 <script>
-// Dark Mode Toggle
-const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+    document.getElementById('cp').style.width=pct+'%';
+  });
+  const ro=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});
+  },{threshold:.06});
+  document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-const themeIcon = themeToggle.querySelector('.theme-icon');
-htmlElement.setAttribute('data-theme', currentTheme);
-themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-});
-
-// Prevent image downloads
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-const images = document.querySelectorAll('img');
-images.forEach(img => {
-    img.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        return false;
-    });
-});
+  const tt=document.getElementById('theme-toggle');
+  const html=document.documentElement;
+  const ti=tt.querySelector('.theme-icon');
+  const th=localStorage.getItem('theme')||'light';
+  html.setAttribute('data-theme',th);
+  ti.textContent=th==='dark'?'☀️':'🌙';
+  tt.addEventListener('click',()=>{
+    const n=html.getAttribute('data-theme')==='light'?'dark':'light';
+    html.setAttribute('data-theme',n);localStorage.setItem('theme',n);
+    ti.textContent=n==='dark'?'☀️':'🌙';
+  });
+  document.addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
+  document.addEventListener('dragstart',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
+  document.querySelectorAll('img').forEach(img=>img.addEventListener('contextmenu',e=>e.preventDefault()));
 </script>
-
-
-
 </body>
 </html>
